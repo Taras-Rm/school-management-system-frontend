@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Layout as AntdLayout, Menu } from "antd";
+import { Layout as AntdLayout, Avatar, Button, Menu, Typography } from "antd";
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
   UserOutlined,
   HomeOutlined,
   ContactsOutlined,
-  BookOutlined,
-  SketchOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
+import { Header } from "antd/es/layout/layout";
+import { Link, Outlet } from "react-router-dom";
+import { routes } from "../../pages/routes";
+
 function Layout() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -23,28 +22,75 @@ function Layout() {
     };
   }
   const items = [
-    getItem("School", "1", <HomeOutlined />),
-    getItem("Teachers", "2", <UserOutlined />),
-    getItem("Students", "3", <ContactsOutlined />),
-    getItem("Subjects", "4", <BookOutlined />),
+    getItem(
+      "School",
+      "1",
+      <Link to={routes.adminSchoolPage}>
+        <HomeOutlined />
+      </Link>
+    ),
+    getItem(
+      "Teachers",
+      "2",
+      <Link to={routes.adminTeachersPage}>
+        <UserOutlined />
+      </Link>
+    ),
+    getItem(
+      "Students",
+      "3",
+      <Link to={routes.adminStudentsPage}>
+        <ContactsOutlined />
+      </Link>
+    ),
   ];
 
   return (
     <div>
       <AntdLayout style={{ minHeight: "100vh" }}>
-        <AntdLayout.Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
+        <Header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
         >
-          <div style={{ marginTop: 20 }}></div>
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            items={items}
+          <Typography.Text style={{ color: "white" }}>
+            test@gmail.com
+          </Typography.Text>
+          <Avatar
+            size={"large"}
+            icon={<UserOutlined />}
+            style={{
+              backgroundColor: "#5b5959",
+              marginLeft: 20,
+            }}
           />
-        </AntdLayout.Sider>
+          <Button
+            style={{ marginLeft: 20 }}
+            shape="circle"
+            icon={<LogoutOutlined />}
+          />
+        </Header>
+        <AntdLayout hasSider>
+          <AntdLayout.Sider
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(value) => setCollapsed(value)}
+          >
+            <Menu
+              theme="dark"
+              mode="inline"
+              defaultSelectedKeys={["1"]}
+              items={items}
+            />
+          </AntdLayout.Sider>
+          <Outlet />
+        </AntdLayout>
       </AntdLayout>
     </div>
   );
