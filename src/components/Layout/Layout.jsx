@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout as AntdLayout, Avatar, Button, Menu, Typography } from "antd";
+import { Layout as AntdLayout, Avatar, Button, Menu, Typography, message } from "antd";
 import {
   UserOutlined,
   HomeOutlined,
@@ -7,11 +7,29 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
+import { logout } from "../../api/auth";
+import { useMutation } from "react-query";
 
 function Layout() {
+  const navigate = useNavigate();
+
   const [collapsed, setCollapsed] = useState(false);
+
+  const logoutMutation = useMutation(logout, {
+    onSuccess: () => {
+      localStorage.removeItem("authToken");
+      navigate(`/login`);
+    },
+    onError: () => {
+      message.error("Failed to logout");
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   function getItem(label, key, icon, children) {
     return {
@@ -74,6 +92,7 @@ function Layout() {
             style={{ marginLeft: 20 }}
             shape="circle"
             icon={<LogoutOutlined />}
+            onClick={() => handleLogout()}
           />
         </Header>
         <AntdLayout hasSider>

@@ -1,7 +1,31 @@
-import { Button, Form, Input, Radio, Typography } from "antd";
+import { Button, Form, Input, Radio, Typography, message } from "antd";
 import React from "react";
+import { useMutation } from "react-query";
+import { login } from "../../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+
+  const loginMutation = useMutation(login, {
+    onSuccess: () => {
+      navigate(`/${form.getFieldValue("role")}/school`);
+      message.success("Logined");
+    },
+    onError: () => {
+      message.error("Failed to login");
+    },
+  });
+
+  const handleLogin = (values) => {
+    loginMutation.mutate({
+      email: values.email,
+      password: values.password,
+      role: values.role,
+    });
+  };
+
   return (
     <div
       style={{
@@ -13,7 +37,14 @@ function LoginPage() {
       }}
     >
       <div style={{ width: 300 }}>
-        <Form layout="vertical" onFinish={() => console.log("Submit !")}>
+        <Form
+          layout="vertical"
+          onFinish={handleLogin}
+          initialValues={{
+            role: "admin",
+          }}
+          form={form}
+        >
           <Form.Item name={"email"} label="Email">
             <Input />
           </Form.Item>
@@ -25,15 +56,14 @@ function LoginPage() {
           >
             as
           </Typography.Text>
-          <Form.Item>
+          <Form.Item name={"role"}>
             <Radio.Group
               options={[
                 { value: "admin", label: "Admin" },
-                { value: "teacher", label: "Teacher" },
-                { value: "student", label: "Student" },
+                { value: "teacher", label: "Teacher", disabled: true },
+                { value: "student", label: "Student", disabled: true },
               ]}
               optionType="button"
-              defaultValue={"admin"}
               buttonStyle="solid"
             />
           </Form.Item>

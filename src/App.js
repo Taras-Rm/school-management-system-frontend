@@ -1,11 +1,15 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
-import Layout from "./components/Layout/Layout";
 import Root from "./pages/Root";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
-      <Root />
+      <QueryClientProvider client={queryClient}>
+        <Root />
+      </QueryClientProvider>
     </div>
   );
 }
