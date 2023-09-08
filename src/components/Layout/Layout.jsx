@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { Layout as AntdLayout, Avatar, Button, Menu, Typography, message } from "antd";
+import React, { useEffect, useState } from "react";
+import {
+  Layout as AntdLayout,
+  Avatar,
+  Button,
+  Menu,
+  Typography,
+  message,
+} from "antd";
 import {
   UserOutlined,
   HomeOutlined,
@@ -7,13 +14,20 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { logout } from "../../api/auth";
 import { useMutation } from "react-query";
 
 function Layout() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
+
+  useEffect(() => {
+    setSelecteMenuItem(location.pathname);
+  }, [location]);
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -42,21 +56,21 @@ function Layout() {
   const items = [
     getItem(
       "School",
-      "1",
+      routes.adminSchoolPage,
       <Link to={routes.adminSchoolPage}>
         <HomeOutlined />
       </Link>
     ),
     getItem(
       "Teachers",
-      "2",
+      routes.adminTeachersPage,
       <Link to={routes.adminTeachersPage}>
         <UserOutlined />
       </Link>
     ),
     getItem(
       "Students",
-      "3",
+      routes.adminStudentsPage,
       <Link to={routes.adminStudentsPage}>
         <ContactsOutlined />
       </Link>
@@ -104,8 +118,9 @@ function Layout() {
             <Menu
               theme="dark"
               mode="inline"
-              defaultSelectedKeys={["1"]}
+              selectedKeys={[selecteMenuItem]}
               items={items}
+              onClick={(e) => setSelecteMenuItem(e.key)}
             />
           </AntdLayout.Sider>
           <Outlet />
