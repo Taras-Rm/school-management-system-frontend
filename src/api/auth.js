@@ -2,7 +2,6 @@ import api from "./api";
 
 export const me = async () => {
   const response = await api.get(`/users/me`)
-  console.log(response.data)
   return response.data
 }
 

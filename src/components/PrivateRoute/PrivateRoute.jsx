@@ -7,6 +7,7 @@ import { Spin } from "antd";
 
 function PrivateRoute({ children, role }) {
   const {
+    data: user,
     isLoading,
     error,
   } = useQuery(["me"], me, {
@@ -26,7 +27,9 @@ function PrivateRoute({ children, role }) {
     return <Navigate to={routes.loginPage} />;
   }
 
-  return <div>{children}</div>;
+  if (user) {
+    return <>{children}</>;
+  }
 }
 
 export default PrivateRoute;

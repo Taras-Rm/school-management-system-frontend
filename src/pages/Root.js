@@ -14,31 +14,16 @@ function Root() {
     <BrowserRouter>
       <Routes>
         <Route path={routes.loginPage} element={<LoginPage />} />
-        <Route element={<Layout />}>
-          <Route
-            path={routes.adminSchoolPage}
-            element={
-              <PrivateRoute role={"admin"}>
-                <SchoolPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={routes.adminTeachersPage}
-            element={
-              <PrivateRoute role={"admin"}>
-                <TeachersPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={routes.adminStudentsPage}
-            element={
-              <PrivateRoute role={"admin"}>
-                <StudentsPage />
-              </PrivateRoute>
-            }
-          />
+        <Route
+          element={
+            <PrivateRoute role={"admin"}>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
+          <Route path={routes.adminSchoolPage} element={<SchoolPage />} />
+          <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
+          <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

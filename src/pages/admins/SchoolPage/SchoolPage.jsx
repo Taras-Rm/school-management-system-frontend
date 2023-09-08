@@ -1,6 +1,8 @@
-import { Button, Typography } from "antd";
+import { Button, Spin, Typography } from "antd";
 import React, { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import { getAdminSchool } from "../../../api/school";
+import { useQuery } from "react-query";
 
 function WithoutSchoolBoard() {
   return (
@@ -24,11 +26,21 @@ function WithoutSchoolBoard() {
 }
 
 function SchoolPage() {
-  const [isSchool, setIsSchool] = useState(true);
+  const {
+    data: school,
+    isLoading,
+    error,
+  } = useQuery(["school"], getAdminSchool, {
+    retry: false,
+  });
+
+  if (isLoading) {
+    return <Spin spinning />;
+  }
 
   return (
     <div style={{ width: "100%" }}>
-      {isSchool ? "SchoolPage" : <WithoutSchoolBoard />}
+      {school ? school.name : <WithoutSchoolBoard />}
     </div>
   );
 }

@@ -16,12 +16,14 @@ import {
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
-import { logout } from "../../api/auth";
-import { useMutation } from "react-query";
+import { logout, me } from "../../api/auth";
+import { useMutation, useQuery } from "react-query";
 
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [collapsed, setCollapsed] = useState(false);
 
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
@@ -29,7 +31,13 @@ function Layout() {
     setSelecteMenuItem(location.pathname);
   }, [location]);
 
-  const [collapsed, setCollapsed] = useState(false);
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery(["me"], me, {
+    retry: false,
+  });
 
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
@@ -92,7 +100,7 @@ function Layout() {
           }}
         >
           <Typography.Text style={{ color: "white" }}>
-            test@gmail.com
+            {user?.email}
           </Typography.Text>
           <Avatar
             size={"large"}
