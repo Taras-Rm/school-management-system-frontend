@@ -1,6 +1,6 @@
 export const routes = {
-  loginPage: "login",
-  adminSchoolPage: "admin/school",
+  loginPage: "/login",
+  adminSchoolPage: "/admin/school",
   adminTeachersPage: "admin/teachers",
-  adminStudentsPage: "admin/students",
+  adminStudentsPage: "/admin/students",
 };

@@ -7,6 +7,7 @@ import TeachersPage from "./admins/TeachersPage/TeachersPage";
 import StudentsPage from "./admins/StudentsPage/StudentsPage";
 import LoginPage from "./common/LoginPage/LoginPage";
 import NotFoundPage from "./common/NotFoundPage/NotFoundPage";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 function Root() {
   return (
@@ -14,9 +15,30 @@ function Root() {
       <Routes>
         <Route path={routes.loginPage} element={<LoginPage />} />
         <Route element={<Layout />}>
-          <Route path={routes.adminSchoolPage} element={<SchoolPage />} />
-          <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
-          <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
+          <Route
+            path={routes.adminSchoolPage}
+            element={
+              <PrivateRoute role={"admin"}>
+                <SchoolPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.adminTeachersPage}
+            element={
+              <PrivateRoute role={"admin"}>
+                <TeachersPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.adminStudentsPage}
+            element={
+              <PrivateRoute role={"admin"}>
+                <StudentsPage />
+              </PrivateRoute>
+            }
+          />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

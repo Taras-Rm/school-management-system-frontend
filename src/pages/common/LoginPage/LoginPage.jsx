@@ -3,15 +3,20 @@ import React from "react";
 import { useMutation } from "react-query";
 import { login } from "../../../api/auth";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const loginMutation = useMutation(login, {
-    onSuccess: () => {
-      navigate(`/${form.getFieldValue("role")}/school`);
+    onSuccess: (data) => {
+      localStorage.setItem("authToken", data.token);
       message.success("Logined");
+
+      let path =
+        form.getFieldValue("role") === "admin" ? routes.adminSchoolPage : "";
+      navigate(path);
     },
     onError: () => {
       message.error("Failed to login");

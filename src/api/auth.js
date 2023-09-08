@@ -1,5 +1,11 @@
 import api from "./api";
 
+export const me = async () => {
+  const response = await api.get(`/users/me`)
+  console.log(response.data)
+  return response.data
+}
+
 export const login = async ({ email, password, role }) => {
   let userPath = "";
   if (role === "admin") {
@@ -15,9 +21,6 @@ export const login = async ({ email, password, role }) => {
     email,
     password,
   });
-
-  localStorage.setItem("authToken", response.data.token);
-
   return response.data;
 };
 
