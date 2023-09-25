@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
-import SchoolPage from "./admins/SchoolPage/SchoolPage";
+import AdminSchoolPage from "./admins/SchoolPage/SchoolPage";
 import { routes } from "./routes";
 import TeachersPage from "./admins/TeachersPage/TeachersPage";
 import StudentsPage from "./admins/StudentsPage/StudentsPage";
 import LoginPage from "./common/LoginPage/LoginPage";
 import NotFoundPage from "./common/NotFoundPage/NotFoundPage";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import TeacherSchoolPage from "./techers/TeacherSchoolPage/TeacherSchoolPage";
+import TeacherSchoolPage from "./techers/SchoolPage/SchoolPage";
 
 function Root() {
   return (
@@ -22,7 +22,7 @@ function Root() {
             </PrivateRoute>
           }
         >
-          <Route path={routes.adminSchoolPage} element={<SchoolPage />} />
+          <Route path={routes.adminSchoolPage} element={<AdminSchoolPage />} />
           <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
         </Route>
