@@ -66,7 +66,7 @@ function TeachersPage() {
           Add teacher
         </Button>
       </div>
-      <Table dataSource={tableData} columns={tableColumns} />
+      <Table dataSource={tableData} columns={tableColumns} scroll={{y: 400}} pagination={false}/>
       <CreateTeacherModal
         isOpen={isCreateTeacherModalOpen}
         setIsCreateTeacherModalOpen={setIsCreateTeacherModalOpen}
