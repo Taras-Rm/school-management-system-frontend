@@ -1,9 +1,13 @@
-import React from "react";
-import { Spin, Table, Typography, message } from "antd";
+import React, { useState } from "react";
+import { Button, Spin, Table, Typography, message } from "antd";
 import { useQuery } from "react-query";
 import { getSchoolTeachers } from "../../../api/teachers";
+import CreateTeacherModal from "./components/CreateTeacherModal";
 
 function TeachersPage() {
+  const [isCreateTeacherModalOpen, setIsCreateTeacherModalOpen] =
+    useState(false);
+
   const {
     data: teachers,
     error,
@@ -53,7 +57,20 @@ function TeachersPage() {
       }}
     >
       <Typography.Title level={2}>Teachers</Typography.Title>
+      <div style={{ marginBottom: 20 }}>
+        <Button
+          type="primary"
+          style={{ backgroundColor: "green" }}
+          onClick={() => setIsCreateTeacherModalOpen(true)}
+        >
+          Add teacher
+        </Button>
+      </div>
       <Table dataSource={tableData} columns={tableColumns} />
+      <CreateTeacherModal
+        isOpen={isCreateTeacherModalOpen}
+        setIsCreateTeacherModalOpen={setIsCreateTeacherModalOpen}
+      />
     </div>
   );
 }
