@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Layout as AntdLayout,
   Avatar,
@@ -39,6 +39,8 @@ function Layout() {
     retry: false,
   });
 
+  console.log(user);
+
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
       localStorage.removeItem("authToken");
@@ -61,29 +63,44 @@ function Layout() {
       label,
     };
   }
-  const items = [
-    getItem(
-      "School",
-      routes.adminSchoolPage,
-      <Link to={routes.adminSchoolPage}>
-        <HomeOutlined />
-      </Link>
-    ),
-    getItem(
-      "Teachers",
-      routes.adminTeachersPage,
-      <Link to={routes.adminTeachersPage}>
-        <UserOutlined />
-      </Link>
-    ),
-    getItem(
-      "Students",
-      routes.adminStudentsPage,
-      <Link to={routes.adminStudentsPage}>
-        <ContactsOutlined />
-      </Link>
-    ),
-  ];
+
+  const items = useMemo(() => {
+    if (user.role === "admin") {
+      return [
+        getItem(
+          "School",
+          routes.adminSchoolPage,
+          <Link to={routes.adminSchoolPage}>
+            <HomeOutlined />
+          </Link>
+        ),
+        getItem(
+          "Teachers",
+          routes.adminTeachersPage,
+          <Link to={routes.adminTeachersPage}>
+            <UserOutlined />
+          </Link>
+        ),
+        getItem(
+          "Students",
+          routes.adminStudentsPage,
+          <Link to={routes.adminStudentsPage}>
+            <ContactsOutlined />
+          </Link>
+        ),
+      ];
+    } else if (user.role === "teacher") {
+      return [
+        getItem(
+          "School",
+          routes.teacherSchoolPage,
+          <Link to={routes.teacherSchoolPage}>
+            <HomeOutlined />
+          </Link>
+        ),
+      ];
+    }
+  }, [user.role]);
 
   return (
     <div>

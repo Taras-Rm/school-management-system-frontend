@@ -3,4 +3,6 @@ export const routes = {
   adminSchoolPage: "/admin/school",
   adminTeachersPage: "/admin/teachers",
   adminStudentsPage: "/admin/students",
+
+  teacherSchoolPage: "/teacher/school",
 };

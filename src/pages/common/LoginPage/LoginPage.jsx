@@ -14,8 +14,13 @@ function LoginPage() {
       localStorage.setItem("authToken", data.token);
       message.success("Logined");
 
+      let role = form.getFieldValue("role");
       let path =
-        form.getFieldValue("role") === "admin" ? routes.adminSchoolPage : "";
+        role === "admin"
+          ? routes.adminSchoolPage
+          : role === "teacher"
+          ? routes.teacherSchoolPage
+          : "";
       navigate(path);
     },
     onError: () => {
@@ -65,7 +70,7 @@ function LoginPage() {
             <Radio.Group
               options={[
                 { value: "admin", label: "Admin" },
-                { value: "teacher", label: "Teacher", disabled: true },
+                { value: "teacher", label: "Teacher" },
                 { value: "student", label: "Student", disabled: true },
               ]}
               optionType="button"

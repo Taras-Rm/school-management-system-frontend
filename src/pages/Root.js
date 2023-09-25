@@ -8,6 +8,7 @@ import StudentsPage from "./admins/StudentsPage/StudentsPage";
 import LoginPage from "./common/LoginPage/LoginPage";
 import NotFoundPage from "./common/NotFoundPage/NotFoundPage";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import TeacherSchoolPage from "./techers/TeacherSchoolPage/TeacherSchoolPage";
 
 function Root() {
   return (
@@ -24,6 +25,18 @@ function Root() {
           <Route path={routes.adminSchoolPage} element={<SchoolPage />} />
           <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
+        </Route>
+        <Route
+          element={
+            <PrivateRoute role={"teacher"}>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
+          <Route
+            path={routes.teacherSchoolPage}
+            element={<TeacherSchoolPage />}
+          />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

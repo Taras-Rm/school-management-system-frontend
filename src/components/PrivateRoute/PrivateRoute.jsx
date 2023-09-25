@@ -1,11 +1,13 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { me } from "../../api/auth";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { Spin } from "antd";
 
 function PrivateRoute({ children, role }) {
+  const navigate = useNavigate();
+
   const {
     data: user,
     isLoading,
@@ -14,7 +16,7 @@ function PrivateRoute({ children, role }) {
     retry: false,
     onSuccess: (data) => {
       if (data.role != role) {
-        return <Navigate to={routes.loginPage} />;
+        navigate(routes.loginPage);
       }
     },
   });
