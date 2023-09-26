@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Layout as AntdLayout,
   Avatar,
@@ -12,6 +12,7 @@ import {
   HomeOutlined,
   ContactsOutlined,
   LogoutOutlined,
+  BlockOutlined,
 } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -86,6 +87,13 @@ function Layout() {
           routes.adminStudentsPage,
           <Link to={routes.adminStudentsPage}>
             <ContactsOutlined />
+          </Link>
+        ),
+        getItem(
+          "Classes",
+          routes.adminClassesPage,
+          <Link to={routes.adminClassesPage}>
+            <BlockOutlined />
           </Link>
         ),
       ];
