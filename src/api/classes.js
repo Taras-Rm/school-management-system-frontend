@@ -16,3 +16,8 @@ export const createSchoolClass = async ({ name }) => {
   });
   return response.data;
 };
+
+export const getSchoolClassStudents = async ({ id }) => {
+  const response = await api.get(`/admins/school/classes/${id}/students`);
+  return response.data;
+};
