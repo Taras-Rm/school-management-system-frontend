@@ -40,8 +40,8 @@ function ClassesPage() {
       </div>
       <Row gutter={20}>
         {classes.map((c) => (
-          <Col span={6} style={{marginBottom: 20}}>
-            <ClassCard title={c.name} />
+          <Col span={6} style={{ marginBottom: 20 }}>
+            <ClassCard id={c.id} title={c.name} />
           </Col>
         ))}
       </Row>

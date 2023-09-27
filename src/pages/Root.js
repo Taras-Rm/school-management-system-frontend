@@ -10,6 +10,7 @@ import NotFoundPage from "./common/NotFoundPage/NotFoundPage";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import TeacherSchoolPage from "./techers/SchoolPage/SchoolPage";
 import ClassesPage from "./admins/ClassesPage/ClassesPage";
+import ClassPage from "./admins/ClassPage/ClassPage";
 
 function Root() {
   return (
@@ -27,6 +28,7 @@ function Root() {
           <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
           <Route path={routes.adminClassesPage} element={<ClassesPage />} />
+          <Route path={routes.adminClassPage} element={<ClassPage />} />
         </Route>
         <Route
           element={

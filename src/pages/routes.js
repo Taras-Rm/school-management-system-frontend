@@ -4,6 +4,7 @@ export const routes = {
   adminClassesPage: "/admin/classes",
   adminTeachersPage: "/admin/teachers",
   adminStudentsPage: "/admin/students",
+  adminClassPage: "/admin/classes/:id",
 
   teacherSchoolPage: "/teacher/school",
 };
