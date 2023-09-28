@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Row, Spin, Table, Typography, message } from "antd";
 import { useQuery } from "react-query";
 import { getSchoolClass, getSchoolClassStudents } from "../../../api/classes";
 import { useParams } from "react-router";
+import AssignClassForStudentsModal from "./components/AssignClassForStudentsModal";
 
 function ClassPage() {
   const { id } = useParams();
+  const [
+    isAssignClassForStudentsModalOpen,
+    setIsAssignClassForStudentsModalOpen,
+  ] = useState(false);
 
   const {
     data: classData,
@@ -68,13 +73,29 @@ function ClassPage() {
       }}
     >
       <Typography.Title level={2}>{classData.name} class</Typography.Title>
-      <div style={{ marginBottom: 20 }}>e</div>
+      <div style={{ marginBottom: 20 }}>
+        <Button
+          type="primary"
+          style={{ backgroundColor: "green" }}
+          onClick={() => setIsAssignClassForStudentsModalOpen(true)}
+        >
+          Assign students
+        </Button>
+      </div>
 
       <Table
         dataSource={tableData}
         columns={tableColumns}
         scroll={{ y: 400 }}
         pagination={false}
+      />
+
+      <AssignClassForStudentsModal
+        isOpen={isAssignClassForStudentsModalOpen}
+        setIsAssignClassForStudentsModalOpen={
+          setIsAssignClassForStudentsModalOpen
+        }
+        classId={id}
       />
     </div>
   );
