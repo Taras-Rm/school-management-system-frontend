@@ -41,7 +41,7 @@ function ClassesPage() {
       <Row gutter={20}>
         {classes.map((c) => (
           <Col span={6} style={{ marginBottom: 20 }}>
-            <ClassCard id={c.id} title={c.name} />
+            <ClassCard classInfo={c} />
           </Col>
         ))}
       </Row>

@@ -73,7 +73,14 @@ function ClassPage() {
       }}
     >
       <Typography.Title level={2}>{classData.name} class</Typography.Title>
-      <div style={{ marginBottom: 20 }}>
+      <div
+        style={{
+          marginBottom: 20,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Button
           type="primary"
           style={{ backgroundColor: "green" }}
@@ -81,6 +88,20 @@ function ClassPage() {
         >
           Assign students
         </Button>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", fontSize: 18 }}>
+            <Typography.Text style={{ marginRight: 5 }}>
+              Class teacher:
+            </Typography.Text>
+            {classData.classTeacher ? (
+              <Typography.Text
+                strong
+              >{`${classData.classTeacher.name} ${classData.classTeacher.surname}`}</Typography.Text>
+            ) : (
+              <Typography.Text>not defined</Typography.Text>
+            )}
+          </div>
+        </div>
       </div>
 
       <Table
