@@ -12,15 +12,22 @@ function ClassCard({ classInfo }) {
           <Typography.Title level={4}>{classInfo.name}</Typography.Title>
         </Link>
       }
-      actions={[<EditOutlined />]}
+      actions={[
+        <Link
+          style={{ width: "fit-content" }}
+          to={generatePath(routes.adminEditClassPage, { id: classInfo.id })}
+        >
+          <EditOutlined />
+        </Link>,
+      ]}
       bordered={false}
     >
       <div>
         <Typography.Text>Class teacher: </Typography.Text>
-        {classInfo.classTeacher ? (
+        {classInfo.teacher ? (
           <Typography.Text
             strong
-          >{`${classInfo.classTeacher.name} ${classInfo.classTeacher.surname}`}</Typography.Text>
+          >{`${classInfo.teacher.name} ${classInfo.teacher.surname}`}</Typography.Text>
         ) : (
           <Typography.Text>not defined</Typography.Text>
         )}

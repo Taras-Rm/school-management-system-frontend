@@ -17,6 +17,14 @@ export const createSchoolClass = async ({ name }) => {
   return response.data;
 };
 
+export const updateSchoolClass = async ({ id, name, teacherId }) => {
+  const response = await api.put(`/admins/school/classes/${id}`, {
+    name,
+    teacherId,
+  });
+  return response.data;
+};
+
 export const getSchoolClassStudents = async ({ id }) => {
   const response = await api.get(`/admins/school/classes/${id}/students`);
   return response.data;

@@ -13,10 +13,3 @@ export const createSchoolTeacher = async ({ name, surname, email }) => {
   });
   return response.data;
 };
-
-export const assignClassForTeacher = async ({ id, classId }) => {
-  const response = await api.put(`/admins/school/teachers/${id}/class/assign`, {
-    classId,
-  });
-  return response.data;
-};

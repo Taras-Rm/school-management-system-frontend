@@ -93,10 +93,10 @@ function ClassPage() {
             <Typography.Text style={{ marginRight: 5 }}>
               Class teacher:
             </Typography.Text>
-            {classData.classTeacher ? (
+            {classData.teacher ? (
               <Typography.Text
                 strong
-              >{`${classData.classTeacher.name} ${classData.classTeacher.surname}`}</Typography.Text>
+              >{`${classData.teacher.name} ${classData.teacher.surname}`}</Typography.Text>
             ) : (
               <Typography.Text>not defined</Typography.Text>
             )}
