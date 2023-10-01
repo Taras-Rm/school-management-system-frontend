@@ -35,6 +35,14 @@ function StudentsPage() {
         return value;
       },
     },
+    {
+      title: "Class",
+      dataIndex: "Class",
+      key: "class.name",
+      render: (value, item) => {
+        return item.class?.name;
+      },
+    },
   ];
 
   const tableData = students?.map((t) => {
@@ -66,7 +74,12 @@ function StudentsPage() {
           Add student
         </Button>
       </div>
-      <Table dataSource={tableData} columns={tableColumns} scroll={{y: 400}} pagination={false}/>
+      <Table
+        dataSource={tableData}
+        columns={tableColumns}
+        scroll={{ y: 400 }}
+        pagination={false}
+      />
       <CreateStudentModal
         isOpen={isCreateStudentModalOpen}
         setIsCreateStudentModalOpen={setIsCreateStudentModalOpen}
