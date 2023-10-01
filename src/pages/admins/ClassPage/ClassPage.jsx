@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Button, Col, Row, Spin, Table, Typography, message } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  Spin,
+  Table,
+  Typography,
+  message,
+} from "antd";
 import { useQuery } from "react-query";
 import { getSchoolClass, getSchoolClassStudents } from "../../../api/classes";
-import { useParams } from "react-router";
+import { generatePath, useParams } from "react-router";
 import AssignClassForStudentsModal from "./components/AssignClassForStudentsModal";
+import { routes } from "../../routes";
+import { Link } from "react-router-dom";
 
 function ClassPage() {
   const { id } = useParams();
@@ -72,7 +81,23 @@ function ClassPage() {
         padding: "10px 20px",
       }}
     >
-      <Typography.Title level={2}>{classData.name} class</Typography.Title>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={routes.adminClassesPage}>Classes</Link>,
+          },
+          {
+            title: (
+              <Link to={generatePath(routes.adminClassPage, { id })}>
+                {classData.name}
+              </Link>
+            ),
+          },
+        ]}
+      />
+      <Typography.Title level={2} style={{ margin: "15px 0" }}>
+        {classData.name} class
+      </Typography.Title>
       <div
         style={{
           marginBottom: 20,

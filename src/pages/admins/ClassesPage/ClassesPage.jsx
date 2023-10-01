@@ -1,9 +1,11 @@
-import { Button, Col, Row, Spin, Typography, message } from "antd";
+import { Breadcrumb, Button, Col, Row, Spin, Typography, message } from "antd";
 import React, { useState } from "react";
 import { getSchoolClasses } from "../../../api/classes";
 import ClassCard from "./components/ClassCard";
 import { useQuery } from "react-query";
 import CreateClassModal from "./components/CreateClassModal";
+import { Link } from "react-router-dom";
+import { routes } from "../../routes";
 
 function ClassesPage() {
   const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
@@ -28,7 +30,17 @@ function ClassesPage() {
         padding: "10px 20px",
       }}
     >
-      <Typography.Title level={2}>Classes</Typography.Title>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={routes.adminClassesPage}>Classes</Link>,
+          },
+        ]}
+      />
+
+      <Typography.Title level={2} style={{ margin: "15px 0" }}>
+        Classes
+      </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         <Button
           type="primary"

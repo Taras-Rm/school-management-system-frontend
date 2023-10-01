@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Spin, Table, Typography, message } from "antd";
+import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
 import { useQuery } from "react-query";
 import CreateStudentModal from "./components/CreateStudentModal";
 import { getSchoolStudents } from "../../../api/students";
+import { routes } from "../../routes";
+import { Link } from "react-router-dom";
 
 function StudentsPage() {
   const [isCreateStudentModalOpen, setIsCreateStudentModalOpen] =
@@ -64,7 +66,16 @@ function StudentsPage() {
         padding: "10px 20px",
       }}
     >
-      <Typography.Title level={2}>Students</Typography.Title>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={routes.adminStudentsPage}>Students</Link>,
+          },
+        ]}
+      />
+      <Typography.Title level={2} style={{ margin: "15px 0" }}>
+        Students
+      </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         <Button
           type="primary"

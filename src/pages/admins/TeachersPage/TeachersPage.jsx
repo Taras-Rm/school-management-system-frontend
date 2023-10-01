@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Spin, Table, Typography, message } from "antd";
+import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
 import { useQuery } from "react-query";
 import { getSchoolTeachers } from "../../../api/teachers";
 import CreateTeacherModal from "./components/CreateTeacherModal";
+import { Link } from "react-router-dom";
+import { routes } from "../../routes";
 
 function TeachersPage() {
   const [isCreateTeacherModalOpen, setIsCreateTeacherModalOpen] =
@@ -56,7 +58,16 @@ function TeachersPage() {
         padding: "10px 20px",
       }}
     >
-      <Typography.Title level={2}>Teachers</Typography.Title>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={routes.adminTeachersPage}>Teachers</Link>,
+          },
+        ]}
+      />
+      <Typography.Title level={2} style={{ margin: "15px 0" }}>
+        Teachers
+      </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         <Button
           type="primary"
@@ -66,7 +77,12 @@ function TeachersPage() {
           Add teacher
         </Button>
       </div>
-      <Table dataSource={tableData} columns={tableColumns} scroll={{y: 400}} pagination={false}/>
+      <Table
+        dataSource={tableData}
+        columns={tableColumns}
+        scroll={{ y: 400 }}
+        pagination={false}
+      />
       <CreateTeacherModal
         isOpen={isCreateTeacherModalOpen}
         setIsCreateTeacherModalOpen={setIsCreateTeacherModalOpen}

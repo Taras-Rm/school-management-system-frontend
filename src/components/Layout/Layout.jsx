@@ -40,8 +40,6 @@ function Layout() {
     retry: false,
   });
 
-  console.log(user);
-
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
       localStorage.removeItem("authToken");

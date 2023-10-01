@@ -1,9 +1,20 @@
 import React from "react";
 import { getSchoolClass, updateSchoolClass } from "../../../api/classes";
-import { useParams } from "react-router";
-import { Button, Form, Input, Select, Spin, Typography, message } from "antd";
+import { generatePath, useParams } from "react-router";
+import {
+  Breadcrumb,
+  Button,
+  Form,
+  Input,
+  Select,
+  Spin,
+  Typography,
+  message,
+} from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolTeachers } from "../../../api/teachers";
+import { Link } from "react-router-dom";
+import { routes } from "../../routes";
 
 function EditClassPage() {
   const { id } = useParams();
@@ -57,7 +68,30 @@ function EditClassPage() {
         padding: "10px 20px",
       }}
     >
-      <Typography.Title level={2}>Edit {classData.name} class</Typography.Title>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={routes.adminClassesPage}>Classes</Link>,
+          },
+          {
+            title: (
+              <Link to={generatePath(routes.adminClassPage, { id })}>
+                {classData.name}
+              </Link>
+            ),
+          },
+          {
+            title: (
+              <Link to={generatePath(routes.adminEditClassPage, { id })}>
+                Edit {classData.name} class
+              </Link>
+            ),
+          },
+        ]}
+      />
+      <Typography.Title level={2} style={{ margin: "15px 0" }}>
+        Edit {classData.name} class
+      </Typography.Title>
       <div
         style={{
           marginBottom: 20,
@@ -85,7 +119,7 @@ function EditClassPage() {
             }}
           >
             <Typography.Text style={{ fontSize: 16 }}>Name</Typography.Text>
-            <Form.Item name={"name"} rules={[{required: true}]}>
+            <Form.Item name={"name"} rules={[{ required: true }]}>
               <Input style={{ width: 200 }} />
             </Form.Item>
           </div>
