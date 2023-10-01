@@ -54,11 +54,26 @@ function LoginPage() {
             role: "admin",
           }}
           form={form}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <Form.Item name={"email"} label="Email">
+          <Form.Item
+            name={"email"}
+            label="Email"
+            rules={[{ required: true }, { type: "email" }]}
+            style={{ width: "100%" }}
+          >
             <Input />
           </Form.Item>
-          <Form.Item name={"password"} label="Password">
+          <Form.Item
+            name={"password"}
+            label="Password"
+            rules={[{ required: true }, { min: 8 }]}
+            style={{ width: "100%" }}
+          >
             <Input type="password" />
           </Form.Item>
           <Typography.Text
@@ -77,7 +92,11 @@ function LoginPage() {
               buttonStyle="solid"
             />
           </Form.Item>
-          <Button style={{ width: "50%" }} type="primary" htmlType="submit">
+          <Button
+            style={{ width: "50%" }}
+            type="primary"
+            htmlType="submit"
+          >
             Login
           </Button>
         </Form>
