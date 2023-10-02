@@ -52,3 +52,8 @@ export const unassignClassForStudents = async ({ id, studentsIds }) => {
   );
   return response.data;
 };
+
+export const deleteSchoolClass = async ({ classId }) => {
+  const response = await api.delete(`/admins/school/classes/${classId}`);
+  return response.data;
+};

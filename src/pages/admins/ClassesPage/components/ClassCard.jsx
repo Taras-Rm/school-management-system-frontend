@@ -1,12 +1,17 @@
-import { Card, Typography, message } from "antd";
+import { Card, Popconfirm, Typography, message } from "antd";
 import React from "react";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link, generatePath } from "react-router-dom";
 import { routes } from "../../../routes";
-import { getSchoolClassStudents } from "../../../../api/classes";
-import { useQuery } from "react-query";
+import {
+  deleteSchoolClass,
+  getSchoolClassStudents,
+} from "../../../../api/classes";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 function ClassCard({ classInfo }) {
+  const queryClient = useQueryClient();
+
   const { data: students, isLoading: isLoadingStudents } = useQuery(
     ["students", "class", classInfo.id],
     () => getSchoolClassStudents({ id: classInfo.id }),
@@ -17,6 +22,22 @@ function ClassCard({ classInfo }) {
       enabled: !!classInfo.id,
     }
   );
+
+  const deleteSchoolClassMutation = useMutation(deleteSchoolClass, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["classes"]);
+      message.success("Class is deleted!");
+    },
+    onError: (err) => {
+      message.error("Failed to delete class: " + err.response.data?.message);
+    },
+  });
+
+  const handleDeleteSchoolClass = (classId) => {
+    deleteSchoolClassMutation.mutate({
+      classId,
+    });
+  };
 
   return (
     <Card
@@ -32,6 +53,13 @@ function ClassCard({ classInfo }) {
         >
           <EditOutlined />
         </Link>,
+        <Popconfirm
+          title="Delete class"
+          description="Are you sure you want to delete a class ?"
+          onConfirm={() => handleDeleteSchoolClass(classInfo.id)}
+        >
+          <DeleteOutlined />
+        </Popconfirm>,
       ]}
       bordered={false}
       loading={isLoadingStudents}
