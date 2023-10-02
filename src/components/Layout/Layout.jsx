@@ -24,8 +24,6 @@ function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [collapsed, setCollapsed] = useState(false);
-
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
   useEffect(() => {
@@ -123,6 +121,7 @@ function Layout() {
             top: 0,
             zIndex: 1,
             width: "100%",
+            height: 70,
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
@@ -146,11 +145,21 @@ function Layout() {
             onClick={() => handleLogout()}
           />
         </Header>
-        <AntdLayout hasSider>
+        <AntdLayout
+          hasSider
+          style={{
+            marginLeft: 200,
+          }}
+        >
           <AntdLayout.Sider
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
+            style={{
+              height: "100vh",
+              position: "fixed",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              marginTop: 70,
+            }}
           >
             <Menu
               theme="dark"
