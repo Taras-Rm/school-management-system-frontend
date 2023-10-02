@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Breadcrumb, Button, Spin, Table, Tooltip, Typography, message } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  Spin,
+  Table,
+  Tooltip,
+  Typography,
+  message,
+} from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateStudentModal from "./components/CreateStudentModal";
 import { deleteSchoolStudent, getSchoolStudents } from "../../../api/students";
 import { routes } from "../../routes";
-import { Link } from "react-router-dom";
+import { Link, generatePath } from "react-router-dom";
 import { DeleteTwoTone } from "@ant-design/icons";
 
 function StudentsPage() {
@@ -44,7 +52,11 @@ function StudentsPage() {
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
-        return `${value} ${item.surname}`;
+        return (
+          <Link
+            to={generatePath(routes.adminStudentPage, { id: item.id })}
+          >{`${value} ${item.surname}`}</Link>
+        );
       },
     },
     {
