@@ -3,7 +3,7 @@ import { useForm } from "antd/es/form/Form";
 import Modal from "antd/es/modal/Modal";
 import React from "react";
 import {
-  assignClassForStudentsAssign,
+  assignClassForStudents,
   getStudentsAvailableForSchoolClassAssign,
 } from "../../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -16,41 +16,32 @@ function AssignClassForStudentsModal({
   const [form] = useForm();
   const queryClient = useQueryClient();
 
-  const {
-    data: students,
-    error: studentsError,
-    isLoading: isLoadingStudents,
-  } = useQuery(
+  const { data: students, isLoading: isLoadingStudents } = useQuery(
     ["students", "class", classId, "assign"],
     () => getStudentsAvailableForSchoolClassAssign({ id: classId }),
     {
-      onError: (error) => {
-        message.error(error);
+      onError: (err) => {
+        message.error("Failed to get students: " + err.response.data?.message);
       },
     }
   );
 
-  const assignStudentsToClassMutation = useMutation(
-    assignClassForStudentsAssign,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["students", "class", classId]);
-        queryClient.invalidateQueries(["students", "class", classId, "assign"]);
-        message.success("Students are assigned!");
-        setIsAssignClassForStudentsModalOpen(false);
-      },
-      onError: (err) => {
-        message.error(
-          "Failed to create a class: " + err.response.data?.message
-        );
-      },
-    }
-  );
+  const assignStudentsToClassMutation = useMutation(assignClassForStudents, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["students", "class", classId]);
+      queryClient.invalidateQueries(["students", "class", classId, "assign"]);
+      message.success("Students are assigned!");
+      setIsAssignClassForStudentsModalOpen(false);
+    },
+    onError: (err) => {
+      message.error("Failed to create a class: " + err.response.data?.message);
+    },
+  });
 
   const handleAssignStudentsToClass = (values) => {
     if (!values.studentsIds?.length) {
       message.warning("You should select at least one student!");
-      return
+      return;
     }
     assignStudentsToClassMutation.mutate({
       id: classId,

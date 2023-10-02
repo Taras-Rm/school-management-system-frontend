@@ -37,9 +37,17 @@ export const getStudentsAvailableForSchoolClassAssign = async ({ id }) => {
   return response.data;
 };
 
-export const assignClassForStudentsAssign = async ({ id, studentsIds }) => {
+export const assignClassForStudents = async ({ id, studentsIds }) => {
   const response = await api.put(
     `/admins/school/classes/${id}/students/assign`,
+    { studentsIds: studentsIds }
+  );
+  return response.data;
+};
+
+export const unassignClassForStudents = async ({ id, studentsIds }) => {
+  const response = await api.put(
+    `/admins/school/classes/${id}/students/unassign`,
     { studentsIds: studentsIds }
   );
   return response.data;

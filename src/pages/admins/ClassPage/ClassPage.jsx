@@ -4,38 +4,42 @@ import {
   Button,
   Spin,
   Table,
+  Tooltip,
   Typography,
   message,
 } from "antd";
-import { useQuery } from "react-query";
-import { getSchoolClass, getSchoolClassStudents } from "../../../api/classes";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+  getSchoolClass,
+  getSchoolClassStudents,
+  unassignClassForStudents,
+} from "../../../api/classes";
 import { generatePath, useParams } from "react-router";
 import AssignClassForStudentsModal from "./components/AssignClassForStudentsModal";
 import { routes } from "../../routes";
 import { Link } from "react-router-dom";
+import { CloseCircleTwoTone } from "@ant-design/icons";
 
 function ClassPage() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
+
   const [
     isAssignClassForStudentsModalOpen,
     setIsAssignClassForStudentsModalOpen,
   ] = useState(false);
 
-  const {
-    data: classData,
-    error,
-    isLoading,
-  } = useQuery(["classes", id], () => getSchoolClass({ id }), {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: classData, isLoading } = useQuery(
+    ["classes", id],
+    () => getSchoolClass({ id }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
-  const {
-    data: students,
-    error: studentsError,
-    isLoading: isLoadingStudents,
-  } = useQuery(
+  const { data: students, isLoading: isLoadingStudents } = useQuery(
     ["students", "class", id],
     () => getSchoolClassStudents({ id }),
     {
@@ -44,6 +48,27 @@ function ClassPage() {
       },
     }
   );
+
+  const unassignStudentForClassMutation = useMutation(
+    unassignClassForStudents,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["students", "class", id]);
+      },
+      onError: (err) => {
+        message.error(
+          "Failed to unassign student: " + err.response.data?.message
+        );
+      },
+    }
+  );
+
+  const handleUnassignStudentForClass = (studentId) => {
+    unassignStudentForClassMutation.mutate({
+      id,
+      studentsIds: [studentId],
+    });
+  };
 
   const tableColumns = [
     {
@@ -60,6 +85,25 @@ function ClassPage() {
       key: "email",
       render: (value, item) => {
         return value;
+      },
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      align: "center",
+      render: (_, item) => {
+        return (
+          <div>
+            <Tooltip title="Unassign student from class">
+              <CloseCircleTwoTone
+                onClick={() => handleUnassignStudentForClass(item.id)}
+                twoToneColor="#eb2f96"
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
+          </div>
+        );
       },
     },
   ];
