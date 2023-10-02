@@ -1,12 +1,22 @@
 import React, { useState } from "react";
-import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
-import { useQuery } from "react-query";
-import { getSchoolTeachers } from "../../../api/teachers";
+import {
+  Breadcrumb,
+  Button,
+  Spin,
+  Table,
+  Tooltip,
+  Typography,
+  message,
+} from "antd";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { deleteSchoolTeacher, getSchoolTeachers } from "../../../api/teachers";
 import CreateTeacherModal from "./components/CreateTeacherModal";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
+import { DeleteTwoTone } from "@ant-design/icons";
 
 function TeachersPage() {
+  const queryClient = useQueryClient();
   const [isCreateTeacherModalOpen, setIsCreateTeacherModalOpen] =
     useState(false);
 
@@ -19,6 +29,22 @@ function TeachersPage() {
       message.error(error);
     },
   });
+
+  const deleteSchoolTeacherMutation = useMutation(deleteSchoolTeacher, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["teachers"]);
+      message.success("Teacher is deleted!");
+    },
+    onError: (err) => {
+      message.error("Failed to delete teacher: " + err.response.data?.message);
+    },
+  });
+
+  const handleDeleteSchoolTeacher = (teacherId) => {
+    deleteSchoolTeacherMutation.mutate({
+      teacherId,
+    });
+  };
 
   const tableColumns = [
     {
@@ -35,6 +61,25 @@ function TeachersPage() {
       key: "email",
       render: (value, item) => {
         return value;
+      },
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      align: "center",
+      render: (value, item) => {
+        return (
+          <div>
+            <Tooltip title="Delete teacher">
+              <DeleteTwoTone
+                onClick={() => handleDeleteSchoolTeacher(item.id)}
+                twoToneColor="#eb2f96"
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
+          </div>
+        );
       },
     },
   ];

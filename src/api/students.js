@@ -13,3 +13,8 @@ export const createSchoolStudent = async ({ name, surname, email }) => {
   });
   return response.data;
 };
+
+export const deleteSchoolStudent = async ({ studentId }) => {
+  const response = await api.delete(`/admins/school/students/${studentId}`);
+  return response.data;
+};

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
-import { useQuery } from "react-query";
+import { Breadcrumb, Button, Spin, Table, Tooltip, Typography, message } from "antd";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateStudentModal from "./components/CreateStudentModal";
-import { getSchoolStudents } from "../../../api/students";
+import { deleteSchoolStudent, getSchoolStudents } from "../../../api/students";
 import { routes } from "../../routes";
 import { Link } from "react-router-dom";
+import { DeleteTwoTone } from "@ant-design/icons";
 
 function StudentsPage() {
+  const queryClient = useQueryClient();
   const [isCreateStudentModalOpen, setIsCreateStudentModalOpen] =
     useState(false);
 
@@ -19,6 +21,22 @@ function StudentsPage() {
       message.error(error);
     },
   });
+
+  const deleteSchoolStudentMutation = useMutation(deleteSchoolStudent, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["students"]);
+      message.success("Student is deleted!");
+    },
+    onError: (err) => {
+      message.error("Failed to delete student: " + err.response.data?.message);
+    },
+  });
+
+  const handleDeleteSchoolStudent = (studentId) => {
+    deleteSchoolStudentMutation.mutate({
+      studentId,
+    });
+  };
 
   const tableColumns = [
     {
@@ -43,6 +61,25 @@ function StudentsPage() {
       key: "class.name",
       render: (value, item) => {
         return item.class?.name;
+      },
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      align: "center",
+      render: (value, item) => {
+        return (
+          <div>
+            <Tooltip title="Delete student">
+              <DeleteTwoTone
+                onClick={() => handleDeleteSchoolStudent(item.id)}
+                twoToneColor="#eb2f96"
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
+          </div>
+        );
       },
     },
   ];

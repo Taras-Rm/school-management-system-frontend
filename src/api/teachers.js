@@ -13,3 +13,8 @@ export const createSchoolTeacher = async ({ name, surname, email }) => {
   });
   return response.data;
 };
+
+export const deleteSchoolTeacher = async ({ teacherId }) => {
+  const response = await api.delete(`/admins/school/teachers/${teacherId}`);
+  return response.data;
+};
