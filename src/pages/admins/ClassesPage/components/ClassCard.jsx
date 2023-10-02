@@ -43,7 +43,7 @@ function ClassCard({ classInfo }) {
     <Card
       title={
         <Link to={generatePath(routes.adminClassPage, { id: classInfo.id })}>
-          <Typography.Title level={4}>{classInfo.name}</Typography.Title>
+          <Typography.Link style={{fontSize: 18}}>{classInfo.name}</Typography.Link>
         </Link>
       }
       actions={[

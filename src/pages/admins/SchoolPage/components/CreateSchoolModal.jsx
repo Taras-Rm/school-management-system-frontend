@@ -11,6 +11,7 @@ function CreateSchoolModal({ isOpen, setIsCreateSchoolModalOpen }) {
   const createSchoolMutation = useMutation(createSchool, {
     onSuccess: () => {
       queryClient.invalidateQueries(["school"]);
+      queryClient.invalidateQueries(["me"]);
       message.success("School is created");
     },
     onError: (err) => {

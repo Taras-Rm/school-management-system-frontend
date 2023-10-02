@@ -18,7 +18,10 @@ function WithoutSchoolBoard() {
         height: "90%",
       }}
     >
-      <Typography.Title level={2} style={{ marginBottom: 30 }}>
+      <Typography.Title
+        level={2}
+        style={{ marginBottom: 30, textAlign: "center" }}
+      >
         If you want to use a system, first of all you should create a school
       </Typography.Title>
       <Button

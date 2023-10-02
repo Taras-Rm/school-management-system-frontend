@@ -64,49 +64,55 @@ function Layout() {
   }
 
   const items = useMemo(() => {
+    let availableItems = [];
     if (user.role === "admin") {
-      return [
+      availableItems.push(
         getItem(
           "School",
           routes.adminSchoolPage,
           <Link to={routes.adminSchoolPage}>
             <HomeOutlined />
           </Link>
-        ),
-        getItem(
-          "Teachers",
-          routes.adminTeachersPage,
-          <Link to={routes.adminTeachersPage}>
-            <UserOutlined />
-          </Link>
-        ),
-        getItem(
-          "Students",
-          routes.adminStudentsPage,
-          <Link to={routes.adminStudentsPage}>
-            <ContactsOutlined />
-          </Link>
-        ),
-        getItem(
-          "Classes",
-          routes.adminClassesPage,
-          <Link to={routes.adminClassesPage}>
-            <BlockOutlined />
-          </Link>
-        ),
-      ];
+        )
+      );
+      if (user.schoolId) {
+        availableItems.push(
+          getItem(
+            "Teachers",
+            routes.adminTeachersPage,
+            <Link to={routes.adminTeachersPage}>
+              <UserOutlined />
+            </Link>
+          ),
+          getItem(
+            "Students",
+            routes.adminStudentsPage,
+            <Link to={routes.adminStudentsPage}>
+              <ContactsOutlined />
+            </Link>
+          ),
+          getItem(
+            "Classes",
+            routes.adminClassesPage,
+            <Link to={routes.adminClassesPage}>
+              <BlockOutlined />
+            </Link>
+          )
+        );
+      }
     } else if (user.role === "teacher") {
-      return [
+      availableItems.push(
         getItem(
           "School",
           routes.teacherSchoolPage,
           <Link to={routes.teacherSchoolPage}>
             <HomeOutlined />
           </Link>
-        ),
-      ];
+        )
+      );
     }
-  }, [user.role]);
+    return availableItems;
+  }, [user.role, user.schoolId]);
 
   return (
     <div>
