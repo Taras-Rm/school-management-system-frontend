@@ -14,6 +14,7 @@ import ClassPage from "./admins/ClassPage/ClassPage";
 import EditClassPage from "./admins/EditClassPage/EditClassPage";
 import StudentPage from "./admins/StudentPage/StudentPage";
 import TeacherPage from "./admins/TeacherPage/TeacherPage";
+import SubjectsPage from "./admins/SubjectsPage/SubjectsPage";
 
 function Root() {
   return (
@@ -35,6 +36,7 @@ function Root() {
           <Route path={routes.adminClassesPage} element={<ClassesPage />} />
           <Route path={routes.adminClassPage} element={<ClassPage />} />
           <Route path={routes.adminEditClassPage} element={<EditClassPage />} />
+          <Route path={routes.adminSubjectsPage} element={<SubjectsPage />} />
         </Route>
         <Route
           element={

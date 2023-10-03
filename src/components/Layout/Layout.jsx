@@ -95,6 +95,13 @@ function Layout() {
             <Link to={routes.adminClassesPage}>
               <BlockOutlined />
             </Link>
+          ),
+          getItem(
+            "Subjects",
+            routes.adminSubjectsPage,
+            <Link to={routes.adminSubjectsPage}>
+              <BlockOutlined />
+            </Link>
           )
         );
       }
