@@ -11,7 +11,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { deleteSchoolTeacher, getSchoolTeachers } from "../../../api/teachers";
 import CreateTeacherModal from "./components/CreateTeacherModal";
-import { Link } from "react-router-dom";
+import { Link, generatePath } from "react-router-dom";
 import { routes } from "../../routes";
 import { DeleteTwoTone } from "@ant-design/icons";
 
@@ -52,7 +52,11 @@ function TeachersPage() {
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
-        return `${value} ${item.surname}`;
+        return (
+          <Link
+            to={generatePath(routes.adminTeacherPage, { id: item.id })}
+          >{`${value} ${item.surname}`}</Link>
+        );
       },
     },
     {

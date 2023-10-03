@@ -13,6 +13,7 @@ import ClassesPage from "./admins/ClassesPage/ClassesPage";
 import ClassPage from "./admins/ClassPage/ClassPage";
 import EditClassPage from "./admins/EditClassPage/EditClassPage";
 import StudentPage from "./admins/StudentPage/StudentPage";
+import TeacherPage from "./admins/TeacherPage/TeacherPage";
 
 function Root() {
   return (
@@ -28,6 +29,7 @@ function Root() {
         >
           <Route path={routes.adminSchoolPage} element={<AdminSchoolPage />} />
           <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
+          <Route path={routes.adminTeacherPage} element={<TeacherPage />} />
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
           <Route path={routes.adminStudentPage} element={<StudentPage />} />
           <Route path={routes.adminClassesPage} element={<ClassesPage />} />

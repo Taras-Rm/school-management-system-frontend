@@ -18,3 +18,8 @@ export const deleteSchoolTeacher = async ({ teacherId }) => {
   const response = await api.delete(`/admins/school/teachers/${teacherId}`);
   return response.data;
 };
+
+export const getSchoolTeacher = async ({ id }) => {
+  const response = await api.get(`/admins/school/teachers/${id}`);
+  return response.data;
+};
