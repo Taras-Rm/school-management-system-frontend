@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { routes } from "../../routes";
 import { Breadcrumb, Button, List, Spin, Typography, message } from "antd";
 import { Link } from "react-router-dom";
 import { getSchoolSubjects } from "../../../api/subjects";
 import { useQuery } from "react-query";
+import CreateSubjectModal from "./components/CreateSubjectModal";
 
 function SubjectsPage() {
+  const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
+    useState(false);
+
   const {
     data: subjects,
     error,
@@ -37,7 +41,11 @@ function SubjectsPage() {
         Subjects
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button type="primary" style={{ backgroundColor: "green" }}>
+        <Button
+          type="primary"
+          style={{ backgroundColor: "green" }}
+          onClick={() => setIsCreateSubjectModalOpen(true)}
+        >
           Add subject
         </Button>
       </div>
@@ -56,16 +64,10 @@ function SubjectsPage() {
         }}
         style={{ backgroundColor: "white" }}
       />
-      {/* <Table
-        dataSource={tableData}
-        columns={tableColumns}
-        scroll={{ y: 400 }}
-        pagination={false}
+      <CreateSubjectModal
+        isOpen={isCreateSubjectModalOpen}
+        setIsCreateSubjectModalOpen={setIsCreateSubjectModalOpen}
       />
-      <CreateStudentModal
-        isOpen={isCreateStudentModalOpen}
-        setIsCreateStudentModalOpen={setIsCreateStudentModalOpen}
-      /> */}
     </div>
   );
 }
