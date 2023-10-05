@@ -3,7 +3,6 @@ import { routes } from "../../routes";
 import { generatePath, useParams } from "react-router";
 import {
   Breadcrumb,
-  Button,
   Card,
   Divider,
   Image,
@@ -12,11 +11,11 @@ import {
   message,
 } from "antd";
 import { Link } from "react-router-dom";
-import { getSchoolStudent } from "../../../api/students";
 import { useQuery } from "react-query";
 import studentImg from "../../../assets/images/student.png";
-import { MailTwoTone } from "@ant-design/icons";
+import { MailTwoTone, PhoneTwoTone } from "@ant-design/icons";
 import { getSchoolTeacher } from "../../../api/teachers";
+import { genders } from "../../../utils/staticData";
 
 function TeacherPage() {
   const { id } = useParams();
@@ -73,7 +72,7 @@ function TeacherPage() {
               strong
             >{`${teacher.name} ${teacher.surname}`}</Typography.Text>
             <Typography.Text style={{ fontSize: 18 }}>
-              Chikago, city
+              {teacher.address}
             </Typography.Text>
 
             <Divider />
@@ -84,15 +83,58 @@ function TeacherPage() {
                   justifyContent: "space-between",
                   alignItems: "center",
                   width: "100%",
+                  marginBottom: 8,
                 }}
               >
                 <MailTwoTone />
                 <Typography.Text>{teacher.email}</Typography.Text>
               </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <PhoneTwoTone />
+                <Typography.Text>{teacher.phone}</Typography.Text>
+              </div>
             </div>
           </div>
         </Card>
-        <Card style={{ flex: 0.6, marginLeft: 20 }}></Card>
+        <Card style={{ flex: 0.6, marginLeft: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>
+              Teacher of:
+            </Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              Math
+            </Typography.Text>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>Degree:</Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              {teacher.degree}
+            </Typography.Text>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>
+              Date of birth:
+            </Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              {teacher.dob === "0001-01-01T00:00:00Z"
+                ? ""
+                : teacher?.dob.split("T")[0]}
+            </Typography.Text>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>Gender:</Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              {genders.find((g) => g.value === teacher.gender)?.label}
+            </Typography.Text>
+          </div>
+        </Card>
       </div>
     </div>
   );

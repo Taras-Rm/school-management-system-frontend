@@ -5,11 +5,25 @@ export const getSchoolTeachers = async () => {
   return response.data;
 };
 
-export const createSchoolTeacher = async ({ name, surname, email }) => {
+export const createSchoolTeacher = async ({
+  name,
+  surname,
+  email,
+  dob,
+  address,
+  phone,
+  gender,
+  degree,
+}) => {
   const response = await api.post(`/admins/school/teachers`, {
     name,
     surname,
     email,
+    dob,
+    address,
+    phone,
+    gender,
+    degree,
   });
   return response.data;
 };
