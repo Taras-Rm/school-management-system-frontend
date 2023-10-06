@@ -133,14 +133,14 @@ function ClassPage() {
           {
             title: (
               <Link to={generatePath(routes.adminClassPage, { id })}>
-                {classData.name}
+                {`${classData.level}-${classData.section}`}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {classData.name} class
+        {`${classData.level}-${classData.section}`} class
       </Typography.Title>
       <div
         style={{

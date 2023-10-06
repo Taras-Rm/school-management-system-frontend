@@ -1,9 +1,11 @@
-import { Form, Input, Modal, message } from "antd";
+import { Form, Input, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolStudent } from "../../../../api/students";
 import { createSchoolClass } from "../../../../api/classes";
+import { classLevels, classSection } from "../../../../utils/staticData";
+import TextArea from "antd/es/input/TextArea";
 
 function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
   const queryClient = useQueryClient();
@@ -22,7 +24,9 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
 
   const handleCreateClass = (values) => {
     createClassMutation.mutate({
-      name: values.name,
+      level: values.level,
+      section: values.section,
+      description: values.description,
     });
   };
 
@@ -35,8 +39,26 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
       onOk={() => form.submit()}
     >
       <Form form={form} onFinish={handleCreateClass} layout="vertical">
-        <Form.Item name={"name"} label="Name" rules={[{ required: true }]}>
-          <Input />
+        <div style={{ display: "flex" }}>
+          <Form.Item
+            name={"level"}
+            label="Level"
+            rules={[{ required: true }]}
+            style={{ flex: 1 }}
+          >
+            <Select options={classLevels} />
+          </Form.Item>
+          <Form.Item
+            name={"section"}
+            label="Section"
+            rules={[{ required: true }]}
+            style={{ flex: 1, marginLeft: 10 }}
+          >
+            <Select options={classSection} />
+          </Form.Item>
+        </div>
+        <Form.Item name={"description"} label="Description">
+          <TextArea />
         </Form.Item>
       </Form>
     </Modal>

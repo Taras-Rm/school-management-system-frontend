@@ -79,21 +79,21 @@ function EditClassPage() {
           {
             title: (
               <Link to={generatePath(routes.adminClassPage, { id })}>
-                {classData.name}
+                {`${classData.level}-${classData.section}`}
               </Link>
             ),
           },
           {
             title: (
               <Link to={generatePath(routes.adminEditClassPage, { id })}>
-                Edit {classData.name} class
+                Edit {`${classData.level}-${classData.section}`} class
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Edit {classData.name} class
+        Edit {`${classData.level}-${classData.section}`} class
       </Typography.Title>
       <div
         style={{

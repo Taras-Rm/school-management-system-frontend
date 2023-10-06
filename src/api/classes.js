@@ -10,9 +10,11 @@ export const getSchoolClass = async ({ id }) => {
   return response.data;
 };
 
-export const createSchoolClass = async ({ name }) => {
+export const createSchoolClass = async ({ level, section, description }) => {
   const response = await api.post(`/admins/school/classes`, {
-    name,
+    level,
+    section,
+    description,
   });
   return response.data;
 };
