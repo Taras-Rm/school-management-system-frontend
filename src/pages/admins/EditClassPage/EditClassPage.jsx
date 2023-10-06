@@ -16,6 +16,7 @@ import { getSchoolTeachers } from "../../../api/teachers";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
 import { classLevels, classSection } from "../../../utils/staticData";
+import TextArea from "antd/es/input/TextArea";
 
 function EditClassPage() {
   const { id } = useParams();
@@ -159,6 +160,20 @@ function EditClassPage() {
                 placeholder={"Select class teacher"}
                 allowClear
               />
+            </Form.Item>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography.Text style={{ fontSize: 16 }}>
+              Description
+            </Typography.Text>
+            <Form.Item name={"description"}>
+              <TextArea />
             </Form.Item>
           </div>
 
