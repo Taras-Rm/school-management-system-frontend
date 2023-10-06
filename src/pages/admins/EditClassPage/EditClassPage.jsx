@@ -15,6 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolTeachers } from "../../../api/teachers";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
+import { classLevels, classSection } from "../../../utils/staticData";
 
 function EditClassPage() {
   const { id } = useParams();
@@ -53,7 +54,9 @@ function EditClassPage() {
   const handleUpdateClass = (values) => {
     updateClassMutation.mutate({
       id: id,
-      name: values.name,
+      level: values.level,
+      section: values.section,
+      description: values.description,
       teacherId: values.teacherId,
     });
   };
@@ -118,9 +121,21 @@ function EditClassPage() {
               justifyContent: "space-between",
             }}
           >
-            <Typography.Text style={{ fontSize: 16 }}>Name</Typography.Text>
-            <Form.Item name={"name"} rules={[{ required: true }]}>
-              <Input style={{ width: 200 }} />
+            <Typography.Text style={{ fontSize: 16 }}>Level</Typography.Text>
+            <Form.Item name={"level"} rules={[{ required: true }]}>
+              <Select options={classLevels} style={{ width: 200 }} />
+            </Form.Item>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography.Text style={{ fontSize: 16 }}>Section</Typography.Text>
+            <Form.Item name={"section"} rules={[{ required: true }]}>
+              <Select options={classSection} style={{ width: 200 }} />
             </Form.Item>
           </div>
           <div

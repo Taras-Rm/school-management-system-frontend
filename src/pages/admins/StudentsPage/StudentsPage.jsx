@@ -72,7 +72,9 @@ function StudentsPage() {
       dataIndex: "Class",
       key: "class.name",
       render: (value, item) => {
-        return item.class?.name;
+        return item.class
+          ? `${item?.class?.level}-${item?.class?.section}`
+          : "";
       },
     },
     {

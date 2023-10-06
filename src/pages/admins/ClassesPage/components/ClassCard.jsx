@@ -46,7 +46,7 @@ function ClassCard({ classInfo }) {
           href={generatePath(routes.adminClassPage, { id: classInfo.id })}
           style={{ fontSize: 18 }}
         >
-          {classInfo.name}
+          {`${classInfo.level}-${classInfo.section}`}
         </Typography.Link>
       }
       actions={[

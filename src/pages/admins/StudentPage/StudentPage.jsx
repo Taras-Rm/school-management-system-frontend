@@ -75,7 +75,10 @@ function StudentPage() {
               Chikago, city
             </Typography.Text>
             <Typography.Text style={{ fontSize: 16 }}>
-              Class: {student?.class ? student.class.name : "none"}
+              Class:
+              {student?.class
+                ? `${student.class.level}-${student.class.section}`
+                : "none"}
             </Typography.Text>
             <Divider />
             <div style={{ padding: "0 30px", width: "100%" }}>
