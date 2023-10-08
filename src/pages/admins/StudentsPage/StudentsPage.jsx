@@ -20,15 +20,15 @@ function StudentsPage() {
   const [isCreateStudentModalOpen, setIsCreateStudentModalOpen] =
     useState(false);
 
-  const {
-    data: students,
-    error,
-    isLoading,
-  } = useQuery(["students"], getSchoolStudents, {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: students, isLoading } = useQuery(
+    ["students"],
+    getSchoolStudents,
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
   const deleteSchoolStudentMutation = useMutation(deleteSchoolStudent, {
     onSuccess: () => {

@@ -15,7 +15,7 @@ import { useQuery } from "react-query";
 import studentImg from "../../../assets/images/student.png";
 import { MailTwoTone, PhoneTwoTone } from "@ant-design/icons";
 import { getSchoolTeacher } from "../../../api/teachers";
-import { genders } from "../../../utils/staticData";
+import { genderOptions } from "../../../utils/staticData";
 
 function TeacherPage() {
   const { id } = useParams();
@@ -131,7 +131,7 @@ function TeacherPage() {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography.Text style={{ fontSize: 20 }}>Gender:</Typography.Text>
             <Typography.Text strong style={{ fontSize: 20 }}>
-              {genders.find((g) => g.value === teacher.gender)?.label}
+              {genderOptions.find((g) => g.value === teacher.gender)?.label}
             </Typography.Text>
           </div>
         </Card>

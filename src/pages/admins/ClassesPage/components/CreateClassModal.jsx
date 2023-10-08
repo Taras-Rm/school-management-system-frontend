@@ -3,7 +3,10 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolClass } from "../../../../api/classes";
-import { classLevels, classSection } from "../../../../utils/staticData";
+import {
+  classLevelOptions,
+  classSectionOptions,
+} from "../../../../utils/staticData";
 import TextArea from "antd/es/input/TextArea";
 
 function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
@@ -45,7 +48,7 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
             rules={[{ required: true }]}
             style={{ flex: 1 }}
           >
-            <Select options={classLevels} />
+            <Select options={classLevelOptions} />
           </Form.Item>
           <Form.Item
             name={"section"}
@@ -53,7 +56,7 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
-            <Select options={classSection} />
+            <Select options={classSectionOptions} />
           </Form.Item>
         </div>
         <Form.Item name={"description"} label="Description">

@@ -1,8 +1,5 @@
-import { Button, Card, Col, Row, Spin, Typography } from "antd";
-import React, { useState } from "react";
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { getAdminSchool } from "../../../api/school";
-import { useQuery } from "react-query";
+import { Card, Col, Row, Typography } from "antd";
+import React from "react";
 
 function TeacherSchoolPage() {
   return (

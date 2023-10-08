@@ -10,11 +10,7 @@ import { routes } from "../../routes";
 function ClassesPage() {
   const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
 
-  const {
-    data: classes,
-    error,
-    isLoading,
-  } = useQuery(["classes"], getSchoolClasses, {
+  const { data: classes, isLoading } = useQuery(["classes"], getSchoolClasses, {
     onError: (error) => {
       message.error(error);
     },

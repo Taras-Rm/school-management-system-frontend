@@ -20,15 +20,15 @@ function TeachersPage() {
   const [isCreateTeacherModalOpen, setIsCreateTeacherModalOpen] =
     useState(false);
 
-  const {
-    data: teachers,
-    error,
-    isLoading,
-  } = useQuery(["teachers"], getSchoolTeachers, {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: teachers, isLoading } = useQuery(
+    ["teachers"],
+    getSchoolTeachers,
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
   const deleteSchoolTeacherMutation = useMutation(deleteSchoolTeacher, {
     onSuccess: () => {

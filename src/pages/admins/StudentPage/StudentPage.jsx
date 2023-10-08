@@ -3,7 +3,6 @@ import { routes } from "../../routes";
 import { generatePath, useParams } from "react-router";
 import {
   Breadcrumb,
-  Button,
   Card,
   Divider,
   Image,
@@ -16,7 +15,7 @@ import { getSchoolStudent } from "../../../api/students";
 import { useQuery } from "react-query";
 import studentImg from "../../../assets/images/student.png";
 import { MailTwoTone, PhoneTwoTone } from "@ant-design/icons";
-import { genders } from "../../../utils/staticData";
+import { genderOptions } from "../../../utils/staticData";
 
 function StudentPage() {
   const { id } = useParams();
@@ -123,7 +122,7 @@ function StudentPage() {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography.Text style={{ fontSize: 20 }}>Gender:</Typography.Text>
             <Typography.Text strong style={{ fontSize: 20 }}>
-              {genders.find((g) => g.value === student.gender)?.label}
+              {genderOptions.find((g) => g.value === student.gender)?.label}
             </Typography.Text>
           </div>
         </Card>

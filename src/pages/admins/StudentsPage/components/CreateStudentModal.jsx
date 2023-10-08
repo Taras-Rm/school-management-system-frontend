@@ -3,7 +3,7 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolStudent } from "../../../../api/students";
-import { genders } from "../../../../utils/staticData";
+import { genderOptions } from "../../../../utils/staticData";
 
 function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
   const queryClient = useQueryClient();
@@ -75,7 +75,7 @@ function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
-            <Select options={genders} />
+            <Select options={genderOptions} />
           </Form.Item>
         </div>
         <Form.Item

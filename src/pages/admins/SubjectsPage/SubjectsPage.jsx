@@ -10,15 +10,15 @@ function SubjectsPage() {
   const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
     useState(false);
 
-  const {
-    data: subjects,
-    error,
-    isLoading,
-  } = useQuery(["subjects"], getSchoolSubjects, {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: subjects, isLoading } = useQuery(
+    ["subjects"],
+    getSchoolSubjects,
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
   if (isLoading) return <Spin spinning />;
 

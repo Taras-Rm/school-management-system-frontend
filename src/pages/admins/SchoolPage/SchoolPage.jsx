@@ -41,11 +41,7 @@ function WithoutSchoolBoard() {
 }
 
 function SchoolPage() {
-  const {
-    data: school,
-    isLoading,
-    error,
-  } = useQuery(["school"], getAdminSchool, {
+  const { data: school, isLoading } = useQuery(["school"], getAdminSchool, {
     retry: false,
   });
 

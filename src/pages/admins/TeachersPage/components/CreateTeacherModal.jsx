@@ -1,17 +1,9 @@
-import {
-  DatePicker,
-  Form,
-  Input,
-  Modal,
-  Segmented,
-  Select,
-  message,
-} from "antd";
+import { DatePicker, Form, Input, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolTeacher } from "../../../../api/teachers";
-import { genders } from "../../../../utils/staticData";
+import { genderOptions } from "../../../../utils/staticData";
 
 function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
   const queryClient = useQueryClient();
@@ -84,7 +76,7 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
-            <Select options={genders} />
+            <Select options={genderOptions} />
           </Form.Item>
         </div>
         <Form.Item

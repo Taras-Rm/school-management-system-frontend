@@ -1,9 +1,9 @@
-export const genders = [
+export const genderOptions = [
   { value: "male", label: "Male" },
   { value: "female", label: "Female" },
 ];
 
-export const classLevels = [
+export const classLevelOptions = [
   {
     value: 1,
     label: "1",
@@ -50,7 +50,7 @@ export const classLevels = [
   },
 ];
 
-export const classSection = [
+export const classSectionOptions = [
   {
     value: "A",
     label: "A",

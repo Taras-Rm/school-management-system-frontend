@@ -5,7 +5,6 @@ import {
   Breadcrumb,
   Button,
   Form,
-  Input,
   Select,
   Spin,
   Typography,
@@ -15,32 +14,35 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolTeachers } from "../../../api/teachers";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
-import { classLevels, classSection } from "../../../utils/staticData";
+import {
+  classLevelOptions,
+  classSectionOptions,
+} from "../../../utils/staticData";
 import TextArea from "antd/es/input/TextArea";
 
 function EditClassPage() {
   const { id } = useParams();
   const queryClient = useQueryClient();
 
-  const {
-    data: classData,
-    error,
-    isLoading,
-  } = useQuery(["classes", id], () => getSchoolClass({ id }), {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: classData, isLoading } = useQuery(
+    ["classes", id],
+    () => getSchoolClass({ id }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
-  const {
-    data: teachers,
-    teachersError,
-    teachersIsLoading,
-  } = useQuery(["teachers"], getSchoolTeachers, {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: teachers, teachersIsLoading } = useQuery(
+    ["teachers"],
+    getSchoolTeachers,
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
 
   const updateClassMutation = useMutation(updateSchoolClass, {
     onSuccess: () => {
@@ -124,7 +126,7 @@ function EditClassPage() {
           >
             <Typography.Text style={{ fontSize: 16 }}>Level</Typography.Text>
             <Form.Item name={"level"} rules={[{ required: true }]}>
-              <Select options={classLevels} style={{ width: 200 }} />
+              <Select options={classLevelOptions} style={{ width: 200 }} />
             </Form.Item>
           </div>
           <div
@@ -136,7 +138,7 @@ function EditClassPage() {
           >
             <Typography.Text style={{ fontSize: 16 }}>Section</Typography.Text>
             <Form.Item name={"section"} rules={[{ required: true }]}>
-              <Select options={classSection} style={{ width: 200 }} />
+              <Select options={classSectionOptions} style={{ width: 200 }} />
             </Form.Item>
           </div>
           <div

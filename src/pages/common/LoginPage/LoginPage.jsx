@@ -92,11 +92,7 @@ function LoginPage() {
               buttonStyle="solid"
             />
           </Form.Item>
-          <Button
-            style={{ width: "50%" }}
-            type="primary"
-            htmlType="submit"
-          >
+          <Button style={{ width: "50%" }} type="primary" htmlType="submit">
             Login
           </Button>
         </Form>
