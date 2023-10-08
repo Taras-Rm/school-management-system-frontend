@@ -15,7 +15,8 @@ import { Link } from "react-router-dom";
 import { getSchoolStudent } from "../../../api/students";
 import { useQuery } from "react-query";
 import studentImg from "../../../assets/images/student.png";
-import { MailTwoTone } from "@ant-design/icons";
+import { MailTwoTone, PhoneTwoTone } from "@ant-design/icons";
+import { genders } from "../../../utils/staticData";
 
 function StudentPage() {
   const { id } = useParams();
@@ -72,7 +73,7 @@ function StudentPage() {
               strong
             >{`${student.name} ${student.surname}`}</Typography.Text>
             <Typography.Text style={{ fontSize: 18 }}>
-              Chikago, city
+              {student.address}
             </Typography.Text>
             <Typography.Text style={{ fontSize: 16 }}>
               Class:
@@ -88,15 +89,44 @@ function StudentPage() {
                   justifyContent: "space-between",
                   alignItems: "center",
                   width: "100%",
+                  marginBottom: 8,
                 }}
               >
                 <MailTwoTone />
                 <Typography.Text>{student.email}</Typography.Text>
               </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <PhoneTwoTone />
+                <Typography.Text>{student.phone}</Typography.Text>
+              </div>
             </div>
           </div>
         </Card>
-        <Card style={{ flex: 0.6, marginLeft: 20 }}></Card>
+        <Card style={{ flex: 0.6, marginLeft: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>
+              Date of birth:
+            </Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              {student.dob === "0001-01-01T00:00:00Z"
+                ? ""
+                : student?.dob.split("T")[0]}
+            </Typography.Text>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography.Text style={{ fontSize: 20 }}>Gender:</Typography.Text>
+            <Typography.Text strong style={{ fontSize: 20 }}>
+              {genders.find((g) => g.value === student.gender)?.label}
+            </Typography.Text>
+          </div>
+        </Card>
       </div>
     </div>
   );
