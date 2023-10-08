@@ -5,11 +5,23 @@ export const getSchoolStudents = async () => {
   return response.data;
 };
 
-export const createSchoolStudent = async ({ name, surname, email }) => {
+export const createSchoolStudent = async ({
+  name,
+  surname,
+  email,
+  dob,
+  address,
+  phone,
+  gender,
+}) => {
   const response = await api.post(`/admins/school/students`, {
     name,
     surname,
     email,
+    dob,
+    address,
+    phone,
+    gender,
   });
   return response.data;
 };

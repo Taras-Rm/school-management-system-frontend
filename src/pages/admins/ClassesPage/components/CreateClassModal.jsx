@@ -1,8 +1,7 @@
-import { Form, Input, Modal, Select, message } from "antd";
+import { Form, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { createSchoolStudent } from "../../../../api/students";
 import { createSchoolClass } from "../../../../api/classes";
 import { classLevels, classSection } from "../../../../utils/staticData";
 import TextArea from "antd/es/input/TextArea";
