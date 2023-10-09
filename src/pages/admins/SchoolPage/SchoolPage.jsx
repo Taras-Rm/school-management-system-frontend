@@ -1,9 +1,11 @@
-import { Button, Card, Col, Row, Spin, Typography } from "antd";
+import { Breadcrumb, Button, Card, Col, Row, Spin, Typography } from "antd";
 import React, { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { getAdminSchool } from "../../../api/school";
 import { useQuery } from "react-query";
 import CreateSchoolModal from "./components/CreateSchoolModal";
+import { routes } from "../../routes";
+import { Link, useNavigate } from "react-router-dom";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -41,6 +43,8 @@ function WithoutSchoolBoard() {
 }
 
 function SchoolPage() {
+  const navigate = useNavigate();
+
   const { data: school, isLoading } = useQuery(["school"], getAdminSchool, {
     retry: false,
   });
@@ -59,7 +63,25 @@ function SchoolPage() {
     >
       {school ? (
         <div>
-          <Typography.Title level={2}>{school.name} school</Typography.Title>
+          <Breadcrumb
+            items={[
+              {
+                title: <Link to={routes.adminSchoolPage}>School</Link>,
+              },
+            ]}
+          />
+          <Typography.Title level={2} style={{ margin: "15px 0" }}>
+            {school.name} school
+          </Typography.Title>
+          <div style={{ marginBottom: 20 }}>
+            <Button
+              type="primary"
+              style={{ backgroundColor: "green" }}
+              onClick={() => navigate(routes.adminEditSchoolPage)}
+            >
+              Edit school
+            </Button>
+          </div>
           <div style={{ width: "100%" }}>
             <Row gutter={16}>
               <Col span={6}>
