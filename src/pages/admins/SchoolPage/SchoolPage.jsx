@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import CreateSchoolModal from "./components/CreateSchoolModal";
 import { routes } from "../../routes";
 import { Link, useNavigate } from "react-router-dom";
+import EditStudyPeriodModal from "./components/EditStudyPeriod";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -44,6 +45,9 @@ function WithoutSchoolBoard() {
 
 function SchoolPage() {
   const navigate = useNavigate();
+
+  const [isEditStudyPeriodModalOpen, setIsEditStudyPeriodModalOpen] =
+    useState(false);
 
   const { data: school, isLoading } = useQuery(["school"], getAdminSchool, {
     retry: false,
@@ -87,6 +91,38 @@ function SchoolPage() {
               <Col span={6}>
                 <Card
                   title={
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography.Text type="secondary">
+                        Study period
+                      </Typography.Text>
+                      <Button
+                        size="small"
+                        type="primary"
+                        onClick={() => setIsEditStudyPeriodModalOpen(true)}
+                      >
+                        Change
+                      </Button>
+                    </div>
+                  }
+                >
+                  <Typography.Text style={{ fontSize: 24 }}>
+                    September 1 2023
+                  </Typography.Text>
+                  <Typography.Text style={{ fontSize: 24 }}>-</Typography.Text>
+                  <Typography.Text style={{ fontSize: 24 }}>
+                    May 21 2024
+                  </Typography.Text>
+                </Card>
+              </Col>
+              <Col span={6}>
+                <Card
+                  title={
                     <Typography.Text type="secondary">
                       Teachers info
                     </Typography.Text>
@@ -110,6 +146,10 @@ function SchoolPage() {
               </Col>
             </Row>
           </div>
+          <EditStudyPeriodModal
+            isOpen={isEditStudyPeriodModalOpen}
+            setIsEditStudyPeriodModalOpen={setIsEditStudyPeriodModalOpen}
+          />
         </div>
       ) : (
         <WithoutSchoolBoard />
