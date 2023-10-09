@@ -11,8 +11,12 @@ import {
 } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { createStudyPeriod } from "../../../../api/studyPeriods";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+  createStudyPeriod,
+  getSchoolStudyPeriods,
+} from "../../../../api/studyPeriods";
+import { formatDate } from "../../../../utils/date";
 
 function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
   const queryClient = useQueryClient();
@@ -21,12 +25,26 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
 
   const [isAddNewPeriodOpen, setIsAddNewPeriodOpen] = useState(false);
 
+  const { data: studyPeriods = [], isLoading: isStudyPeriodsLoading } =
+    useQuery(["studyPeriods"], getSchoolStudyPeriods, {
+      onSuccess: (data) => {
+        form.setFieldsValue({
+          studyPeriodId: data.find((sp) => sp.isActive)?.id,
+        });
+      },
+      onError: (err) => {
+        message.error(
+          "Failed to get school study periods: " + err.response.data?.message
+        );
+      },
+    });
+
   const {
     mutate: createStudyPeriodMutation,
     isLoading: isCreateStudyPeriodMutationLoading,
   } = useMutation(createStudyPeriod, {
     onSuccess: () => {
-      // queryClient.invalidateQueries(["me"]);
+      queryClient.invalidateQueries(["studyPeriods"]);
       message.success("Study period is created");
       newPeriodForm.resetFields();
       setIsAddNewPeriodOpen(false);
@@ -48,13 +66,24 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
       open={isOpen}
       onCancel={() => setIsEditStudyPeriodModalOpen(false)}
       title="Edit study period"
-      okText={"Edit study period"}
-      okButtonProps={{ disabled: isAddNewPeriodOpen }}
-      onOk={() => form.submit()}
+      footer={null}
     >
       <Form form={form} onFinish={() => {}} layout="vertical">
-        <Form.Item name={"period"} label="Period" rules={[{ required: true }]}>
-          <Select />
+        <Form.Item
+          name={"studyPeriodId"}
+          label="Period"
+          rules={[{ required: true }]}
+        >
+          <Select
+            loading={isStudyPeriodsLoading}
+            options={studyPeriods.map((sp) => ({
+              value: sp.id,
+              label: `${formatDate(new Date(sp.startDate))} - ${formatDate(
+                new Date(sp.endDate)
+              )}`,
+              disabled: !sp.isActive,
+            }))}
+          />
         </Form.Item>
       </Form>
       <div style={{ display: "flex" }}>
