@@ -27,11 +27,6 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
 
   const { data: studyPeriods = [], isLoading: isStudyPeriodsLoading } =
     useQuery(["studyPeriods"], getSchoolStudyPeriods, {
-      onSuccess: (data) => {
-        form.setFieldsValue({
-          studyPeriodId: data.find((sp) => sp.isActive)?.id,
-        });
-      },
       onError: (err) => {
         message.error(
           "Failed to get school study periods: " + err.response.data?.message
@@ -68,24 +63,21 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
       title="Edit study period"
       footer={null}
     >
-      <Form form={form} onFinish={() => {}} layout="vertical">
-        <Form.Item
-          name={"studyPeriodId"}
-          label="Period"
-          rules={[{ required: true }]}
-        >
-          <Select
-            loading={isStudyPeriodsLoading}
-            options={studyPeriods.map((sp) => ({
-              value: sp.id,
-              label: `${formatDate(new Date(sp.startDate))} - ${formatDate(
-                new Date(sp.endDate)
-              )}`,
-              disabled: !sp.isActive,
-            }))}
-          />
-        </Form.Item>
-      </Form>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Typography style={{ marginRight: 10 }}>Period</Typography>
+        <Select
+          loading={isStudyPeriodsLoading}
+          value={studyPeriods.find((sp) => sp.isActive)?.id}
+          options={studyPeriods.map((sp) => ({
+            value: sp.id,
+            label: `${formatDate(new Date(sp.startDate))} - ${formatDate(
+              new Date(sp.endDate)
+            )}`,
+            disabled: !sp.isActive,
+          }))}
+          style={{ width: "100%", marginTop: 10, marginBottom: 20 }}
+        />
+      </div>
       <div style={{ display: "flex" }}>
         <Typography style={{ marginRight: 10 }}>Add new period</Typography>
         <Switch

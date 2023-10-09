@@ -1,4 +1,14 @@
-import { Breadcrumb, Button, Card, Col, Row, Spin, Typography } from "antd";
+import {
+  Alert,
+  Breadcrumb,
+  Button,
+  Card,
+  Col,
+  Row,
+  Spin,
+  Typography,
+  message,
+} from "antd";
 import React, { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { getAdminSchool } from "../../../api/school";
@@ -7,6 +17,8 @@ import CreateSchoolModal from "./components/CreateSchoolModal";
 import { routes } from "../../routes";
 import { Link, useNavigate } from "react-router-dom";
 import EditStudyPeriodModal from "./components/EditStudyPeriod";
+import { getSchoolStudyPeriods } from "../../../api/studyPeriods";
+import { formatDate } from "../../../utils/date";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -49,9 +61,26 @@ function SchoolPage() {
   const [isEditStudyPeriodModalOpen, setIsEditStudyPeriodModalOpen] =
     useState(false);
 
+  const [activeStudyPeriod, setActiveStudyPeriod] = useState(null);
+
   const { data: school, isLoading } = useQuery(["school"], getAdminSchool, {
     retry: false,
   });
+
+  const { isLoading: isStudyPeriodsLoading } = useQuery(
+    ["studyPeriods"],
+    getSchoolStudyPeriods,
+    {
+      onSuccess: (data) => {
+        setActiveStudyPeriod(data.find((sp) => sp.isActive));
+      },
+      onError: (err) => {
+        message.error(
+          "Failed to get school study periods: " + err.response.data?.message
+        );
+      },
+    }
+  );
 
   if (isLoading) {
     return <Spin spinning />;
@@ -86,10 +115,18 @@ function SchoolPage() {
               Edit school
             </Button>
           </div>
+          {!activeStudyPeriod && !isStudyPeriodsLoading && (
+            <Alert
+              message="You should create study period before using the system"
+              banner
+              style={{ marginBottom: 20 }}
+            />
+          )}
           <div style={{ width: "100%" }}>
             <Row gutter={16}>
               <Col span={6}>
                 <Card
+                  loading={isStudyPeriodsLoading}
                   title={
                     <div
                       style={{
@@ -111,12 +148,12 @@ function SchoolPage() {
                     </div>
                   }
                 >
-                  <Typography.Text style={{ fontSize: 24 }}>
-                    September 1 2023
-                  </Typography.Text>
-                  <Typography.Text style={{ fontSize: 24 }}>-</Typography.Text>
-                  <Typography.Text style={{ fontSize: 24 }}>
-                    May 21 2024
+                  <Typography.Text style={{ fontSize: 16 }}>
+                    {activeStudyPeriod
+                      ? `${formatDate(
+                          new Date(activeStudyPeriod.startDate)
+                        )} - ${formatDate(new Date(activeStudyPeriod.endDate))}`
+                      : ""}
                   </Typography.Text>
                 </Card>
               </Col>
