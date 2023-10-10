@@ -79,6 +79,7 @@ function SchoolPage() {
           "Failed to get school study periods: " + err.response.data?.message
         );
       },
+      enabled: !!school
     }
   );
 
