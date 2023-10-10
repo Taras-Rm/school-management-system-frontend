@@ -13,6 +13,7 @@ import {
   ContactsOutlined,
   LogoutOutlined,
   BlockOutlined,
+  ScheduleOutlined,
 } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -101,6 +102,13 @@ function Layout() {
             routes.adminSubjectsPage,
             <Link to={routes.adminSubjectsPage}>
               <BlockOutlined />
+            </Link>
+          ),
+          getItem(
+            "Schedule",
+            routes.adminSchedulePage,
+            <Link to={routes.adminSchedulePage}>
+              <ScheduleOutlined />
             </Link>
           )
         );
