@@ -30,18 +30,29 @@ function CallSchedulePage() {
       key: "time",
       align: "center",
       render: (value, item) => {
-        return `${formatTime(new Date(item.startTime))} - ${formatTime(
-          new Date(item.endTime)
-        )}`;
+        return item.startTime && item.endTime
+          ? `${formatTime(new Date(item.startTime))} - ${formatTime(
+              new Date(item.endTime)
+            )}`
+          : "";
       },
     },
   ];
 
-  const tableData = callsSchedule?.map((t) => {
-    return {
-      ...t,
-      key: t.id,
-    };
+  const defaultRows = [1, 2, 3, 4, 5, 6, 7];
+
+  const tableData = defaultRows.map((r) => {
+    let cS = callsSchedule.find((cS) => cS.orderNumber === r);
+    if (cS) {
+      return {
+        ...cS,
+        key: cS.id,
+      };
+    } else {
+      return {
+        orderNumber: r,
+      };
+    }
   });
 
   return (
@@ -63,7 +74,7 @@ function CallSchedulePage() {
         Schedule
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button type="primary" style={{ backgroundColor: "green" }}>
+        <Button type="primary" style={{ backgroundColor: "green" }} disabled>
           Edit schedule
         </Button>
       </div>
