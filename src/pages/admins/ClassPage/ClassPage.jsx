@@ -14,7 +14,7 @@ import {
   getSchoolClassStudents,
   unassignClassForStudents,
 } from "../../../api/classes";
-import { generatePath, useParams } from "react-router";
+import { generatePath, useNavigate, useParams } from "react-router";
 import AssignClassForStudentsModal from "./components/AssignClassForStudentsModal";
 import { routes } from "../../routes";
 import { Link } from "react-router-dom";
@@ -23,6 +23,7 @@ import { CloseCircleTwoTone } from "@ant-design/icons";
 function ClassPage() {
   const { id } = useParams();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [
     isAssignClassForStudentsModalOpen,
@@ -150,13 +151,24 @@ function ClassPage() {
           alignItems: "center",
         }}
       >
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsAssignClassForStudentsModalOpen(true)}
-        >
-          Assign students
-        </Button>
+        <div>
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsAssignClassForStudentsModalOpen(true)}
+          >
+            Assign students
+          </Button>
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green", marginLeft: 10 }}
+            onClick={() =>
+              navigate(generatePath(routes.adminClassSubjectsPage, { id: id }))
+            }
+          >
+            Subjects
+          </Button>
+        </div>
         <div>
           <div style={{ display: "flex", alignItems: "center", fontSize: 18 }}>
             <Typography.Text style={{ marginRight: 5 }}>
