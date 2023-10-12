@@ -67,3 +67,14 @@ export const deleteSchoolClass = async ({ classId }) => {
   const response = await api.delete(`/admins/school/classes/${classId}`);
   return response.data;
 };
+
+export const createClassSubject = async ({ subjectId, classId, teacherId }) => {
+  const response = await api.post(
+    `/admins/school/classes/${classId}/subjects`,
+    {
+      subjectId,
+      teacherId,
+    }
+  );
+  return response.data;
+};

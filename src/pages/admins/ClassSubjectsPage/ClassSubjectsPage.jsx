@@ -1,12 +1,15 @@
 import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
 import { getSchoolClass } from "../../../api/classes";
+import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
 
 function ClassSubjectsPage() {
   const { id } = useParams();
+  const [isCreateClassSubjectModalOpen, setIsCreateClassSubjectModalOpen] =
+    useState(false);
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -111,12 +114,17 @@ function ClassSubjectsPage() {
         <Button
           type="primary"
           style={{ backgroundColor: "green" }}
-          onClick={() => {}}
+          onClick={() => setIsCreateClassSubjectModalOpen(true)}
         >
-          Edit
+          Add
         </Button>
       </div>
       <Table columns={tableColumns} dataSource={data} pagination={false} />
+      <CreateClassSubjectModal
+        isOpen={isCreateClassSubjectModalOpen}
+        setIsCreateClassSubjectModalOpen={setIsCreateClassSubjectModalOpen}
+        classId={id}
+      />
     </div>
   );
 }
