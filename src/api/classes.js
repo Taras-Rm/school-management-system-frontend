@@ -78,3 +78,8 @@ export const createClassSubject = async ({ subjectId, classId, teacherId }) => {
   );
   return response.data;
 };
+
+export const getClassSubjects = async ({ id }) => {
+  const response = await api.get(`/admins/school/classes/${id}/subjects`);
+  return response.data;
+};

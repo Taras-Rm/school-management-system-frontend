@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
-import { getSchoolClass } from "../../../api/classes";
+import { getClassSubjects, getSchoolClass } from "../../../api/classes";
 import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
 
 function ClassSubjectsPage() {
@@ -21,34 +21,19 @@ function ClassSubjectsPage() {
     }
   );
 
-  const data = [
-    {
-      id: 1,
-      classId: 2,
-      teacherId: 34,
-      subjectId: 4,
-      teacher: {
-        name: "Tom",
-        surname: "Cruz",
+  const { data: classSubjects = [], isLoading: isLoadingClassSubjects } =
+    useQuery(["classes", id, "subjects"], () => getClassSubjects({ id }), {
+      onError: (error) => {
+        message.error(error);
       },
-      subject: {
-        name: "Math",
-      },
-    },
-    {
-      id: 2,
-      classId: 2,
-      teacherId: 36,
-      subjectId: 5,
-      teacher: {
-        name: "Tom1",
-        surname: "Cruz1",
-      },
-      subject: {
-        name: "Math 2",
-      },
-    },
-  ];
+    });
+
+  const tableData = classSubjects?.map((t) => {
+    return {
+      ...t,
+      key: t.id,
+    };
+  });
 
   const tableColumns = [
     {
@@ -61,10 +46,10 @@ function ClassSubjectsPage() {
     },
     {
       title: "Teacher",
-      dataIndex: "teacher",
-      key: "teacher",
+      dataIndex: "teacherId",
+      key: "teacherId",
       render: (value, item) => {
-        return `${value.name} ${value.surname}`;
+        return value ? `${item.teacher.name} ${item.teacher.surname}` : "";
       },
     },
   ];
@@ -119,7 +104,12 @@ function ClassSubjectsPage() {
           Add
         </Button>
       </div>
-      <Table columns={tableColumns} dataSource={data} pagination={false} />
+      <Table
+        columns={tableColumns}
+        dataSource={tableData}
+        pagination={false}
+        loading={isLoadingClassSubjects}
+      />
       <CreateClassSubjectModal
         isOpen={isCreateClassSubjectModalOpen}
         setIsCreateClassSubjectModalOpen={setIsCreateClassSubjectModalOpen}
