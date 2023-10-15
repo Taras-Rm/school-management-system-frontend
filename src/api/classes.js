@@ -90,3 +90,28 @@ export const deleteClassSubject = async ({ classId, subjectId }) => {
   );
   return response.data;
 };
+
+export const updateClassSubject = async ({
+  id,
+  classId,
+  subjectId,
+  teacherId,
+}) => {
+  const response = await api.put(
+    `/admins/school/classes/${classId}/subjects/${id}`,
+    {
+      id,
+      classId,
+      subjectId,
+      teacherId,
+    }
+  );
+  return response.data;
+};
+
+export const getClassSubject = async ({ classId, classSubjectId }) => {
+  const response = await api.get(
+    `/admins/school/classes/${classId}/subjects/${classSubjectId}`
+  );
+  return response.data;
+};

@@ -17,7 +17,8 @@ import {
   getSchoolClass,
 } from "../../../api/classes";
 import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import EditClassSubjectModal from "./components/EditClassSubjectModal";
 
 function ClassSubjectsPage() {
   const { id } = useParams();
@@ -25,6 +26,8 @@ function ClassSubjectsPage() {
 
   const [isCreateClassSubjectModalOpen, setIsCreateClassSubjectModalOpen] =
     useState(false);
+
+  const [updateClassSubjectId, setUpdateClassSubjectId] = useState(null);
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -91,7 +94,13 @@ function ClassSubjectsPage() {
       align: "center",
       render: (value, item) => {
         return (
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <Tooltip title="Edit subject">
+              <EditTwoTone
+                onClick={() => setUpdateClassSubjectId(item.id)}
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
             <Tooltip title="Delete subject">
               <DeleteTwoTone
                 onClick={() => handleDeleteClassSubject(item.id)}
@@ -164,6 +173,11 @@ function ClassSubjectsPage() {
       <CreateClassSubjectModal
         isOpen={isCreateClassSubjectModalOpen}
         setIsCreateClassSubjectModalOpen={setIsCreateClassSubjectModalOpen}
+        classId={id}
+      />
+      <EditClassSubjectModal
+        classSubjectId={updateClassSubjectId}
+        setUpdateClassSubjectId={setUpdateClassSubjectId}
         classId={id}
       />
     </div>

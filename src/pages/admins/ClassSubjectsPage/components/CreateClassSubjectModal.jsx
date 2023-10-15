@@ -82,6 +82,7 @@ function CreateClassSubjectModal({
               value: s.id,
               label: `${s.name} ${s.surname}`,
             }))}
+            allowClear
           />
         </Form.Item>
       </Form>
