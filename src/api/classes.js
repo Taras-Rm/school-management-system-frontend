@@ -83,3 +83,10 @@ export const getClassSubjects = async ({ id }) => {
   const response = await api.get(`/admins/school/classes/${id}/subjects`);
   return response.data;
 };
+
+export const deleteClassSubject = async ({ classId, subjectId }) => {
+  const response = await api.delete(
+    `/admins/school/classes/${classId}/subjects/${subjectId}`
+  );
+  return response.data;
+};

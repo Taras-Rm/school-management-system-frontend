@@ -1,13 +1,28 @@
-import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  Spin,
+  Table,
+  Tooltip,
+  Typography,
+  message,
+} from "antd";
 import React, { useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
-import { useQuery } from "react-query";
-import { getClassSubjects, getSchoolClass } from "../../../api/classes";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+  deleteClassSubject,
+  getClassSubjects,
+  getSchoolClass,
+} from "../../../api/classes";
 import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
+import { DeleteTwoTone } from "@ant-design/icons";
 
 function ClassSubjectsPage() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
+
   const [isCreateClassSubjectModalOpen, setIsCreateClassSubjectModalOpen] =
     useState(false);
 
@@ -27,6 +42,23 @@ function ClassSubjectsPage() {
         message.error(error);
       },
     });
+
+  const deleteClassSubjectMutation = useMutation(deleteClassSubject, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["classes", id, "subjects"]);
+      message.success("Subject is deleted!");
+    },
+    onError: (err) => {
+      message.error("Failed to delete subject: " + err.response.data?.message);
+    },
+  });
+
+  const handleDeleteClassSubject = (subjectId) => {
+    deleteClassSubjectMutation.mutate({
+      classId: id,
+      subjectId,
+    });
+  };
 
   const tableData = classSubjects?.map((t) => {
     return {
@@ -50,6 +82,25 @@ function ClassSubjectsPage() {
       key: "teacherId",
       render: (value, item) => {
         return value ? `${item.teacher.name} ${item.teacher.surname}` : "";
+      },
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      align: "center",
+      render: (value, item) => {
+        return (
+          <div>
+            <Tooltip title="Delete subject">
+              <DeleteTwoTone
+                onClick={() => handleDeleteClassSubject(item.id)}
+                twoToneColor="#eb2f96"
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
+          </div>
+        );
       },
     },
   ];
