@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import { routes } from "../../routes";
-import { Breadcrumb, Button, List, Spin, Typography, message } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  List,
+  Spin,
+  Tooltip,
+  Typography,
+  message,
+} from "antd";
 import { Link } from "react-router-dom";
 import { getSchoolSubjects } from "../../../api/subjects";
 import { useQuery } from "react-query";
 import CreateSubjectModal from "./components/CreateSubjectModal";
+import { EditTwoTone } from "@ant-design/icons";
+import EditSubjectModal from "./components/EditSubjectModal";
 
 function SubjectsPage() {
   const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
     useState(false);
+
+  const [editSubjectId, setEditSubjectId] = useState(null);
 
   const { data: subjects, isLoading } = useQuery(
     ["subjects"],
@@ -55,7 +67,14 @@ function SubjectsPage() {
         renderItem={(item) => {
           return (
             <List.Item
-              actions={[<Link>Edit</Link>]}
+              actions={[
+                <Tooltip title="Edit subject">
+                  <EditTwoTone
+                    onClick={() => setEditSubjectId(item.id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>,
+              ]}
               style={{ padding: "15px 30px" }}
             >
               {item.name}
@@ -67,6 +86,10 @@ function SubjectsPage() {
       <CreateSubjectModal
         isOpen={isCreateSubjectModalOpen}
         setIsCreateSubjectModalOpen={setIsCreateSubjectModalOpen}
+      />
+      <EditSubjectModal
+        subjectId={editSubjectId}
+        setEditSubjectId={setEditSubjectId}
       />
     </div>
   );
