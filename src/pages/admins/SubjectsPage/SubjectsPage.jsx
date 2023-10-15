@@ -10,13 +10,15 @@ import {
   message,
 } from "antd";
 import { Link } from "react-router-dom";
-import { getSchoolSubjects } from "../../../api/subjects";
-import { useQuery } from "react-query";
+import { deleteSchoolSubject, getSchoolSubjects } from "../../../api/subjects";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateSubjectModal from "./components/CreateSubjectModal";
-import { EditTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditSubjectModal from "./components/EditSubjectModal";
 
 function SubjectsPage() {
+  const queryClient = useQueryClient()
+
   const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
     useState(false);
 
@@ -31,6 +33,22 @@ function SubjectsPage() {
       },
     }
   );
+
+  const deleteSubjectMutation = useMutation(deleteSchoolSubject, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["subjects"]);
+      message.success("Subject is deleted!");
+    },
+    onError: (err) => {
+      message.error("Failed to delete subject: " + err.response.data?.message);
+    },
+  });
+
+  const handleDeleteSubject = (id) => {
+    deleteSubjectMutation.mutate({
+      id,
+    });
+  };
 
   if (isLoading) return <Spin spinning />;
 
@@ -71,6 +89,13 @@ function SubjectsPage() {
                 <Tooltip title="Edit subject">
                   <EditTwoTone
                     onClick={() => setEditSubjectId(item.id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>,
+                <Tooltip title="Edit subject">
+                  <DeleteTwoTone
+                    onClick={() => handleDeleteSubject(item.id)}
+                    twoToneColor="#eb2f96"
                     style={{ cursor: "pointer" }}
                   />
                 </Tooltip>,

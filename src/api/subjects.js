@@ -25,3 +25,8 @@ export const updateSchoolSubject = async ({ id, name, schoolId }) => {
   });
   return response.data;
 };
+
+export const deleteSchoolSubject = async ({ id }) => {
+  const response = await api.delete(`/admins/school/subjects/${id}`);
+  return response.data;
+};
