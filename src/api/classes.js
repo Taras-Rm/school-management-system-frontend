@@ -115,3 +115,10 @@ export const getClassSubject = async ({ classId, classSubjectId }) => {
   );
   return response.data;
 };
+
+export const getClassSchedule = async ({ classId }) => {
+  const response = await api.get(
+    `/admins/school/classes/${classId}/schedule`
+  );
+  return response.data;
+};

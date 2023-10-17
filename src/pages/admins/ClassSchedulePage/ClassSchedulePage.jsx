@@ -3,7 +3,7 @@ import React from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
-import { getSchoolClass } from "../../../api/classes";
+import { getClassSchedule, getSchoolClass } from "../../../api/classes";
 import { getSchoolCallsSchedule } from "../../../api/callsSchedule";
 import { prepareScheduleTable } from "./classScheduleHelper";
 import { formatTime } from "../../../utils/date";
@@ -11,58 +11,58 @@ import { formatTime } from "../../../utils/date";
 function ClassSchedulePage() {
   const { id } = useParams();
 
-  const data = [
-    {
-      id: 1,
-      classId: 26,
-      class: {
-        id: 2,
-        section: "A",
-        level: 2,
-      },
-      classSubjectId: 3,
-      classSubject: {
-        classId: 2,
-        subjectId: 6,
-        subject: {
-          name: "Math",
-        },
-        teacherId: 8,
-        teacher: {
-          name: "Natalia",
-          surname: "Romaniuk",
-        },
-      },
-      dayOfWeek: "mon",
-      orderNumber: 1,
-      studyPeriodId: 4,
-    },
-    {
-      id: 3,
-      classId: 26,
-      class: {
-        id: 2,
-        section: "A",
-        level: 2,
-      },
-      classSubjectId: 5,
-      classSubject: {
-        classId: 2,
-        subjectId: 9,
-        subject: {
-          name: "Music",
-        },
-        teacherId: 10,
-        teacher: {
-          name: "Andrii",
-          surname: "Chaplya",
-        },
-      },
-      dayOfWeek: "tue",
-      orderNumber: 3,
-      studyPeriodId: 4,
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     classId: 26,
+  //     class: {
+  //       id: 2,
+  //       section: "A",
+  //       level: 2,
+  //     },
+  //     classSubjectId: 3,
+  //     classSubject: {
+  //       classId: 2,
+  //       subjectId: 6,
+  //       subject: {
+  //         name: "Math",
+  //       },
+  //       teacherId: 8,
+  //       teacher: {
+  //         name: "Natalia",
+  //         surname: "Romaniuk",
+  //       },
+  //     },
+  //     dayOfWeek: "mon",
+  //     orderNumber: 1,
+  //     studyPeriodId: 4,
+  //   },
+  //   {
+  //     id: 3,
+  //     classId: 26,
+  //     class: {
+  //       id: 2,
+  //       section: "A",
+  //       level: 2,
+  //     },
+  //     classSubjectId: 5,
+  //     classSubject: {
+  //       classId: 2,
+  //       subjectId: 9,
+  //       subject: {
+  //         name: "Music",
+  //       },
+  //       teacherId: 10,
+  //       teacher: {
+  //         name: "Andrii",
+  //         surname: "Chaplya",
+  //       },
+  //     },
+  //     dayOfWeek: "tue",
+  //     orderNumber: 3,
+  //     studyPeriodId: 4,
+  //   },
+  // ];
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -80,6 +80,17 @@ function ClassSchedulePage() {
         message.error(error);
       },
     });
+
+  const { data: classSchedule = [], isLoading: isClassScheduleLoading } =
+    useQuery(
+      ["class", id, "schedule"],
+      () => getClassSchedule({ classId: id }),
+      {
+        onError: (error) => {
+          message.error(error);
+        },
+      }
+    );
 
   const tableColumns = [
     {
@@ -142,7 +153,7 @@ function ClassSchedulePage() {
     },
   ];
 
-  const tableData = prepareScheduleTable(data, callsSchedule)?.map((t) => {
+  const tableData = prepareScheduleTable(classSchedule, callsSchedule)?.map((t) => {
     return {
       ...t,
       key: t.id,
@@ -192,7 +203,7 @@ function ClassSchedulePage() {
           onClick={() => {}}
           disabled
         >
-          Smth
+          Edit
         </Button>
       </div>
       <Table columns={tableColumns} dataSource={tableData} pagination={false} />

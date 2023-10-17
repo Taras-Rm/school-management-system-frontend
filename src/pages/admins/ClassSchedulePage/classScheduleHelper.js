@@ -49,7 +49,7 @@ function prepareSheduleTemplate(scheduleData, callsSchedule) {
 
 function prepareDaySubject(scheduleData, day, orderNumber) {
   let targetScheduleDay = scheduleData.find(
-    (sD) => sD.dayOfWeek === day && sD.orderNumber === orderNumber
+    (sD) => sD.dayOfWeek === day && sD.callSchedule.orderNumber === orderNumber
   );
 
   if (!targetScheduleDay) {
