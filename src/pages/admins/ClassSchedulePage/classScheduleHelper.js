@@ -57,11 +57,7 @@ function prepareDaySubject(scheduleData, day, orderNumber) {
   }
 
   return {
-    subject: {
-      ...targetScheduleDay.classSubject.subject,
-    },
-    teacher: {
-      ...targetScheduleDay.classSubject.techer,
-    },
+    subject: targetScheduleDay.classSubject.subject,
+    teacher: targetScheduleDay.classSubject.teacher,
   };
 }

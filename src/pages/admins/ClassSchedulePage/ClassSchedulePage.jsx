@@ -39,6 +39,26 @@ function ClassSchedulePage() {
       }
     );
 
+  const getCellContent = (day) => {
+    return (
+      <div>
+        {day ? (
+          <div>
+            {day.subject.name}
+            <br />
+            {day.teacher && (
+              <Typography.Text style={{ size: 12 }} type="secondary">
+                {`${day.teacher.name} ${day.teacher.surname}`}
+              </Typography.Text>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  };
+
   const tableColumns = [
     {
       title: "#",
@@ -65,7 +85,7 @@ function ClassSchedulePage() {
       dataIndex: "mon",
       key: "mon",
       render: (value, item) => {
-        return item.days.mon ? item.days.mon.subject.name : "";
+        return getCellContent(item.days.mon);
       },
     },
     {
@@ -73,7 +93,7 @@ function ClassSchedulePage() {
       dataIndex: "tue",
       key: "tue",
       render: (value, item) => {
-        return item.days.tue ? item.days.tue.subject.name : "";
+        return getCellContent(item.days.tue);
       },
     },
     {
@@ -81,7 +101,7 @@ function ClassSchedulePage() {
       dataIndex: "wed",
       key: "wed",
       render: (value, item) => {
-        return item.days.wed ? item.days.wed.subject.name : "";
+        return getCellContent(item.days.wed);
       },
     },
     {
@@ -89,7 +109,7 @@ function ClassSchedulePage() {
       dataIndex: "thu",
       key: "thu",
       render: (value, item) => {
-        return item.days.thu ? item.days.thu.subject.name : "";
+        return getCellContent(item.days.thu);
       },
     },
     {
@@ -97,7 +117,7 @@ function ClassSchedulePage() {
       dataIndex: "fri",
       key: "fri",
       render: (value, item) => {
-        return item.days.fri ? item.days.fri.subject.name : "";
+        return getCellContent(item.days.fri);
       },
     },
   ];
