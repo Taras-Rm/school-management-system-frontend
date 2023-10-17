@@ -11,59 +11,6 @@ import { formatTime } from "../../../utils/date";
 function ClassSchedulePage() {
   const { id } = useParams();
 
-  // const data = [
-  //   {
-  //     id: 1,
-  //     classId: 26,
-  //     class: {
-  //       id: 2,
-  //       section: "A",
-  //       level: 2,
-  //     },
-  //     classSubjectId: 3,
-  //     classSubject: {
-  //       classId: 2,
-  //       subjectId: 6,
-  //       subject: {
-  //         name: "Math",
-  //       },
-  //       teacherId: 8,
-  //       teacher: {
-  //         name: "Natalia",
-  //         surname: "Romaniuk",
-  //       },
-  //     },
-  //     dayOfWeek: "mon",
-  //     orderNumber: 1,
-  //     studyPeriodId: 4,
-  //   },
-  //   {
-  //     id: 3,
-  //     classId: 26,
-  //     class: {
-  //       id: 2,
-  //       section: "A",
-  //       level: 2,
-  //     },
-  //     classSubjectId: 5,
-  //     classSubject: {
-  //       classId: 2,
-  //       subjectId: 9,
-  //       subject: {
-  //         name: "Music",
-  //       },
-  //       teacherId: 10,
-  //       teacher: {
-  //         name: "Andrii",
-  //         surname: "Chaplya",
-  //       },
-  //     },
-  //     dayOfWeek: "tue",
-  //     orderNumber: 3,
-  //     studyPeriodId: 4,
-  //   },
-  // ];
-
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
     () => getSchoolClass({ id }),
@@ -97,6 +44,7 @@ function ClassSchedulePage() {
       title: "#",
       dataIndex: "orderNumber",
       key: "orderNumber",
+      align: "center",
       render: (value, item) => {
         return value;
       },
@@ -105,6 +53,7 @@ function ClassSchedulePage() {
       title: "Time",
       dataIndex: "time",
       key: "time",
+      align: "center",
       render: (value, item) => {
         return `${formatTime(new Date(item.startTime))} - ${formatTime(
           new Date(item.endTime)
@@ -153,12 +102,14 @@ function ClassSchedulePage() {
     },
   ];
 
-  const tableData = prepareScheduleTable(classSchedule, callsSchedule)?.map((t) => {
-    return {
-      ...t,
-      key: t.id,
-    };
-  });
+  const tableData = prepareScheduleTable(classSchedule, callsSchedule)?.map(
+    (t) => {
+      return {
+        ...t,
+        key: t.id,
+      };
+    }
+  );
 
   console.log(tableData);
 
@@ -206,7 +157,12 @@ function ClassSchedulePage() {
           Edit
         </Button>
       </div>
-      <Table columns={tableColumns} dataSource={tableData} pagination={false} />
+      <Table
+        columns={tableColumns}
+        dataSource={tableData}
+        pagination={false}
+        bordered
+      />
     </div>
   );
 }
