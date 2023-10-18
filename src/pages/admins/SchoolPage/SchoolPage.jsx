@@ -79,7 +79,7 @@ function SchoolPage() {
           "Failed to get school study periods: " + err.response.data?.message
         );
       },
-      enabled: !!school
+      enabled: !!school,
     }
   );
 
@@ -180,6 +180,17 @@ function SchoolPage() {
                   <Typography.Text style={{ fontSize: 30 }}>
                     435
                   </Typography.Text>
+                </Card>
+              </Col>
+              <Col span={6}>
+                <Card
+                  title={
+                    <Typography.Text type="secondary">
+                      Classes info
+                    </Typography.Text>
+                  }
+                >
+                  <Typography.Text style={{ fontSize: 30 }}>5</Typography.Text>
                 </Card>
               </Col>
             </Row>

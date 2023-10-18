@@ -177,6 +177,7 @@ function EditClassSchedulePage() {
                                     options={classSubjects.map((cS) => ({
                                       label: cS.subject.name,
                                       value: cS.id,
+                                      disabled: !cS.teacherId,
                                     }))}
                                     allowClear
                                     loading={isLoadingClassSubjects}
