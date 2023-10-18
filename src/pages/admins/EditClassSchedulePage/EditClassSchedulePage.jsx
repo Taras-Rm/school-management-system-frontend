@@ -18,13 +18,14 @@ import {
   getClassSubjects,
   getSchoolClass,
 } from "../../../api/classes";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolCallsSchedule } from "../../../api/callsSchedule";
 import { workingWeekDays } from "../../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 
 function EditClassSchedulePage() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
   const [form] = useForm();
 
   const { data: classData, isLoading: isLoadingClass } = useQuery(
@@ -76,13 +77,58 @@ function EditClassSchedulePage() {
         }
         return {
           callSchedule: {
+            id: cS.id,
             orderNumber: cS.orderNumber,
           },
         };
       });
     }
     return res;
-  }, [classSchedule, workingWeekDays, callsSchedule]);
+  }, [classSchedule, callsSchedule]);
+
+  const updateClassScheduleMutation = useMutation(() => {}, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["classes", id, "schedule"]);
+      message.success("Schedule is updated");
+    },
+    onError: (err) => {
+      message.error(
+        "Failed to update a schedule: " + err.response.data?.message
+      );
+    },
+  });
+
+  const handleUpdateClassSchedule = (values) => {
+    let preparedValues = [];
+    for (const day in values) {
+      let daySchedule = values[day];
+      for (const schedule of daySchedule) {
+        if (schedule?.classSubjectId) {
+          if (schedule?.id) {
+            preparedValues.push({
+              ...schedule,
+            });
+          } else {
+            // for new schedule items
+            preparedValues.push({
+              classSubjectId: schedule.classSubjectId,
+              dayOfWeek: day,
+              callScheduleId: schedule.callSchedule.id,
+            });
+          }
+        }
+      }
+    }
+
+    // updateClassScheduleMutation.mutate({
+    //   id: id,
+    //   level: values.level,
+    //   section: values.section,
+    //   description: values.description,
+    //   teacherId: values.teacherId,
+    // });
+    console.log(preparedValues);
+  };
 
   if (isLoadingClass || isCallScheduleLoading || isClassScheduleLoading)
     return <Spin spinning />;
@@ -141,7 +187,11 @@ function EditClassSchedulePage() {
         </Button>
       </div>
       <div>
-        <Form form={form} initialValues={preparedScheduleData}>
+        <Form
+          form={form}
+          initialValues={preparedScheduleData}
+          onFinish={handleUpdateClassSchedule}
+        >
           <Row gutter={20}>
             {workingWeekDays.map((workingDay) => (
               <Col span={8} style={{ marginBottom: 20 }} key={workingDay.code}>
@@ -194,6 +244,15 @@ function EditClassSchedulePage() {
               </Col>
             ))}
           </Row>
+          <Form.Item>
+            <Button
+              type="primary"
+              style={{ backgroundColor: "green" }}
+              htmlType="submit"
+            >
+              Update
+            </Button>
+          </Form.Item>
         </Form>
       </div>
     </div>
