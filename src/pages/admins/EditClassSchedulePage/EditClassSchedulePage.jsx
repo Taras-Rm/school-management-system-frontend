@@ -17,6 +17,7 @@ import {
   getClassSchedule,
   getClassSubjects,
   getSchoolClass,
+  updateClassSchedule,
 } from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolCallsSchedule } from "../../../api/callsSchedule";
@@ -86,7 +87,7 @@ function EditClassSchedulePage() {
     return res;
   }, [classSchedule, callsSchedule]);
 
-  const updateClassScheduleMutation = useMutation(() => {}, {
+  const updateClassScheduleMutation = useMutation(updateClassSchedule, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes", id, "schedule"]);
       message.success("Schedule is updated");
@@ -120,13 +121,11 @@ function EditClassSchedulePage() {
       }
     }
 
-    // updateClassScheduleMutation.mutate({
-    //   id: id,
-    //   level: values.level,
-    //   section: values.section,
-    //   description: values.description,
-    //   teacherId: values.teacherId,
-    // });
+    updateClassScheduleMutation.mutate({
+      schedule: preparedValues,
+      classId: id,
+    });
+
     console.log(preparedValues);
   };
 
