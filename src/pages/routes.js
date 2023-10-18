@@ -13,6 +13,7 @@ export const routes = {
   adminSchedulePage: "/admin/schedule",
   adminClassSubjectsPage: "/admin/classes/:id/subject",
   adminClassSchedulePage: "/admin/classes/:id/schedule",
+  adminEditClassSchedulePage: "/admin/classes/:id/schedule/edit",
 
   teacherSchoolPage: "/teacher/school",
 };

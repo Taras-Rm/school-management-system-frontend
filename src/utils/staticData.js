@@ -60,3 +60,26 @@ export const classSectionOptions = [
     label: "B",
   },
 ];
+
+export const workingWeekDays = [
+  {
+    code: "mon",
+    day: "Monday",
+  },
+  {
+    code: "tue",
+    day: "Tuesday",
+  },
+  {
+    code: "wed",
+    day: "Wednesday",
+  },
+  {
+    code: "thu",
+    day: "Thursday",
+  },
+  {
+    code: "fri",
+    day: "Friday",
+  },
+];

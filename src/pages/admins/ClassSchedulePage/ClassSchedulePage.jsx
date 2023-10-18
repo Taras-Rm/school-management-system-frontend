@@ -1,6 +1,6 @@
 import { Breadcrumb, Button, Spin, Table, Typography, message } from "antd";
 import React from "react";
-import { Link, generatePath, useParams } from "react-router-dom";
+import { Link, generatePath, useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
 import { getClassSchedule, getSchoolClass } from "../../../api/classes";
@@ -10,6 +10,7 @@ import { formatTime } from "../../../utils/date";
 
 function ClassSchedulePage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -30,7 +31,7 @@ function ClassSchedulePage() {
 
   const { data: classSchedule = [], isLoading: isClassScheduleLoading } =
     useQuery(
-      ["class", id, "schedule"],
+      ["classes", id, "schedule"],
       () => getClassSchedule({ classId: id }),
       {
         onError: (error) => {
@@ -131,9 +132,8 @@ function ClassSchedulePage() {
     }
   );
 
-  console.log(tableData);
-
-  if (isLoading) return <Spin spinning />;
+  if (isLoading || isClassScheduleLoading || isCallScheduleLoading)
+    return <Spin spinning />;
 
   return (
     <div
@@ -171,8 +171,9 @@ function ClassSchedulePage() {
         <Button
           type="primary"
           style={{ backgroundColor: "green" }}
-          onClick={() => {}}
-          disabled
+          onClick={() =>
+            navigate(generatePath(routes.adminEditClassSchedulePage, { id }))
+          }
         >
           Edit
         </Button>
