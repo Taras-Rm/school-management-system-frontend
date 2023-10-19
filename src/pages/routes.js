@@ -4,7 +4,7 @@ export const routes = {
   adminEditSchoolPage: "/admin/school/edit",
   adminClassesPage: "/admin/classes",
   adminTeachersPage: "/admin/teachers",
-  adminTeacherPage: "/admin/teacher/:id",
+  adminTeacherPage: "/admin/teachers/:id",
   adminStudentsPage: "/admin/students",
   adminStudentPage: "/admin/students/:id",
   adminClassPage: "/admin/classes/:id",

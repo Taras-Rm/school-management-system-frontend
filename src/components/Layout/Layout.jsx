@@ -21,6 +21,15 @@ import { routes } from "../../pages/routes";
 import { logout, me } from "../../api/auth";
 import { useMutation, useQuery } from "react-query";
 
+const menuOptionsRoutes = [
+  routes.adminSchoolPage,
+  routes.adminTeachersPage,
+  routes.adminStudentsPage,
+  routes.adminClassesPage,
+  routes.adminSubjectsPage,
+  routes.adminSchedulePage,
+];
+
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +37,11 @@ function Layout() {
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
   useEffect(() => {
-    setSelecteMenuItem(location.pathname);
+    let path = location.pathname;
+    for (const p of menuOptionsRoutes) {
+      path = location.pathname.startsWith(p) ? p : path;
+    }
+    setSelecteMenuItem(path);
   }, [location]);
 
   const {
