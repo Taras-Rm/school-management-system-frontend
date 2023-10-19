@@ -67,7 +67,7 @@ function SchoolPage() {
     retry: false,
   });
 
-  const { data: schoolBasicInfo, isLoadingSchoolBasicInfo } = useQuery(
+  const { data: schoolBasicInfo = {}, isLoadingSchoolBasicInfo } = useQuery(
     ["school", "basic_info"],
     getSchoolBasicInfo,
     {
