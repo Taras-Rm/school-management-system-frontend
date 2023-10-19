@@ -11,7 +11,7 @@ import {
 } from "antd";
 import React, { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { getAdminSchool } from "../../../api/school";
+import { getAdminSchool, getSchoolBasicInfo } from "../../../api/school";
 import { useQuery } from "react-query";
 import CreateSchoolModal from "./components/CreateSchoolModal";
 import { routes } from "../../routes";
@@ -67,6 +67,15 @@ function SchoolPage() {
     retry: false,
   });
 
+  const { data: schoolBasicInfo, isLoadingSchoolBasicInfo } = useQuery(
+    ["school", "basic_info"],
+    getSchoolBasicInfo,
+    {
+      retry: false,
+      enabled: !!school,
+    }
+  );
+
   const { isLoading: isStudyPeriodsLoading } = useQuery(
     ["studyPeriods"],
     getSchoolStudyPeriods,
@@ -83,7 +92,7 @@ function SchoolPage() {
     }
   );
 
-  if (isLoading) {
+  if (isLoading || isLoadingSchoolBasicInfo) {
     return <Spin spinning />;
   }
 
@@ -125,7 +134,7 @@ function SchoolPage() {
           )}
           <div style={{ width: "100%" }}>
             <Row gutter={16}>
-              <Col span={6}>
+              <Col span={6} style={{ marginBottom: 20 }}>
                 <Card
                   loading={isStudyPeriodsLoading}
                   title={
@@ -166,7 +175,9 @@ function SchoolPage() {
                     </Typography.Text>
                   }
                 >
-                  <Typography.Text style={{ fontSize: 30 }}>45</Typography.Text>
+                  <Typography.Text style={{ fontSize: 30 }}>
+                    {schoolBasicInfo.teachersCount}
+                  </Typography.Text>
                 </Card>
               </Col>
               <Col span={6}>
@@ -178,7 +189,7 @@ function SchoolPage() {
                   }
                 >
                   <Typography.Text style={{ fontSize: 30 }}>
-                    435
+                    {schoolBasicInfo.studentsCount}
                   </Typography.Text>
                 </Card>
               </Col>
@@ -190,7 +201,22 @@ function SchoolPage() {
                     </Typography.Text>
                   }
                 >
-                  <Typography.Text style={{ fontSize: 30 }}>5</Typography.Text>
+                  <Typography.Text style={{ fontSize: 30 }}>
+                    {schoolBasicInfo.classesCount}
+                  </Typography.Text>
+                </Card>
+              </Col>
+              <Col span={6}>
+                <Card
+                  title={
+                    <Typography.Text type="secondary">
+                      Subjects info
+                    </Typography.Text>
+                  }
+                >
+                  <Typography.Text style={{ fontSize: 30 }}>
+                    {schoolBasicInfo.subjectsCount}
+                  </Typography.Text>
                 </Card>
               </Col>
             </Row>
