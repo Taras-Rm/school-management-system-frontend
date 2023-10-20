@@ -19,17 +19,13 @@
 // }
 
 export function prepareScheduleTable(scheduleData, callsSchedule = []) {
-  let schedule = prepareSheduleTemplate(scheduleData, callsSchedule);
-
-  console.log(schedule);
-
-  return schedule;
+  return prepareSheduleTemplate(scheduleData, callsSchedule);
 }
 
 function prepareSheduleTemplate(scheduleData, callsSchedule) {
   let res = [];
   for (let i = 0; i < callsSchedule.length; i++) {
-    let cS = callsSchedule[i];
+    let cS = callsSchedule[i] || {};
     res.push({
       id: cS.id,
       orderNumber: cS.orderNumber,
@@ -49,7 +45,7 @@ function prepareSheduleTemplate(scheduleData, callsSchedule) {
 
 function prepareDaySubject(scheduleData, day, orderNumber) {
   let targetScheduleDay = scheduleData.find(
-    (sD) => sD.dayOfWeek === day && sD.callSchedule.orderNumber === orderNumber
+    (sD) => sD.dayOfWeek === day && sD?.callSchedule?.orderNumber === orderNumber
   );
 
   if (!targetScheduleDay) {

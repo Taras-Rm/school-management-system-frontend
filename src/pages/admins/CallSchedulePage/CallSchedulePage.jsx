@@ -41,20 +41,11 @@ function CallSchedulePage() {
     },
   ];
 
-  const defaultRows = [1, 2, 3, 4, 5, 6, 7];
-
-  const tableData = defaultRows.map((r) => {
-    let cS = callsSchedule.find((cS) => cS.orderNumber === r);
-    if (cS) {
-      return {
-        ...cS,
-        key: cS.id,
-      };
-    } else {
-      return {
-        orderNumber: r,
-      };
-    }
+  const tableData = callsSchedule.map((cS) => {
+    return {
+      ...cS,
+      key: cS.id,
+    };
   });
 
   return (
