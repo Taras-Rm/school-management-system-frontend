@@ -27,7 +27,7 @@ const menuOptionsRoutes = [
   routes.adminStudentsPage,
   routes.adminClassesPage,
   routes.adminSubjectsPage,
-  routes.adminSchedulePage,
+  routes.adminCallSchedulePage,
 ];
 
 function Layout() {
@@ -119,8 +119,8 @@ function Layout() {
           ),
           getItem(
             "Schedule",
-            routes.adminSchedulePage,
-            <Link to={routes.adminSchedulePage}>
+            routes.adminCallSchedulePage,
+            <Link to={routes.adminCallSchedulePage}>
               <ScheduleOutlined />
             </Link>
           )

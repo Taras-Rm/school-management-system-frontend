@@ -1,12 +1,14 @@
 import React from "react";
 import { routes } from "../../routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumb, Button, Table, Typography, message } from "antd";
 import { getSchoolCallsSchedule } from "../../../api/callsSchedule";
 import { useQuery } from "react-query";
 import { formatTime } from "../../../utils/date";
 
 function CallSchedulePage() {
+  const navigate = useNavigate();
+
   const { data: callsSchedule = [], isLoading: isCallScheduleLoading } =
     useQuery(["callsSchedule"], getSchoolCallsSchedule, {
       onError: (error) => {
@@ -66,7 +68,7 @@ function CallSchedulePage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.adminSchedulePage}>Schedule</Link>,
+            title: <Link to={routes.adminCallSchedulePage}>Schedule</Link>,
           },
         ]}
       />
@@ -74,7 +76,11 @@ function CallSchedulePage() {
         Schedule
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button type="primary" style={{ backgroundColor: "green" }} disabled>
+        <Button
+          type="primary"
+          style={{ backgroundColor: "green" }}
+          onClick={() => navigate(routes.adminEditCallSchedulePage)}
+        >
           Edit schedule
         </Button>
       </div>

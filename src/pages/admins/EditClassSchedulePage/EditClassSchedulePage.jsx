@@ -125,8 +125,6 @@ function EditClassSchedulePage() {
       schedule: preparedValues,
       classId: id,
     });
-
-    console.log(preparedValues);
   };
 
   if (isLoadingClass || isCallScheduleLoading || isClassScheduleLoading)
