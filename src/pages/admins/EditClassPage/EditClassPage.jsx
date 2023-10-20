@@ -1,6 +1,6 @@
 import React from "react";
 import { getSchoolClass, updateSchoolClass } from "../../../api/classes";
-import { generatePath, useParams } from "react-router";
+import { generatePath, useNavigate, useParams } from "react-router";
 import {
   Breadcrumb,
   Button,

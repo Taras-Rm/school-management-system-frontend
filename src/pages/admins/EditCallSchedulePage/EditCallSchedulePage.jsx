@@ -1,6 +1,6 @@
 import React from "react";
 import { routes } from "../../routes";
-import { Link, generatePath } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
 import {
   Breadcrumb,
   Button,
@@ -23,6 +23,7 @@ import { useForm } from "antd/es/form/Form";
 function EditCallSchedulePage() {
   const queryClient = useQueryClient();
   const [form] = useForm();
+  const navigate = useNavigate();
 
   const { data: callsSchedule = [], isLoading: isCallScheduleLoading } =
     useQuery(["callsSchedule"], getSchoolCallsSchedule, {
@@ -45,6 +46,7 @@ function EditCallSchedulePage() {
     onSuccess: () => {
       queryClient.invalidateQueries(["callsSchedule"]);
       message.success("Calls schedule is updated");
+      navigate(routes.adminCallSchedulePage);
     },
     onError: (err) => {
       message.error(
