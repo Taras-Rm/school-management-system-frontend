@@ -51,6 +51,14 @@ function CreateClassJournalsModal({
         return `${item.subject.name}`;
       },
     },
+    {
+      title: "Teacher",
+      dataIndex: "name",
+      key: "name",
+      render: (value, item) => {
+        return item.teacher && `${item.teacher.name} ${item.teacher.surname}`;
+      },
+    },
   ];
 
   const tableData = classSubjects?.map((t) => {
