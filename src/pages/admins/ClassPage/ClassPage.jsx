@@ -177,6 +177,15 @@ function ClassPage() {
           >
             Schedule
           </Button>
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green", marginLeft: 10 }}
+            onClick={() =>
+              navigate(generatePath(routes.adminClassJournalsPage, { id: id }))
+            }
+          >
+            Journals
+          </Button>
         </div>
         <div>
           <div style={{ display: "flex", alignItems: "center", fontSize: 18 }}>
