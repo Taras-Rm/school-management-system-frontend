@@ -1,10 +1,11 @@
-import { Breadcrumb, Button, Spin, Typography, message } from "antd";
+import { Breadcrumb, Button, Col, Row, Spin, Typography, message } from "antd";
 import React, { useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
-import { getSchoolClass } from "../../../api/classes";
+import { getClassJournals, getSchoolClass } from "../../../api/classes";
 import CreateClassJournalsModal from "./components/CreateClassJournalsModal";
+import JournalCard from "./components/JournalCard";
 
 function ClassJournalsPage() {
   const { id } = useParams();
@@ -21,7 +22,17 @@ function ClassJournalsPage() {
     }
   );
 
-  if (isLoading) return <Spin spinning />;
+  const { data: classJournals = [], isLoading: isLoadingJournals } = useQuery(
+    ["classes", id, "journals"],
+    () => getClassJournals({ id }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
+
+  if (isLoading || isLoadingJournals) return <Spin spinning />;
 
   return (
     <div
@@ -64,6 +75,13 @@ function ClassJournalsPage() {
           Create
         </Button>
       </div>
+      <Row gutter={20}>
+        {classJournals.map((c) => (
+          <Col span={8} style={{ marginBottom: 20 }} key={c.id}>
+            <JournalCard journalInfo={c} />
+          </Col>
+        ))}
+      </Row>
       <CreateClassJournalsModal
         isOpen={isCreateClassJournalsModalOpen}
         setIsCreateClassJournalsModalOpen={setIsCreateClassJournalsModalOpen}

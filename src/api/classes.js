@@ -127,3 +127,8 @@ export const updateClassSchedule = async ({ schedule, classId }) => {
   });
   return response.data;
 };
+
+export const getClassJournals = async ({ id }) => {
+  const response = await api.get(`/admins/school/classes/${id}/journals`);
+  return response.data;
+};
