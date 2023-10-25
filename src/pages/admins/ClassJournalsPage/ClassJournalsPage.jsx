@@ -86,6 +86,7 @@ function ClassJournalsPage() {
         isOpen={isCreateClassJournalsModalOpen}
         setIsCreateClassJournalsModalOpen={setIsCreateClassJournalsModalOpen}
         classId={id}
+        disabledClassSubjectsIds={classJournals.map((cJ) => cJ.classSubjectId)}
       />
     </div>
   );

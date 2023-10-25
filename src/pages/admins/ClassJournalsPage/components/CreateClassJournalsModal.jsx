@@ -8,6 +8,7 @@ function CreateClassJournalsModal({
   isOpen,
   setIsCreateClassJournalsModalOpen,
   classId,
+  disabledClassSubjectsIds = [],
 }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
@@ -94,6 +95,9 @@ function CreateClassJournalsModal({
                   studentsIds: selectedRows.map((row) => row.id),
                 });
               },
+              getCheckboxProps: (row) => ({
+                disabled: disabledClassSubjectsIds.find((id) => id === row.id),
+              }),
             }}
           />
         </Form.Item>
