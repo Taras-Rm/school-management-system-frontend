@@ -102,7 +102,7 @@ function SubjectsPage() {
                   </Tooltip>,
                 ]
               }
-              style={{ padding: "15px 30px" }}
+              style={{ padding: "10px 20px" }}
             >
               {item.name}
             </List.Item>
