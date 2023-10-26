@@ -12,3 +12,8 @@ export const getSchoolStudyPeriods = async () => {
   const response = await api.get(`/admins/school/study_periods`);
   return response.data;
 };
+
+export const getSchoolActiveStudyPeriod = async () => {
+  const response = await api.get(`/admins/school/study_periods/active`);
+  return response.data;
+};
