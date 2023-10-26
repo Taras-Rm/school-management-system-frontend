@@ -17,7 +17,7 @@ import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditSubjectModal from "./components/EditSubjectModal";
 
 function SubjectsPage() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
     useState(false);
@@ -85,21 +85,23 @@ function SubjectsPage() {
         renderItem={(item) => {
           return (
             <List.Item
-              actions={[
-                <Tooltip title="Edit subject">
-                  <EditTwoTone
-                    onClick={() => setEditSubjectId(item.id)}
-                    style={{ cursor: "pointer" }}
-                  />
-                </Tooltip>,
-                <Tooltip title="Edit subject">
-                  <DeleteTwoTone
-                    onClick={() => handleDeleteSubject(item.id)}
-                    twoToneColor="#eb2f96"
-                    style={{ cursor: "pointer" }}
-                  />
-                </Tooltip>,
-              ]}
+              actions={
+                item.schoolId && [
+                  <Tooltip title="Edit subject">
+                    <EditTwoTone
+                      onClick={() => setEditSubjectId(item.id)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </Tooltip>,
+                  <Tooltip title="Edit subject">
+                    <DeleteTwoTone
+                      onClick={() => handleDeleteSubject(item.id)}
+                      twoToneColor="#eb2f96"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </Tooltip>,
+                ]
+              }
               style={{ padding: "15px 30px" }}
             >
               {item.name}
