@@ -2,7 +2,7 @@ import { Form, Modal, Table, Typography, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getClassSubjects } from "../../../../api/classes";
+import { createClassJournals, getClassSubjects } from "../../../../api/classes";
 
 function CreateClassJournalsModal({
   isOpen,
@@ -24,11 +24,12 @@ function CreateClassJournalsModal({
       }
     );
 
-  const createClassJournalsMutation = useMutation(() => {}, {
+  const createClassJournalsMutation = useMutation(createClassJournals, {
     onSuccess: () => {
-      //queryClient.invalidateQueries(["classes"]);
+      queryClient.invalidateQueries(["classes", classId, "journals"]);
       message.success("Journals are created");
       setIsCreateClassJournalsModalOpen(false);
+      form.resetFields();
     },
     onError: (err) => {
       message.error("Failed to create journals: " + err.response.data?.message);
@@ -36,11 +37,15 @@ function CreateClassJournalsModal({
   });
 
   const handleCreateClassJournals = (values) => {
-    // createClassJournalsMutation.mutate({
-    //   level: values.level,
-    //   section: values.section,
-    //   description: values.description,
-    // });
+    if (!values.classSubjectsIds?.length) {
+      message.warning("You should select at least one subject!");
+      return;
+    }
+
+    createClassJournalsMutation.mutate({
+      classId: classId,
+      classSubjectsIds: values.classSubjectsIds,
+    });
   };
 
   const tableColumns = [
@@ -69,13 +74,19 @@ function CreateClassJournalsModal({
     };
   });
 
+  const onModalCancel = () => {
+    setIsCreateClassJournalsModalOpen(false);
+    form.resetFields();
+  };
+
   return (
     <Modal
       open={isOpen}
-      onCancel={() => setIsCreateClassJournalsModalOpen(false)}
+      onCancel={() => onModalCancel()}
       title="Create journals"
       okText={"Create journals"}
       onOk={() => form.submit()}
+      destroyOnClose
     >
       <Typography.Text style={{ display: "inline-block", marginBottom: 15 }}>
         Please, select subjects for which you want to create journals
@@ -92,7 +103,7 @@ function CreateClassJournalsModal({
               type: "checkbox",
               onChange: (_, selectedRows) => {
                 form.setFieldsValue({
-                  studentsIds: selectedRows.map((row) => row.id),
+                  classSubjectsIds: selectedRows.map((row) => row.id),
                 });
               },
               getCheckboxProps: (row) => ({

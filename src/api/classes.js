@@ -132,3 +132,13 @@ export const getClassJournals = async ({ id }) => {
   const response = await api.get(`/admins/school/classes/${id}/journals`);
   return response.data;
 };
+
+export const createClassJournals = async ({ classId, classSubjectsIds }) => {
+  const response = await api.post(
+    `/admins/school/classes/${classId}/journals`,
+    {
+      classSubjectsIds,
+    }
+  );
+  return response.data;
+};
