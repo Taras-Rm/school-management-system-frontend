@@ -1,13 +1,17 @@
 import { Card, Typography } from "antd";
 import React from "react";
 import { generatePath } from "react-router";
+import { routes } from "../../../routes";
 
-function JournalCard({ journalInfo }) {
+function JournalCard({ journalInfo, classId }) {
   return (
     <Card
       title={
         <Typography.Link
-          href={generatePath("sa", { id: journalInfo.id })}
+          href={generatePath(routes.adminClassJournalPage, {
+            id: classId,
+            journalId: journalInfo.id,
+          })}
           style={{ fontSize: 18 }}
         >
           {`${journalInfo.classSubject.subject.name}`}

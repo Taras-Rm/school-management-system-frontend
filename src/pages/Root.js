@@ -22,6 +22,7 @@ import ClassSchedulePage from "./admins/ClassSchedulePage/ClassSchedulePage";
 import EditClassSchedulePage from "./admins/EditClassSchedulePage/EditClassSchedulePage";
 import EditCallSchedulePage from "./admins/EditCallSchedulePage/EditCallSchedulePage";
 import ClassJournalsPage from "./admins/ClassJournalsPage/ClassJournalsPage";
+import ClassJournalPage from "./admins/ClassJournalPage/ClassJournalPage";
 
 function Root() {
   return (
@@ -73,6 +74,10 @@ function Root() {
           <Route
             path={routes.adminClassJournalsPage}
             element={<ClassJournalsPage />}
+          />
+          <Route
+            path={routes.adminClassJournalPage}
+            element={<ClassJournalPage />}
           />
         </Route>
         <Route

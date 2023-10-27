@@ -78,7 +78,7 @@ function ClassJournalsPage() {
       <Row gutter={20}>
         {classJournals.map((c) => (
           <Col span={8} style={{ marginBottom: 20 }} key={c.id}>
-            <JournalCard journalInfo={c} />
+            <JournalCard journalInfo={c} classId={id}/>
           </Col>
         ))}
       </Row>
