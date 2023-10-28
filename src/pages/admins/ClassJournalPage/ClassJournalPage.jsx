@@ -3,7 +3,12 @@ import React from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
 import { useQuery } from "react-query";
-import { getClassJournal, getSchoolClass } from "../../../api/classes";
+import {
+  getClassJournal,
+  getClassJournalGrades,
+  getSchoolClass,
+} from "../../../api/classes";
+import { prepareClassJournalTableColumns } from "./classJournalHelper";
 
 function ClassJournalPage() {
   const { id, journalId } = useParams();
@@ -28,7 +33,27 @@ function ClassJournalPage() {
     }
   );
 
-  if (isLoading || isLoadingJournal) return <Spin spinning />;
+  const { data: journalGrades, isLoading: isLoadingJournalGrades } = useQuery(
+    ["classes", id, "journals", journalId, "grades"],
+    () => getClassJournalGrades({ id, journalId }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
+
+  const tableColumns = prepareClassJournalTableColumns(journalGrades);
+
+  const tableData = journalGrades?.map((t) => {
+    return {
+      ...t,
+      key: t.id,
+    };
+  });
+
+  if (isLoading || isLoadingJournal || isLoadingJournalGrades)
+    return <Spin spinning />;
 
   return (
     <div
@@ -75,7 +100,14 @@ function ClassJournalPage() {
         {`${classJournal.classSubject.subject.name}`} journal
       </Typography.Title>
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
-      <Table />
+      <Table
+        columns={tableColumns}
+        dataSource={tableData}
+        scroll={{ x: tableColumns.length * 80 }}
+        size="small"
+        pagination={false}
+        bordered
+      />
     </div>
   );
 }

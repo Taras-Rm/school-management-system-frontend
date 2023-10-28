@@ -147,3 +147,8 @@ export const getClassJournal = async ({ id, journalId }) => {
   const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}`);
   return response.data;
 };
+
+export const getClassJournalGrades = async ({ id, journalId }) => {
+  const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}/grades`);
+  return response.data;
+};
