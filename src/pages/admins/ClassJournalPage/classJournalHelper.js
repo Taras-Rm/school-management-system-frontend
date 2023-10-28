@@ -1,4 +1,4 @@
-export function prepareClassJournalTableColumns(journalGrades = []) {
+export function prepareClassJournalTableColumns(journalColumns = []) {
   let columns = [];
   // student name
   columns.push({
@@ -10,20 +10,19 @@ export function prepareClassJournalTableColumns(journalGrades = []) {
       return `${value.name} ${value.surname}`;
     },
   });
-  // dates
-  for (let i = 0; i < journalGrades.length; i++) {
-    for (let date in journalGrades[i].grades) {
-      columns.push({
-        title: prepareCellDate(date),
-        dataIndex: ["grades", date],
-        align: "center",
-        render: (value, _) => {
-          return value;
-        },
-      });
-    }
-    // only first row
-    break;
+  // columns (dates, ...)
+  for (let i = 0; i < journalColumns.length; i++) {
+    columns.push({
+      title:
+        journalColumns[i].type === "date"
+          ? prepareCellDate(journalColumns[i].value)
+          : journalColumns[i].value,
+      dataIndex: "value",
+      align: "center",
+      render: (value, _) => {
+        return value;
+      },
+    });
   }
   return columns;
 }
