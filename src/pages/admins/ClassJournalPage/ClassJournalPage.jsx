@@ -6,9 +6,10 @@ import { useQuery } from "react-query";
 import {
   getClassJournal,
   getClassJournalColumns,
+  getClassJournalStudentsGrades,
   getSchoolClass,
 } from "../../../api/classes";
-import { prepareClassJournalTableColumns } from "./classJournalHelper";
+import { prepareClassJournalTableColumns, prepareClassJournalTableData } from "./classJournalHelper";
 
 function ClassJournalPage() {
   const { id, journalId } = useParams();
@@ -43,9 +44,26 @@ function ClassJournalPage() {
     }
   );
 
+  const { data: journalGrades, isLoading: isLoadingJournalGrades } = useQuery(
+    ["classes", id, "journals", journalId, "grades"],
+    () => getClassJournalStudentsGrades({ id, journalId }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+    }
+  );
+
   const tableColumns = prepareClassJournalTableColumns(journalColumns);
 
-  if (isLoading || isLoadingJournal || isLoadingJournalColumns)
+  const tableData = prepareClassJournalTableData(journalGrades);
+
+  if (
+    isLoading ||
+    isLoadingJournal ||
+    isLoadingJournalColumns ||
+    isLoadingJournalGrades
+  )
     return <Spin spinning />;
 
   return (
@@ -95,7 +113,7 @@ function ClassJournalPage() {
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
       <Table
         columns={tableColumns}
-        // dataSource={tableData}
+        dataSource={tableData}
         scroll={{ x: tableColumns.length * 80 }}
         size="small"
         pagination={false}

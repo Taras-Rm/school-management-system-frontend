@@ -17,7 +17,7 @@ export function prepareClassJournalTableColumns(journalColumns = []) {
         journalColumns[i].type === "date"
           ? prepareCellDate(journalColumns[i].value)
           : journalColumns[i].value,
-      dataIndex: "value",
+      dataIndex: ["grades", `${journalColumns[i].id}`, "grade"],
       align: "center",
       render: (value, _) => {
         return value;
@@ -25,6 +25,22 @@ export function prepareClassJournalTableColumns(journalColumns = []) {
     });
   }
   return columns;
+}
+
+export function prepareClassJournalTableData(journalGrades = []) {
+  let rows = [];
+
+  for (const row of journalGrades) {
+    rows.push({
+      ...row,
+      grades: row.grades.reduce(
+        (a, v) => ({ ...a, [v.journalColumnId]: { ...v } }),
+        {}
+      ),
+    });
+  }
+
+  return rows;
 }
 
 export function prepareCellDate(date) {

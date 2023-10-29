@@ -152,3 +152,8 @@ export const getClassJournalColumns = async ({ id, journalId }) => {
   const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}/columns`);
   return response.data;
 };
+
+export const getClassJournalStudentsGrades = async ({ id, journalId }) => {
+  const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}/students_grades`);
+  return response.data;
+};
