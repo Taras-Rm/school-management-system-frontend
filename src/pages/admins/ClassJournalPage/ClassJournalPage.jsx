@@ -114,7 +114,7 @@ function ClassJournalPage() {
       <Table
         columns={tableColumns}
         dataSource={tableData}
-        scroll={{ x: tableColumns.length * 80 }}
+        scroll={{ x: tableColumns.length * 60 }}
         size="small"
         pagination={false}
         bordered
