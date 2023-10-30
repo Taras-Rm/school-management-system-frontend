@@ -43,7 +43,7 @@ export function prepareClassJournalTableData(journalGrades = []) {
   return rows;
 }
 
-export function prepareCellDate(date) {
+function prepareCellDate(date) {
   // YYYY-MM-DD to DD-MM
   let dateParams = date.split("-");
   return `${dateParams[2]}.${dateParams[1]}`;

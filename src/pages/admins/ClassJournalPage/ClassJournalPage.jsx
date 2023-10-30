@@ -1,4 +1,4 @@
-import { Breadcrumb, Spin, Table, Typography, message } from "antd";
+import { Breadcrumb, Spin, Typography, message } from "antd";
 import React from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes";
@@ -9,7 +9,7 @@ import {
   getClassJournalStudentsGrades,
   getSchoolClass,
 } from "../../../api/classes";
-import { prepareClassJournalTableColumns, prepareClassJournalTableData } from "./classJournalHelper";
+import ClassJournalTable from "../../../components/ClassJournalTable/ClassJournalTable";
 
 function ClassJournalPage() {
   const { id, journalId } = useParams();
@@ -53,10 +53,6 @@ function ClassJournalPage() {
       },
     }
   );
-
-  const tableColumns = prepareClassJournalTableColumns(journalColumns);
-
-  const tableData = prepareClassJournalTableData(journalGrades);
 
   if (
     isLoading ||
@@ -111,13 +107,11 @@ function ClassJournalPage() {
         {`${classJournal.classSubject.subject.name}`} journal
       </Typography.Title>
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
-      <Table
-        columns={tableColumns}
-        dataSource={tableData}
-        scroll={{ x: tableColumns.length * 60 }}
-        size="small"
-        pagination={false}
-        bordered
+      <ClassJournalTable
+        journalColumns={journalColumns}
+        journalGrades={journalGrades}
+        classId={id}
+        journalId={journalId}
       />
     </div>
   );
