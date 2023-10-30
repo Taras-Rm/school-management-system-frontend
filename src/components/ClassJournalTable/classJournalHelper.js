@@ -12,16 +12,23 @@ export function prepareClassJournalTableColumns(journalColumns = []) {
   });
   // columns (dates, ...)
   for (let i = 0; i < journalColumns.length; i++) {
+    const title =
+      journalColumns[i].type === "date"
+        ? prepareCellDate(journalColumns[i].value)
+        : journalColumns[i].value;
+    const dataIndex = ["grades", `${journalColumns[i].id}`, "grade"];
+
     columns.push({
-      title:
-        journalColumns[i].type === "date"
-          ? prepareCellDate(journalColumns[i].value)
-          : journalColumns[i].value,
-      dataIndex: ["grades", `${journalColumns[i].id}`, "grade"],
+      title,
+      dataIndex,
       align: "center",
-      render: (value, _) => {
-        return value;
-      },
+      onCell: (record) => ({
+        record,
+        editable: true,
+        dataIndex,
+        title,
+        handleSave: () => console.log("saved"),
+      }),
     });
   }
   return columns;
