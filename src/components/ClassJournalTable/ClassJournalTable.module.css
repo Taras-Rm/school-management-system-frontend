@@ -3,3 +3,11 @@
     min-height: 100%;
     cursor: pointer;
 }
+
+.journalGradeButton {
+    margin-right: 5px;
+}
+
+.journalGradeButton:last-child {
+    margin-right: 0px;
+}

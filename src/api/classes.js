@@ -144,16 +144,43 @@ export const createClassJournals = async ({ classId, classSubjectsIds }) => {
 };
 
 export const getClassJournal = async ({ id, journalId }) => {
-  const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}`);
+  const response = await api.get(
+    `/admins/school/classes/${id}/journals/${journalId}`
+  );
   return response.data;
 };
 
 export const getClassJournalColumns = async ({ id, journalId }) => {
-  const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}/columns`);
+  const response = await api.get(
+    `/admins/school/classes/${id}/journals/${journalId}/columns`
+  );
   return response.data;
 };
 
 export const getClassJournalStudentsGrades = async ({ id, journalId }) => {
-  const response = await api.get(`/admins/school/classes/${id}/journals/${journalId}/students_grades`);
+  const response = await api.get(
+    `/admins/school/classes/${id}/journals/${journalId}/students_grades`
+  );
+  return response.data;
+};
+
+export const upsertClassJournalStudentGrade = async ({
+  classId,
+  journalGradeId,
+  journalId,
+  journalColumnId,
+  studentId,
+  grade,
+}) => {
+  const response = await api.post(
+    `/admins/school/classes/${classId}/journals/${journalId}/students_grades`,
+    {
+      id: journalGradeId,
+      journalId,
+      journalColumnId,
+      studentId,
+      grade,
+    }
+  );
   return response.data;
 };

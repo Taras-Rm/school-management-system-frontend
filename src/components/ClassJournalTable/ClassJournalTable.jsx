@@ -1,10 +1,13 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import s from "./ClassJournalTable.module.css";
-import { Button, Form, Popconfirm, Table } from "antd";
+import { Button, Form, Popconfirm, Table, message } from "antd";
 import {
   prepareClassJournalTableColumns,
   prepareClassJournalTableData,
 } from "./classJournalHelper";
+import { journalGrades } from "../../utils/staticData";
+import { useMutation, useQueryClient } from "react-query";
+import { upsertClassJournalStudentGrade } from "../../api/classes";
 
 const EditableContext = React.createContext(null);
 
@@ -23,23 +26,45 @@ const EditableRow = ({ index, ...props }) => {
 const EditableCell = ({
   title,
   editable,
-  dataIndex,
+  dataIndex = {},
   children,
   render,
-  handleSave,
+  handleUpsertClassJournalStudentGrade,
   record,
+  journalColumnId,
   ...restProps
 }) => {
-  const form = useContext(EditableContext);
+  let journalGradeId = record?.grades[Number(dataIndex[1])]
+    ? record?.grades[Number(dataIndex[1])].id
+    : null;
+
   const childNode = editable ? (
-    <Button
-      onClick={() => {
-        console.log("open modal");
-      }}
-      className={s.editableCellValueWrap}
+    <Popconfirm
+      title="Please set grade"
+      description={
+        <div>
+          {journalGrades.map((jG) => (
+            <Button
+              className={s.journalGradeButton}
+              size="small"
+              onClick={() =>
+                handleUpsertClassJournalStudentGrade({
+                  journalGradeId,
+                  journalColumnId,
+                  studentId: record?.student?.id,
+                  grade: jG.value,
+                })
+              }
+            >
+              {jG.value}
+            </Button>
+          ))}
+        </div>
+      }
+      showCancel={false}
     >
-      {children}
-    </Button>
+      <Button className={s.editableCellValueWrap}>{children}</Button>
+    </Popconfirm>
   ) : (
     <div>{children}</div>
   );
@@ -50,9 +75,53 @@ const EditableCell = ({
   );
 };
 
-function ClassJournalTable({ journalColumns, journalGrades }) {
+function ClassJournalTable({
+  journalColumns,
+  journalGrades,
+  classId,
+  journalId,
+}) {
+  const queryClient = useQueryClient();
+
+  const upsertClassJournalStudentGradeMutation = useMutation(
+    upsertClassJournalStudentGrade,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          "classes",
+          classId,
+          "journals",
+          journalId,
+          "grades",
+        ]);
+      },
+      onError: (err) => {
+        message.error("Failed to set a grade: " + err.response.data?.message);
+      },
+    }
+  );
+
+  const handleUpsertClassJournalStudentGrade = ({
+    journalGradeId,
+    journalColumnId,
+    studentId,
+    grade,
+  }) => {
+    upsertClassJournalStudentGradeMutation.mutate({
+      classId,
+      journalGradeId,
+      journalId: Number(journalId),
+      journalColumnId,
+      studentId,
+      grade,
+    });
+  };
+
   const tableColumns = useMemo(() => {
-    return prepareClassJournalTableColumns(journalColumns);
+    return prepareClassJournalTableColumns(
+      journalColumns,
+      handleUpsertClassJournalStudentGrade
+    );
   }, [journalColumns]);
 
   const tableData = useMemo(() => {

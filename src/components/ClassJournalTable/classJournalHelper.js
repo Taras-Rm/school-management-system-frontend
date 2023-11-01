@@ -1,4 +1,4 @@
-export function prepareClassJournalTableColumns(journalColumns = []) {
+export function prepareClassJournalTableColumns(journalColumns = [], handleUpsertClassJournalStudentGrade) {
   let columns = [];
   // student name
   columns.push({
@@ -27,7 +27,8 @@ export function prepareClassJournalTableColumns(journalColumns = []) {
         editable: true,
         dataIndex,
         title,
-        handleSave: () => console.log("saved"),
+        handleUpsertClassJournalStudentGrade,
+        journalColumnId: journalColumns[i].id
       }),
     });
   }
