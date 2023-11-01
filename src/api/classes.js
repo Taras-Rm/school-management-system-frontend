@@ -184,3 +184,14 @@ export const upsertClassJournalStudentGrade = async ({
   );
   return response.data;
 };
+
+export const deleteClassJournalStudentGrade = async ({
+  classId,
+  journalId,
+  journalGradeId,
+}) => {
+  const response = await api.delete(
+    `/admins/school/classes/${classId}/journals/${journalId}/students_grades/${journalGradeId}`
+  );
+  return response.data;
+};

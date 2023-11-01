@@ -7,7 +7,10 @@ import {
 } from "./classJournalHelper";
 import { journalGrades } from "../../utils/staticData";
 import { useMutation, useQueryClient } from "react-query";
-import { upsertClassJournalStudentGrade } from "../../api/classes";
+import {
+  deleteClassJournalStudentGrade,
+  upsertClassJournalStudentGrade,
+} from "../../api/classes";
 
 const EditableContext = React.createContext(null);
 
@@ -30,6 +33,7 @@ const EditableCell = ({
   children,
   render,
   handleUpsertClassJournalStudentGrade,
+  handleDeleteClassJournalStudentGrade,
   record,
   journalColumnId,
   ...restProps
@@ -43,22 +47,33 @@ const EditableCell = ({
       title="Please set grade"
       description={
         <div>
-          {journalGrades.map((jG) => (
-            <Button
-              className={s.journalGradeButton}
-              size="small"
-              onClick={() =>
-                handleUpsertClassJournalStudentGrade({
-                  journalGradeId,
-                  journalColumnId,
-                  studentId: record?.student?.id,
-                  grade: jG.value,
-                })
-              }
-            >
-              {jG.value}
-            </Button>
-          ))}
+          <div style={{ marginBottom: 10 }}>
+            {journalGrades.map((jG) => (
+              <Button
+                className={s.journalGradeButton}
+                size="small"
+                onClick={() =>
+                  handleUpsertClassJournalStudentGrade({
+                    journalGradeId,
+                    journalColumnId,
+                    studentId: record?.student?.id,
+                    grade: jG.value,
+                  })
+                }
+              >
+                {jG.label}
+              </Button>
+            ))}
+          </div>
+          <Button
+            size="small"
+            disabled={!journalGradeId}
+            onClick={() =>
+              handleDeleteClassJournalStudentGrade({ journalGradeId })
+            }
+          >
+            Delete
+          </Button>
         </div>
       }
       showCancel={false}
@@ -117,10 +132,39 @@ function ClassJournalTable({
     });
   };
 
+  const deleteClassJournalStudentGradeMutation = useMutation(
+    deleteClassJournalStudentGrade,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          "classes",
+          classId,
+          "journals",
+          journalId,
+          "grades",
+        ]);
+      },
+      onError: (err) => {
+        message.error(
+          "Failed to delete a grade: " + err.response.data?.message
+        );
+      },
+    }
+  );
+
+  const handleDeleteClassJournalStudentGrade = ({ journalGradeId }) => {
+    deleteClassJournalStudentGradeMutation.mutate({
+      classId,
+      journalGradeId,
+      journalId: Number(journalId),
+    });
+  };
+
   const tableColumns = useMemo(() => {
     return prepareClassJournalTableColumns(
       journalColumns,
-      handleUpsertClassJournalStudentGrade
+      handleUpsertClassJournalStudentGrade,
+      handleDeleteClassJournalStudentGrade
     );
   }, [journalColumns]);
 
