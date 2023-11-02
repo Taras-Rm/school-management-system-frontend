@@ -14,11 +14,14 @@ import CreateTeacherModal from "./components/CreateTeacherModal";
 import { Link, generatePath } from "react-router-dom";
 import { routes } from "../../routes";
 import { DeleteTwoTone } from "@ant-design/icons";
+import TeacherInfoDrawer from "../../../components/TeacherInfoDrawer/TeacherInfoDrawer";
 
 function TeachersPage() {
   const queryClient = useQueryClient();
   const [isCreateTeacherModalOpen, setIsCreateTeacherModalOpen] =
     useState(false);
+
+  const [teacherInfoId, setTeacherInfoId] = useState(null);
 
   const { data: teachers, isLoading } = useQuery(
     ["teachers"],
@@ -54,7 +57,7 @@ function TeachersPage() {
       render: (value, item) => {
         return (
           <Link
-            to={generatePath(routes.adminTeacherPage, { id: item.id })}
+            onClick={() => setTeacherInfoId(item.id)}
           >{`${value} ${item.surname}`}</Link>
         );
       },
@@ -135,6 +138,11 @@ function TeachersPage() {
       <CreateTeacherModal
         isOpen={isCreateTeacherModalOpen}
         setIsCreateTeacherModalOpen={setIsCreateTeacherModalOpen}
+      />
+      <TeacherInfoDrawer
+        isOpen={!!teacherInfoId}
+        teacher={teachers.find((t) => t.id === teacherInfoId)}
+        onClose={() => setTeacherInfoId(null)}
       />
     </div>
   );

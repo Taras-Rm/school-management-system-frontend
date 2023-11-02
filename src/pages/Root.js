@@ -13,7 +13,6 @@ import ClassesPage from "./admins/ClassesPage/ClassesPage";
 import ClassPage from "./admins/ClassPage/ClassPage";
 import EditClassPage from "./admins/EditClassPage/EditClassPage";
 import StudentPage from "./admins/StudentPage/StudentPage";
-import TeacherPage from "./admins/TeacherPage/TeacherPage";
 import SubjectsPage from "./admins/SubjectsPage/SubjectsPage";
 import EditSchoolPage from "./admins/EditSchoolPage/EditSchoolPage";
 import CallSchedulePage from "./admins/CallSchedulePage/CallSchedulePage";
@@ -43,7 +42,6 @@ function Root() {
           />
 
           <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
-          <Route path={routes.adminTeacherPage} element={<TeacherPage />} />
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
           <Route path={routes.adminStudentPage} element={<StudentPage />} />
           <Route path={routes.adminClassesPage} element={<ClassesPage />} />
