@@ -110,6 +110,9 @@ function CreateClassJournalsModal({
           )}`}
         </Typography.Text>
         <Typography.Text style={{ display: "inline-block", marginBottom: 15 }}>
+          It is neccessary set up correct schedule for subjects you want to create journals
+        </Typography.Text>
+        <Typography.Text style={{ display: "inline-block", marginBottom: 15 }}>
           Please, select subjects for which you want to create journals
         </Typography.Text>
       </div>
