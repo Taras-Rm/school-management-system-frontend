@@ -22,12 +22,15 @@ import EditClassSchedulePage from "./admins/EditClassSchedulePage/EditClassSched
 import EditCallSchedulePage from "./admins/EditCallSchedulePage/EditCallSchedulePage";
 import ClassJournalsPage from "./admins/ClassJournalsPage/ClassJournalsPage";
 import ClassJournalPage from "./admins/ClassJournalPage/ClassJournalPage";
+import FirstPage from "./common/FirstPage/FirstPage";
 
 function Root() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={routes.loginPage} element={<LoginPage />} />
+        <Route path={routes.firstPage} element={<FirstPage />} />
+
         <Route
           element={
             <PrivateRoute role={"admin"}>

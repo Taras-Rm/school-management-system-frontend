@@ -1,4 +1,5 @@
 export const routes = {
+  firstPage: "/",
   loginPage: "/login",
   adminSchoolPage: "/admin/school",
   adminEditSchoolPage: "/admin/school/edit",
