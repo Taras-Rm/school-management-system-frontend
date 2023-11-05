@@ -2,11 +2,9 @@ import { Button, Form, Input, Radio, Typography, message } from "antd";
 import React from "react";
 import { useMutation } from "react-query";
 import { login } from "../../../api/auth";
-import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 
 function LoginPage() {
-  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const loginMutation = useMutation(login, {

@@ -11,10 +11,11 @@ import {
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { deleteSchoolTeacher, getSchoolTeachers } from "../../../api/teachers";
 import CreateTeacherModal from "./components/CreateTeacherModal";
-import { Link, generatePath } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { routes } from "../../routes";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import TeacherInfoDrawer from "../../../components/TeacherInfoDrawer/TeacherInfoDrawer";
+import EditTeacherDrawer from "../../../components/EditTeacherDrawer/EditTeacherDrawer";
 
 function TeachersPage() {
   const queryClient = useQueryClient();
@@ -22,6 +23,7 @@ function TeachersPage() {
     useState(false);
 
   const [teacherInfoId, setTeacherInfoId] = useState(null);
+  const [editTeacherId, setEditTeacherId] = useState(null);
 
   const { data: teachers, isLoading } = useQuery(
     ["teachers"],
@@ -77,7 +79,13 @@ function TeachersPage() {
       align: "center",
       render: (value, item) => {
         return (
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <Tooltip title="Edit teacher">
+              <EditTwoTone
+                onClick={() => setEditTeacherId(item.id)}
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
             <Tooltip title="Delete teacher">
               <DeleteTwoTone
                 onClick={() => handleDeleteSchoolTeacher(item.id)}
@@ -108,6 +116,7 @@ function TeachersPage() {
         width: "100%",
         backgroundColor: "rgb(215 215 215)",
         padding: "10px 20px",
+        position: "relative",
       }}
     >
       <Breadcrumb
@@ -143,6 +152,11 @@ function TeachersPage() {
         isOpen={!!teacherInfoId}
         teacher={teachers.find((t) => t.id === teacherInfoId)}
         onClose={() => setTeacherInfoId(null)}
+      />
+      <EditTeacherDrawer
+        isOpen={!!editTeacherId}
+        id={editTeacherId}
+        onClose={() => setEditTeacherId(null)}
       />
     </div>
   );

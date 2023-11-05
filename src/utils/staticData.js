@@ -99,3 +99,8 @@ export const journalGrades = [
   { value: "12", label: "12" },
   { value: "H", label: "H" },
 ];
+
+export const degreesLevelsOptions = [
+  { value: "basic", label: "Basic" },
+  { value: "specialist", label: "Specialist" },
+];

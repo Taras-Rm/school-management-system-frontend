@@ -3,7 +3,10 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolTeacher } from "../../../../api/teachers";
-import { genderOptions } from "../../../../utils/staticData";
+import {
+  degreesLevelsOptions,
+  genderOptions,
+} from "../../../../utils/staticData";
 
 function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
   const queryClient = useQueryClient();
@@ -101,12 +104,7 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
           label={"Degree"}
           rules={[{ required: true }]}
         >
-          <Select
-            options={[
-              { value: "basic", label: "Basic" },
-              { value: "specialist", label: "Specialist" },
-            ]}
-          />
+          <Select options={degreesLevelsOptions} />
         </Form.Item>
       </Form>
     </Modal>
