@@ -21,7 +21,7 @@ function LoginPage() {
           : role === "teacher"
           ? routes.teacherSchoolPage
           : "";
-      navigate(path);
+      window.location.href = path;
     },
     onError: () => {
       message.error("Failed to login");
