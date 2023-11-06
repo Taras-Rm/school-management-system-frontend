@@ -26,6 +26,28 @@ export const createSchoolStudent = async ({
   return response.data;
 };
 
+export const updateSchoolStudent = async ({
+  id,
+  name,
+  surname,
+  email,
+  dob,
+  address,
+  phone,
+  gender,
+}) => {
+  const response = await api.put(`/admins/school/students/${id}`, {
+    name,
+    surname,
+    email,
+    dob,
+    address,
+    phone,
+    gender,
+  });
+  return response.data;
+};
+
 export const deleteSchoolStudent = async ({ studentId }) => {
   const response = await api.delete(`/admins/school/students/${studentId}`);
   return response.data;

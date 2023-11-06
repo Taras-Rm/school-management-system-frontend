@@ -14,12 +14,15 @@ import CreateStudentModal from "./components/CreateStudentModal";
 import { deleteSchoolStudent, getSchoolStudents } from "../../../api/students";
 import { routes } from "../../routes";
 import { Link, generatePath } from "react-router-dom";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import EditStudentDrawer from "../../../components/EditStudentDrawer/EditStudentDrawer";
 
 function StudentsPage() {
   const queryClient = useQueryClient();
   const [isCreateStudentModalOpen, setIsCreateStudentModalOpen] =
     useState(false);
+
+  const [editStudentId, setEditStudentId] = useState(null);
 
   const { data: students, isLoading } = useQuery(
     ["students"],
@@ -53,11 +56,7 @@ function StudentsPage() {
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
-        return (
-          <Link
-            to={generatePath(routes.adminStudentPage, { id: item.id })}
-          >{`${value} ${item.surname}`}</Link>
-        );
+        return <Link>{`${value} ${item.surname}`}</Link>;
       },
     },
     {
@@ -85,7 +84,13 @@ function StudentsPage() {
       align: "center",
       render: (value, item) => {
         return (
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <Tooltip title="Edit student">
+              <EditTwoTone
+                onClick={() => setEditStudentId(item.id)}
+                style={{ cursor: "pointer" }}
+              />
+            </Tooltip>
             <Tooltip title="Delete student">
               <Popconfirm
                 title="Do you really want to delete student ?"
@@ -120,6 +125,7 @@ function StudentsPage() {
         width: "100%",
         backgroundColor: "rgb(215 215 215)",
         padding: "10px 20px",
+        position: "relative",
       }}
     >
       <Breadcrumb
@@ -150,6 +156,11 @@ function StudentsPage() {
       <CreateStudentModal
         isOpen={isCreateStudentModalOpen}
         setIsCreateStudentModalOpen={setIsCreateStudentModalOpen}
+      />
+      <EditStudentDrawer
+        isOpen={!!editStudentId}
+        id={editStudentId}
+        onClose={() => setEditStudentId(null)}
       />
     </div>
   );
