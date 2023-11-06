@@ -1,5 +1,6 @@
 import {
   Button,
+  Checkbox,
   DatePicker,
   Form,
   Modal,
@@ -53,6 +54,7 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
     createStudyPeriodMutation({
       startDate: values.startDate,
       endDate: values.endDate,
+      incrementClassesLevels: values.incrementClassesLevels,
     });
   };
 
@@ -116,6 +118,9 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
                 <DatePicker style={{ width: "100%" }} />
               </Form.Item>
             </div>
+            <Form.Item name={"incrementClassesLevels"} valuePropName="checked">
+              <Checkbox>Increment classes levels</Checkbox>
+            </Form.Item>
             <Form.Item>
               <Button
                 type="primary"

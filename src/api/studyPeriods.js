@@ -1,9 +1,14 @@
 import api from "./api";
 
-export const createStudyPeriod = async ({ startDate, endDate }) => {
+export const createStudyPeriod = async ({
+  startDate,
+  endDate,
+  incrementClassesLevels,
+}) => {
   const response = await api.post(`/admins/school/study_periods`, {
     startDate,
     endDate,
+    incrementClassesLevels,
   });
   return response.data;
 };
