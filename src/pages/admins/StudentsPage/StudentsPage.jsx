@@ -16,6 +16,7 @@ import { routes } from "../../routes";
 import { Link, generatePath } from "react-router-dom";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditStudentDrawer from "../../../components/EditStudentDrawer/EditStudentDrawer";
+import StudentInfoDrawer from "../../../components/StudentInfoDrawer/StudentInfoDrawer";
 
 function StudentsPage() {
   const queryClient = useQueryClient();
@@ -23,6 +24,7 @@ function StudentsPage() {
     useState(false);
 
   const [editStudentId, setEditStudentId] = useState(null);
+  const [studentInfoId, setStudentInfoId] = useState(null);
 
   const { data: students, isLoading } = useQuery(
     ["students"],
@@ -56,7 +58,11 @@ function StudentsPage() {
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
-        return <Link>{`${value} ${item.surname}`}</Link>;
+        return (
+          <Link
+            onClick={() => setStudentInfoId(item.id)}
+          >{`${value} ${item.surname}`}</Link>
+        );
       },
     },
     {
@@ -156,6 +162,11 @@ function StudentsPage() {
       <CreateStudentModal
         isOpen={isCreateStudentModalOpen}
         setIsCreateStudentModalOpen={setIsCreateStudentModalOpen}
+      />
+      <StudentInfoDrawer
+        isOpen={!!studentInfoId}
+        student={students.find((s) => s.id === studentInfoId)}
+        onClose={() => setStudentInfoId(null)}
       />
       <EditStudentDrawer
         isOpen={!!editStudentId}

@@ -8,7 +8,7 @@ const DescriptionItem = ({ title, content }) => (
   </div>
 );
 
-function TeacherInfoDrawer({ isOpen, onClose, teacher = {} }) {
+function StudentInfoDrawer({ isOpen, onClose, student = {} }) {
   return (
     <Drawer
       open={isOpen}
@@ -20,10 +20,10 @@ function TeacherInfoDrawer({ isOpen, onClose, teacher = {} }) {
       <p style={{ fontSize: 20 }}>Profile</p>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="Name" content={teacher.name} />
+          <DescriptionItem title="Name" content={student.name} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Surname" content={teacher.surname} />
+          <DescriptionItem title="Surname" content={student.surname} />
         </Col>
       </Row>
       <Row>
@@ -31,40 +31,47 @@ function TeacherInfoDrawer({ isOpen, onClose, teacher = {} }) {
           <DescriptionItem
             title="Birthday"
             content={
-              teacher.dob === "0001-01-01T00:00:00Z"
+              student.dob === "0001-01-01T00:00:00Z"
                 ? ""
-                : teacher?.dob?.split("T")[0]
+                : student?.dob?.split("T")[0]
             }
           />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Gender" content={teacher.gender} />
+          <DescriptionItem title="Gender" content={student.gender} />
         </Col>
       </Row>
       <Row>
         <Col span={24}>
-          <DescriptionItem title="Address" content={teacher.address} />
-        </Col>
-      </Row>
-      <Divider />
-      <p style={{ fontSize: 20 }}>Speciality</p>
-      <Row>
-        <Col span={24}>
-          <DescriptionItem title="Degree" content={teacher.degree} />
+          <DescriptionItem title="Address" content={student.address} />
         </Col>
       </Row>
       <Divider />
       <p style={{ fontSize: 20 }}>Contacts</p>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="Email" content={teacher.email} />
+          <DescriptionItem
+            title="Class"
+            content={
+              student.class
+                ? `${student.class.level}-${student.class.section}`
+                : "not assigned"
+            }
+          />
+        </Col>
+      </Row>
+      <Divider />
+      <p style={{ fontSize: 20 }}>Contacts</p>
+      <Row>
+        <Col span={12}>
+          <DescriptionItem title="Email" content={student.email} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Phone Number" content={teacher.phone} />
+          <DescriptionItem title="Phone Number" content={student.phone} />
         </Col>
       </Row>
     </Drawer>
   );
 }
 
-export default TeacherInfoDrawer;
+export default StudentInfoDrawer;
