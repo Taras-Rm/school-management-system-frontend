@@ -18,7 +18,7 @@ function TeacherSchoolPage() {
               <Card
                 title={
                   <Typography.Text type="secondary">
-                    Teachers info
+                    Teachers
                   </Typography.Text>
                 }
               >
@@ -29,7 +29,7 @@ function TeacherSchoolPage() {
               <Card
                 title={
                   <Typography.Text type="secondary">
-                    Students info
+                    Students
                   </Typography.Text>
                 }
               >
