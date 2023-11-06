@@ -4,6 +4,7 @@ import {
   Breadcrumb,
   Button,
   List,
+  Popconfirm,
   Spin,
   Tooltip,
   Typography,
@@ -94,11 +95,15 @@ function SubjectsPage() {
                     />
                   </Tooltip>,
                   <Tooltip title="Edit subject">
-                    <DeleteTwoTone
-                      onClick={() => handleDeleteSubject(item.id)}
-                      twoToneColor="#eb2f96"
-                      style={{ cursor: "pointer" }}
-                    />
+                    <Popconfirm
+                      title="Do you really want to delete subject ?"
+                      onConfirm={() => handleDeleteSubject(item.id)}
+                    >
+                      <DeleteTwoTone
+                        twoToneColor="#eb2f96"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </Popconfirm>
                   </Tooltip>,
                 ]
               }

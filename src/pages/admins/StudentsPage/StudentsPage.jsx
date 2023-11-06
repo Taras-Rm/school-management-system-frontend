@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Breadcrumb,
   Button,
+  Popconfirm,
   Spin,
   Table,
   Tooltip,
@@ -86,11 +87,15 @@ function StudentsPage() {
         return (
           <div>
             <Tooltip title="Delete student">
-              <DeleteTwoTone
-                onClick={() => handleDeleteSchoolStudent(item.id)}
-                twoToneColor="#eb2f96"
-                style={{ cursor: "pointer" }}
-              />
+              <Popconfirm
+                title="Do you really want to delete student ?"
+                onConfirm={() => handleDeleteSchoolStudent(item.id)}
+              >
+                <DeleteTwoTone
+                  twoToneColor="#eb2f96"
+                  style={{ cursor: "pointer" }}
+                />
+              </Popconfirm>
             </Tooltip>
           </div>
         );
