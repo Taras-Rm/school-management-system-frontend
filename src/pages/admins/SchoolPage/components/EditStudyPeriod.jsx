@@ -43,7 +43,7 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
       queryClient.invalidateQueries(["studyPeriods"]);
       message.success("Study period is created");
       newPeriodForm.resetFields();
-      setIsAddNewPeriodOpen(false);
+      setIsEditStudyPeriodModalOpen(false);
     },
     onError: (err) => {
       message.error(err);
