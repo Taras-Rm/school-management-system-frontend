@@ -149,7 +149,12 @@ function EditCallSchedulePage() {
                     >
                       <TimePicker.RangePicker format={"HH:mm"} minuteStep={5} />
                     </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(name)} />
+                    <MinusCircleOutlined
+                      onClick={() => remove(name)}
+                      style={{
+                        visibility: `${name + 1 <= 7 ? "hidden" : "unset"}`,
+                      }}
+                    />
                   </div>
                 ))}
                 <Form.Item>
