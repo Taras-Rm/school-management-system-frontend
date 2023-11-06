@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import EditStudyPeriodModal from "./components/EditStudyPeriod";
 import { getSchoolStudyPeriods } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
+import EditSchoolDrawer from "../../../components/EditSchoolDrawer/EditSchoolDrawer";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -62,6 +63,8 @@ function SchoolPage() {
     useState(false);
 
   const [activeStudyPeriod, setActiveStudyPeriod] = useState(null);
+
+  const [isEditSchoolDrawer, setIsEditSchoolDrawer] = useState(false);
 
   const { data: school, isLoading } = useQuery(["school"], getAdminSchool, {
     retry: false,
@@ -120,7 +123,7 @@ function SchoolPage() {
             <Button
               type="primary"
               style={{ backgroundColor: "green" }}
-              onClick={() => navigate(routes.adminEditSchoolPage)}
+              onClick={() => setIsEditSchoolDrawer(true)}
             >
               Edit school
             </Button>
@@ -224,6 +227,10 @@ function SchoolPage() {
           <EditStudyPeriodModal
             isOpen={isEditStudyPeriodModalOpen}
             setIsEditStudyPeriodModalOpen={setIsEditStudyPeriodModalOpen}
+          />
+          <EditSchoolDrawer
+            isOpen={!!isEditSchoolDrawer}
+            onClose={() => setIsEditSchoolDrawer(false)}
           />
         </div>
       ) : (
