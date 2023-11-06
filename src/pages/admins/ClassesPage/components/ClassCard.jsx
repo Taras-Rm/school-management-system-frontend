@@ -9,7 +9,7 @@ import {
 } from "../../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-function ClassCard({ classInfo }) {
+function ClassCard({ classInfo, setEditClassId }) {
   const queryClient = useQueryClient();
 
   const { data: students, isLoading: isLoadingStudents } = useQuery(
@@ -52,7 +52,7 @@ function ClassCard({ classInfo }) {
       actions={[
         <Link
           style={{ width: "fit-content" }}
-          to={generatePath(routes.adminEditClassPage, { id: classInfo.id })}
+          onClick={() => setEditClassId(classInfo.id)}
         >
           <EditOutlined />
         </Link>,

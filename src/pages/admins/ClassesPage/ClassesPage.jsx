@@ -6,9 +6,12 @@ import { useQuery } from "react-query";
 import CreateClassModal from "./components/CreateClassModal";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
+import EditClassDrawer from "../../../components/EditClassDrawer/EditClassDrawer";
 
 function ClassesPage() {
   const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
+
+  const [editClassId, setEditClassId] = useState(null);
 
   const { data: classes, isLoading } = useQuery(["classes"], getSchoolClasses, {
     onError: (error) => {
@@ -49,13 +52,18 @@ function ClassesPage() {
       <Row gutter={20}>
         {classes.map((c) => (
           <Col span={6} style={{ marginBottom: 20 }} key={c.id}>
-            <ClassCard classInfo={c} />
+            <ClassCard classInfo={c} setEditClassId={setEditClassId} />
           </Col>
         ))}
       </Row>
       <CreateClassModal
         isOpen={isCreateClassModalOpen}
         setIsCreateClassModalOpen={setIsCreateClassModalOpen}
+      />
+      <EditClassDrawer
+        isOpen={!!editClassId}
+        id={editClassId}
+        onClose={() => setEditClassId(null)}
       />
     </div>
   );

@@ -11,7 +11,6 @@ import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import TeacherSchoolPage from "./techers/SchoolPage/SchoolPage";
 import ClassesPage from "./admins/ClassesPage/ClassesPage";
 import ClassPage from "./admins/ClassPage/ClassPage";
-import EditClassPage from "./admins/EditClassPage/EditClassPage";
 import SubjectsPage from "./admins/SubjectsPage/SubjectsPage";
 import EditSchoolPage from "./admins/EditSchoolPage/EditSchoolPage";
 import CallSchedulePage from "./admins/CallSchedulePage/CallSchedulePage";
@@ -47,7 +46,6 @@ function Root() {
           <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
           <Route path={routes.adminClassesPage} element={<ClassesPage />} />
           <Route path={routes.adminClassPage} element={<ClassPage />} />
-          <Route path={routes.adminEditClassPage} element={<EditClassPage />} />
           <Route path={routes.adminSubjectsPage} element={<SubjectsPage />} />
           <Route
             path={routes.adminCallSchedulePage}
