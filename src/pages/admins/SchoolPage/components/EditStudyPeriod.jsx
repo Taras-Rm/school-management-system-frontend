@@ -127,7 +127,7 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
                 htmlType="submit"
                 style={{ width: "25%", float: "right" }}
               >
-                Add
+                Set period
               </Button>
             </Form.Item>
           </Spin>

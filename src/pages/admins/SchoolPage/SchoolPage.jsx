@@ -146,11 +146,13 @@ function SchoolPage() {
                         alignItems: "center",
                       }}
                     >
-                      <Typography.Text type="secondary">
+                      <Typography.Text
+                        type="secondary"
+                        style={{ fontSize: 18 }}
+                      >
                         Study period
                       </Typography.Text>
                       <Button
-                        size="small"
                         type="primary"
                         onClick={() => setIsEditStudyPeriodModalOpen(true)}
                       >
@@ -172,7 +174,9 @@ function SchoolPage() {
               <Col span={6}>
                 <Card
                   title={
-                    <Typography.Text type="secondary">Teachers</Typography.Text>
+                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
+                      Teachers
+                    </Typography.Text>
                   }
                 >
                   <div
@@ -190,7 +194,9 @@ function SchoolPage() {
               <Col span={6}>
                 <Card
                   title={
-                    <Typography.Text type="secondary">Students</Typography.Text>
+                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
+                      Students
+                    </Typography.Text>
                   }
                 >
                   <div
@@ -208,7 +214,9 @@ function SchoolPage() {
               <Col span={6}>
                 <Card
                   title={
-                    <Typography.Text type="secondary">Classes</Typography.Text>
+                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
+                      Classes
+                    </Typography.Text>
                   }
                 >
                   <div
@@ -226,7 +234,9 @@ function SchoolPage() {
               <Col span={6}>
                 <Card
                   title={
-                    <Typography.Text type="secondary">Subjects</Typography.Text>
+                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
+                      Subjects
+                    </Typography.Text>
                   }
                 >
                   <div

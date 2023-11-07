@@ -57,6 +57,7 @@ function LoginPage() {
             flexDirection: "column",
             alignItems: "center",
           }}
+          requiredMark={false}
         >
           <Form.Item
             name={"email"}
