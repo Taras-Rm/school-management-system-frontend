@@ -17,4 +17,5 @@ export const routes = {
   adminClassJournalPage: "/admin/classes/:id/journals/:journalId",
 
   teacherSchoolPage: "/teacher/school",
+  teacherMyClassesPage: "/teacher/my_classes",
 };

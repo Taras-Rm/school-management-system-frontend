@@ -21,6 +21,7 @@ import EditCallSchedulePage from "./admins/EditCallSchedulePage/EditCallSchedule
 import ClassJournalsPage from "./admins/ClassJournalsPage/ClassJournalsPage";
 import ClassJournalPage from "./admins/ClassJournalPage/ClassJournalPage";
 import FirstPage from "./common/FirstPage/FirstPage";
+import MyClassesPage from "./techers/MyClassesPage/MyClassesPage";
 
 function Root() {
   return (
@@ -87,6 +88,10 @@ function Root() {
           <Route
             path={routes.teacherSchoolPage}
             element={<TeacherSchoolPage />}
+          />
+          <Route
+            path={routes.teacherMyClassesPage}
+            element={<MyClassesPage />}
           />
         </Route>
         <Route path="*" element={<NotFoundPage />} />

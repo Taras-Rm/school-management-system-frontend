@@ -134,6 +134,13 @@ function Layout() {
           <Link to={routes.teacherSchoolPage}>
             <HomeOutlined />
           </Link>
+        ),
+        getItem(
+          "My classes",
+          routes.teacherMyClassesPage,
+          <Link to={routes.teacherMyClassesPage}>
+            <BlockOutlined />
+          </Link>
         )
       );
     }

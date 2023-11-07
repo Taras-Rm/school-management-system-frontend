@@ -181,13 +181,13 @@ function SchoolPage() {
               <Col span={6}>
                 <SchoolCardInfo
                   title={"Classes"}
-                  count={schoolBasicInfo.studentsCount}
+                  count={schoolBasicInfo.classesCount}
                 />
               </Col>
               <Col span={6}>
                 <SchoolCardInfo
                   title={"Students"}
-                  count={schoolBasicInfo.classesCount}
+                  count={schoolBasicInfo.studentsCount}
                 />
               </Col>
               <Col span={6}>
