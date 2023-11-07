@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateStudentModal from "./components/CreateStudentModal";
-import { deleteSchoolStudent, getSchoolStudents } from "../../../api/students";
+import { deleteSchoolStudent, getSchoolStudents } from "../../../api/admins/students";
 import { routes } from "../../routes";
 import { Link, generatePath } from "react-router-dom";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";

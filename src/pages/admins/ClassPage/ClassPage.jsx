@@ -13,7 +13,7 @@ import {
   getSchoolClass,
   getSchoolClassStudents,
   unassignClassForStudents,
-} from "../../../api/classes";
+} from "../../../api/admins/classes";
 import { generatePath, useNavigate, useParams } from "react-router";
 import AssignClassForStudentsModal from "./components/AssignClassForStudentsModal";
 import { routes } from "../../routes";

@@ -10,7 +10,7 @@ import {
   message,
 } from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { deleteSchoolTeacher, getSchoolTeachers } from "../../../api/teachers";
+import { deleteSchoolTeacher, getSchoolTeachers } from "../../../api/admins/teachers";
 import CreateTeacherModal from "./components/CreateTeacherModal";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";

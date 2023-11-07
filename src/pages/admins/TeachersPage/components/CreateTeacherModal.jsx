@@ -2,7 +2,7 @@ import { DatePicker, Form, Input, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { createSchoolTeacher } from "../../../../api/teachers";
+import { createSchoolTeacher } from "../../../../api/admins/teachers";
 import {
   degreesLevelsOptions,
   genderOptions,

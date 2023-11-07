@@ -11,10 +11,10 @@ import {
 } from "antd";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getSchoolTeachers } from "../../api/teachers";
+import { getSchoolTeachers } from "../../api/admins/teachers";
 import { classLevelOptions, classSectionOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
-import { getSchoolClass, updateSchoolClass } from "../../api/classes";
+import { getSchoolClass, updateSchoolClass } from "../../api/admins/classes";
 import TextArea from "antd/es/input/TextArea";
 
 function EditClassDrawer({ isOpen, onClose, id }) {

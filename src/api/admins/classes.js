@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../api";
 
 export const getSchoolClasses = async () => {
   const response = await api.get(`/admins/school/classes`);

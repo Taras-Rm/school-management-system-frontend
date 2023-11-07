@@ -11,15 +11,16 @@ import {
 } from "antd";
 import React, { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { getAdminSchool, getSchoolBasicInfo } from "../../../api/school";
+import { getAdminSchool, getSchoolBasicInfo } from "../../../api/admins/school";
 import { useQuery } from "react-query";
 import CreateSchoolModal from "./components/CreateSchoolModal";
 import { routes } from "../../routes";
 import { Link } from "react-router-dom";
 import EditStudyPeriodModal from "./components/EditStudyPeriod";
-import { getSchoolStudyPeriods } from "../../../api/studyPeriods";
+import { getSchoolStudyPeriods } from "../../../api/admins/studyPeriods";
 import { formatDate } from "../../../utils/date";
 import EditSchoolDrawer from "../../../components/EditSchoolDrawer/EditSchoolDrawer";
+import SchoolCardInfo from "../../../components/SchoolCardInfo/SchoolCardInfo";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -172,84 +173,28 @@ function SchoolPage() {
               </Col>
               <Col span={12} />
               <Col span={6}>
-                <Card
-                  title={
-                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
-                      Teachers
-                    </Typography.Text>
-                  }
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      Count:
-                    </Typography.Text>
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      {schoolBasicInfo.teachersCount}
-                    </Typography.Text>
-                  </div>
-                </Card>
+                <SchoolCardInfo
+                  title={"Teachers"}
+                  count={schoolBasicInfo.teachersCount}
+                />
               </Col>
               <Col span={6}>
-                <Card
-                  title={
-                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
-                      Students
-                    </Typography.Text>
-                  }
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      Count:
-                    </Typography.Text>
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      {schoolBasicInfo.studentsCount}
-                    </Typography.Text>
-                  </div>
-                </Card>
+                <SchoolCardInfo
+                  title={"Classes"}
+                  count={schoolBasicInfo.studentsCount}
+                />
               </Col>
               <Col span={6}>
-                <Card
-                  title={
-                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
-                      Classes
-                    </Typography.Text>
-                  }
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      Count:
-                    </Typography.Text>
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      {schoolBasicInfo.classesCount}
-                    </Typography.Text>
-                  </div>
-                </Card>
+                <SchoolCardInfo
+                  title={"Students"}
+                  count={schoolBasicInfo.classesCount}
+                />
               </Col>
               <Col span={6}>
-                <Card
-                  title={
-                    <Typography.Text type="secondary" style={{ fontSize: 18 }}>
-                      Subjects
-                    </Typography.Text>
-                  }
-                >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      Count:
-                    </Typography.Text>
-                    <Typography.Text style={{ fontSize: 26 }}>
-                      {schoolBasicInfo.subjectsCount}
-                    </Typography.Text>
-                  </div>
-                </Card>
+                <SchoolCardInfo
+                  title={"Subjects"}
+                  count={schoolBasicInfo.subjectsCount}
+                />
               </Col>
             </Row>
           </div>

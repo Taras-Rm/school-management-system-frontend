@@ -14,7 +14,7 @@ import {
 import {
   getSchoolCallsSchedule,
   updateSchoolCallsSchedule,
-} from "../../../api/callsSchedule";
+} from "../../../api/admins/callsSchedule";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import dayjs from "dayjs";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";

@@ -13,11 +13,11 @@ import {
 } from "antd";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
+import { getSchoolTeacher, updateSchoolTeacher } from "../../api/admins/teachers";
 import dayjs from "dayjs";
 import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
-import { getSchoolStudent, updateSchoolStudent } from "../../api/students";
+import { getSchoolStudent, updateSchoolStudent } from "../../api/admins/students";
 
 function EditStudentDrawer({ isOpen, onClose, id }) {
   const queryClient = useQueryClient();

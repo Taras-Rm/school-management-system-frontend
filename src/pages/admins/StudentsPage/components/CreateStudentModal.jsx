@@ -2,7 +2,7 @@ import { DatePicker, Form, Input, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { createSchoolStudent } from "../../../../api/students";
+import { createSchoolStudent } from "../../../../api/admins/students";
 import { genderOptions } from "../../../../utils/staticData";
 
 function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {

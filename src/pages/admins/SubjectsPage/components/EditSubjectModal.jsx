@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getSchoolSubject,
   updateSchoolSubject,
-} from "../../../../api/subjects";
+} from "../../../../api/admins/subjects";
 
 function EditSubjectModal({ subjectId, setEditSubjectId }) {
   const queryClient = useQueryClient();

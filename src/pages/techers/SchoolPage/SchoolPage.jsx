@@ -1,7 +1,20 @@
-import { Card, Col, Row, Typography } from "antd";
+import { Card, Col, Row, Spin, Typography } from "antd";
 import React from "react";
+import SchoolCardInfo from "../../../components/SchoolCardInfo/SchoolCardInfo";
+import { getSchoolBasicInfo } from "../../../api/teachers/school";
+import { useQuery } from "react-query";
 
 function TeacherSchoolPage() {
+  const { data: schoolBasicInfo = {}, isLoadingSchoolBasicInfo } = useQuery(
+    ["school", "basic_info"],
+    getSchoolBasicInfo,
+    {
+      retry: false,
+    }
+  );
+
+  if (isLoadingSchoolBasicInfo) return <Spin spinning />;
+
   return (
     <div
       style={{
@@ -15,26 +28,28 @@ function TeacherSchoolPage() {
         <div style={{ width: "100%" }}>
           <Row gutter={16}>
             <Col span={6}>
-              <Card
-                title={
-                  <Typography.Text type="secondary">
-                    Teachers
-                  </Typography.Text>
-                }
-              >
-                <Typography.Text style={{ fontSize: 30 }}>45</Typography.Text>
-              </Card>
+              <SchoolCardInfo
+                title={"Teachers"}
+                count={schoolBasicInfo.teachersCount}
+              />
             </Col>
             <Col span={6}>
-              <Card
-                title={
-                  <Typography.Text type="secondary">
-                    Students
-                  </Typography.Text>
-                }
-              >
-                <Typography.Text style={{ fontSize: 30 }}>435</Typography.Text>
-              </Card>
+              <SchoolCardInfo
+                title={"Classes"}
+                count={schoolBasicInfo.studentsCount}
+              />
+            </Col>
+            <Col span={6}>
+              <SchoolCardInfo
+                title={"Students"}
+                count={schoolBasicInfo.classesCount}
+              />
+            </Col>
+            <Col span={6}>
+              <SchoolCardInfo
+                title={"Subjects"}
+                count={schoolBasicInfo.subjectsCount}
+              />
             </Col>
           </Row>
         </div>

@@ -16,7 +16,7 @@ import {
   deleteClassSubject,
   getClassSubjects,
   getSchoolClass,
-} from "../../../api/classes";
+} from "../../../api/admins/classes";
 import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditClassSubjectModal from "./components/EditClassSubjectModal";

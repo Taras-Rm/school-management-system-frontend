@@ -2,7 +2,7 @@ import React from "react";
 import { routes } from "../../routes";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumb, Button, Table, Typography, message } from "antd";
-import { getSchoolCallsSchedule } from "../../../api/callsSchedule";
+import { getSchoolCallsSchedule } from "../../../api/admins/callsSchedule";
 import { useQuery } from "react-query";
 import { formatTime } from "../../../utils/date";
 
