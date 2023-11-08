@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Layout as AntdLayout,
   Avatar,
@@ -20,19 +20,21 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { logout, me } from "../../api/auth";
 import { useMutation, useQuery } from "react-query";
+import UserContext from "../../user-context";
 
 const menuOptionsRoutes = [
-  routes.adminSchoolPage,
-  routes.adminTeachersPage,
-  routes.adminStudentsPage,
-  routes.adminClassesPage,
-  routes.adminSubjectsPage,
-  routes.adminCallSchedulePage,
+  routes.schoolPage,
+  routes.teachersPage,
+  routes.studentsPage,
+  routes.classesPage,
+  routes.subjectsPage,
+  routes.callSchedulePage,
 ];
 
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useContext(UserContext);
 
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
@@ -43,14 +45,6 @@ function Layout() {
     }
     setSelecteMenuItem(path);
   }, [location]);
-
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery(["me"], me, {
-    retry: false,
-  });
 
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
@@ -81,8 +75,8 @@ function Layout() {
       availableItems.push(
         getItem(
           "School",
-          routes.adminSchoolPage,
-          <Link to={routes.adminSchoolPage}>
+          routes.schoolPage,
+          <Link to={routes.schoolPage}>
             <HomeOutlined />
           </Link>
         )
@@ -91,36 +85,36 @@ function Layout() {
         availableItems.push(
           getItem(
             "Teachers",
-            routes.adminTeachersPage,
-            <Link to={routes.adminTeachersPage}>
+            routes.teachersPage,
+            <Link to={routes.teachersPage}>
               <UserOutlined />
             </Link>
           ),
           getItem(
             "Students",
-            routes.adminStudentsPage,
-            <Link to={routes.adminStudentsPage}>
+            routes.studentsPage,
+            <Link to={routes.studentsPage}>
               <ContactsOutlined />
             </Link>
           ),
           getItem(
             "Classes",
-            routes.adminClassesPage,
-            <Link to={routes.adminClassesPage}>
+            routes.classesPage,
+            <Link to={routes.classesPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
             "Subjects",
-            routes.adminSubjectsPage,
-            <Link to={routes.adminSubjectsPage}>
+            routes.subjectsPage,
+            <Link to={routes.subjectsPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
             "Schedule",
-            routes.adminCallSchedulePage,
-            <Link to={routes.adminCallSchedulePage}>
+            routes.callSchedulePage,
+            <Link to={routes.callSchedulePage}>
               <ScheduleOutlined />
             </Link>
           )
@@ -130,15 +124,29 @@ function Layout() {
       availableItems.push(
         getItem(
           "School",
-          routes.teacherSchoolPage,
-          <Link to={routes.teacherSchoolPage}>
+          routes.schoolPage,
+          <Link to={routes.schoolPage}>
             <HomeOutlined />
           </Link>
         ),
         getItem(
-          "My classes",
-          routes.teacherMyClassesPage,
-          <Link to={routes.teacherMyClassesPage}>
+          "Teachers",
+          routes.teachersPage,
+          <Link to={routes.teachersPage}>
+            <UserOutlined />
+          </Link>
+        ),
+        getItem(
+          "Students",
+          routes.studentsPage,
+          <Link to={routes.studentsPage}>
+            <ContactsOutlined />
+          </Link>
+        ),
+        getItem(
+          "Subjects",
+          routes.subjectsPage,
+          <Link to={routes.subjectsPage}>
             <BlockOutlined />
           </Link>
         )

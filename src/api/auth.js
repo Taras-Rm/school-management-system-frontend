@@ -1,24 +1,16 @@
 import api from "./api";
 
 export const me = async () => {
-  const response = await api.get(`/users/me`)
+  const response = await api.get(`/me`)
   return response.data
 }
 
 export const login = async ({ email, password, role }) => {
-  let userPath = "";
-  if (role === "admin") {
-    userPath = "admins";
-  } else if (role === "student") {
-    userPath = "students";
-  } else if (role === "teacher") {
-    userPath = "teachers";
-  }
-
   const response = await 
-  api.post(`/${userPath}/login`, {
+  api.post(`/login`, {
     email,
     password,
+    role
   });
   return response.data;
 };

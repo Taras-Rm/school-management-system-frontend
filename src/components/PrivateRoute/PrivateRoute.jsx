@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { me } from "../../api/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { Spin } from "antd";
+import UserContext from "../../user-context";
 
-function PrivateRoute({ children, role }) {
+function PrivateRoute({ children, roles }) {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const {
     data: user,
@@ -15,7 +17,8 @@ function PrivateRoute({ children, role }) {
   } = useQuery(["me"], me, {
     retry: false,
     onSuccess: (data) => {
-      if (data.role != role) {
+      setUser(data)
+      if (!roles.find((r) => r === data.role)) {
         navigate(routes.loginPage);
       }
     },

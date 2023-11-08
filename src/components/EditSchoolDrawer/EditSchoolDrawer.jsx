@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useForm } from "antd/es/form/Form";
-import { getAdminSchool, updateSchool } from "../../api/admins/school";
+import { getAdminSchool, updateSchool } from "../../api/school";
 
 function EditSchoolDrawer({ isOpen, onClose }) {
   const queryClient = useQueryClient();

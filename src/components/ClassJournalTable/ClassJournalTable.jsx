@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   deleteClassJournalStudentGrade,
   upsertClassJournalStudentGrade,
-} from "../../api/admins/classes";
+} from "../../api/classes";
 
 const EditableContext = React.createContext(null);
 

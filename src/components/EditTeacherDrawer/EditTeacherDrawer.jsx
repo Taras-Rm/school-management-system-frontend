@@ -13,7 +13,7 @@ import {
 } from "antd";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getSchoolTeacher, updateSchoolTeacher } from "../../api/admins/teachers";
+import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
 import dayjs from "dayjs";
 import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
