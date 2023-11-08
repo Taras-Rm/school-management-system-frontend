@@ -9,7 +9,7 @@ import {
   Typography,
   message,
 } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useQuery } from "react-query";
 import CreateSchoolModal from "./components/CreateSchoolModal";
@@ -21,6 +21,7 @@ import EditSchoolDrawer from "../../components/EditSchoolDrawer/EditSchoolDrawer
 import SchoolCardInfo from "../../components/SchoolCardInfo/SchoolCardInfo";
 import { getAdminSchool, getSchoolBasicInfo } from "../../api/school";
 import { getSchoolStudyPeriods } from "../../api/studyPeriods";
+import UserContext from "../../user-context";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -58,6 +59,8 @@ function WithoutSchoolBoard() {
 }
 
 function SchoolPage() {
+  const { user } = useContext(UserContext);
+
   const [isEditStudyPeriodModalOpen, setIsEditStudyPeriodModalOpen] =
     useState(false);
 
@@ -119,13 +122,15 @@ function SchoolPage() {
             {school.name} school
           </Typography.Title>
           <div style={{ marginBottom: 20 }}>
-            <Button
-              type="primary"
-              style={{ backgroundColor: "green" }}
-              onClick={() => setIsEditSchoolDrawer(true)}
-            >
-              Edit school
-            </Button>
+            {user.role === "admin" && (
+              <Button
+                type="primary"
+                style={{ backgroundColor: "green" }}
+                onClick={() => setIsEditSchoolDrawer(true)}
+              >
+                Edit school
+              </Button>
+            )}
           </div>
           {!activeStudyPeriod && !isStudyPeriodsLoading && (
             <Alert
@@ -153,12 +158,14 @@ function SchoolPage() {
                       >
                         Study period
                       </Typography.Text>
-                      <Button
-                        type="primary"
-                        onClick={() => setIsEditStudyPeriodModalOpen(true)}
-                      >
-                        Change
-                      </Button>
+                      {user.role === "admin" && (
+                        <Button
+                          type="primary"
+                          onClick={() => setIsEditStudyPeriodModalOpen(true)}
+                        >
+                          Change
+                        </Button>
+                      )}
                     </div>
                   }
                 >

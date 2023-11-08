@@ -124,16 +124,9 @@ function Layout() {
       availableItems.push(
         getItem(
           "School",
-          routes.teacherSchoolPage,
-          <Link to={routes.teacherSchoolPage}>
+          routes.schoolPage,
+          <Link to={routes.schoolPage}>
             <HomeOutlined />
-          </Link>
-        ),
-        getItem(
-          "My classes",
-          routes.teacherMyClassesPage,
-          <Link to={routes.teacherMyClassesPage}>
-            <BlockOutlined />
           </Link>
         )
       );
