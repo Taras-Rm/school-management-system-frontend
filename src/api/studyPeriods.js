@@ -5,7 +5,7 @@ export const createStudyPeriod = async ({
   endDate,
   incrementClassesLevels,
 }) => {
-  const response = await api.post(`/admins/school/study_periods`, {
+  const response = await api.post(`/school/study_periods`, {
     startDate,
     endDate,
     incrementClassesLevels,

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Layout as AntdLayout,
   Avatar,
@@ -20,6 +20,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { logout, me } from "../../api/auth";
 import { useMutation, useQuery } from "react-query";
+import UserContext from "../../user-context";
 
 const menuOptionsRoutes = [
   routes.schoolPage,
@@ -33,6 +34,7 @@ const menuOptionsRoutes = [
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
+  const {user} = useContext(UserContext)
 
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
@@ -43,14 +45,6 @@ function Layout() {
     }
     setSelecteMenuItem(path);
   }, [location]);
-
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery(["me"], me, {
-    retry: false,
-  });
 
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
