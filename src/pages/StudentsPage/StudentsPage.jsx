@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Breadcrumb,
   Button,
@@ -17,8 +17,12 @@ import { Link } from "react-router-dom";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditStudentDrawer from "../../components/EditStudentDrawer/EditStudentDrawer";
 import StudentInfoDrawer from "../../components/StudentInfoDrawer/StudentInfoDrawer";
+import { useContext } from "react";
+import UserContext from "../../user-context";
 
 function StudentsPage() {
+  const { user } = useContext(UserContext);
+
   const queryClient = useQueryClient();
   const [isCreateStudentModalOpen, setIsCreateStudentModalOpen] =
     useState(false);
@@ -52,67 +56,72 @@ function StudentsPage() {
     });
   };
 
-  const tableColumns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (value, item) => {
-        return (
-          <Link
-            onClick={() => setStudentInfoId(item.id)}
-          >{`${value} ${item.surname}`}</Link>
-        );
+  const tableColumns = useMemo(() => {
+    let columns = [
+      {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+        render: (value, item) => {
+          return (
+            <Link
+              onClick={() => setStudentInfoId(item.id)}
+            >{`${value} ${item.surname}`}</Link>
+          );
+        },
       },
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      render: (value, item) => {
-        return value;
+      {
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
+        render: (value, item) => {
+          return value;
+        },
       },
-    },
-    {
-      title: "Class",
-      dataIndex: "Class",
-      key: "class.name",
-      render: (value, item) => {
-        return item.class
-          ? `${item?.class?.level}-${item?.class?.section}`
-          : "";
+      {
+        title: "Class",
+        dataIndex: "Class",
+        key: "class.name",
+        render: (value, item) => {
+          return item.class
+            ? `${item?.class?.level}-${item?.class?.section}`
+            : "";
+        },
       },
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      align: "center",
-      render: (value, item) => {
-        return (
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <Tooltip title="Edit student">
-              <EditTwoTone
-                onClick={() => setEditStudentId(item.id)}
-                style={{ cursor: "pointer" }}
-              />
-            </Tooltip>
-            <Tooltip title="Delete student">
-              <Popconfirm
-                title="Do you really want to delete student ?"
-                onConfirm={() => handleDeleteSchoolStudent(item.id)}
-              >
-                <DeleteTwoTone
-                  twoToneColor="#eb2f96"
+    ];
+    if (user.role === "admin") {
+      columns.push({
+        title: "Action",
+        dataIndex: "action",
+        key: "action",
+        align: "center",
+        render: (value, item) => {
+          return (
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <Tooltip title="Edit student">
+                <EditTwoTone
+                  onClick={() => setEditStudentId(item.id)}
                   style={{ cursor: "pointer" }}
                 />
-              </Popconfirm>
-            </Tooltip>
-          </div>
-        );
-      },
-    },
-  ];
+              </Tooltip>
+              <Tooltip title="Delete student">
+                <Popconfirm
+                  title="Do you really want to delete student ?"
+                  onConfirm={() => handleDeleteSchoolStudent(item.id)}
+                >
+                  <DeleteTwoTone
+                    twoToneColor="#eb2f96"
+                    style={{ cursor: "pointer" }}
+                  />
+                </Popconfirm>
+              </Tooltip>
+            </div>
+          );
+        },
+      });
+    }
+    return columns;
+  }, [user]);
 
   const tableData = students?.map((t) => {
     return {
@@ -145,13 +154,15 @@ function StudentsPage() {
         Students
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsCreateStudentModalOpen(true)}
-        >
-          Add student
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsCreateStudentModalOpen(true)}
+          >
+            Add student
+          </Button>
+        )}
       </div>
       <Table
         dataSource={tableData}

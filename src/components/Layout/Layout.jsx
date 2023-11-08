@@ -135,7 +135,14 @@ function Layout() {
           <Link to={routes.teachersPage}>
             <UserOutlined />
           </Link>
-        )
+        ),
+        getItem(
+          "Students",
+          routes.studentsPage,
+          <Link to={routes.studentsPage}>
+            <ContactsOutlined />
+          </Link>
+        ),
       );
     }
     return availableItems;
