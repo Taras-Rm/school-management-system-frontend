@@ -143,6 +143,13 @@ function Layout() {
             <ContactsOutlined />
           </Link>
         ),
+        getItem(
+          "Subjects",
+          routes.subjectsPage,
+          <Link to={routes.subjectsPage}>
+            <BlockOutlined />
+          </Link>
+        )
       );
     }
     return availableItems;

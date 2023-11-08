@@ -16,8 +16,12 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateSubjectModal from "./components/CreateSubjectModal";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditSubjectModal from "./components/EditSubjectModal";
+import { useContext } from "react";
+import UserContext from "../../user-context";
 
 function SubjectsPage() {
+  const { user } = useContext(UserContext);
+
   const queryClient = useQueryClient();
 
   const [isCreateSubjectModalOpen, setIsCreateSubjectModalOpen] =
@@ -72,13 +76,15 @@ function SubjectsPage() {
         Subjects
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsCreateSubjectModalOpen(true)}
-        >
-          Add subject
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsCreateSubjectModalOpen(true)}
+          >
+            Add subject
+          </Button>
+        )}
       </div>
       <List
         itemLayout="horizontal"
@@ -87,7 +93,8 @@ function SubjectsPage() {
           return (
             <List.Item
               actions={
-                item.schoolId && [
+                item.schoolId &&
+                user.role === "admin" && [
                   <Tooltip title="Edit subject">
                     <EditTwoTone
                       onClick={() => setEditSubjectId(item.id)}
