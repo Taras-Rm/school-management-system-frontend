@@ -34,7 +34,7 @@ const menuOptionsRoutes = [
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
 
@@ -127,6 +127,13 @@ function Layout() {
           routes.schoolPage,
           <Link to={routes.schoolPage}>
             <HomeOutlined />
+          </Link>
+        ),
+        getItem(
+          "Teachers",
+          routes.teachersPage,
+          <Link to={routes.teachersPage}>
+            <UserOutlined />
           </Link>
         )
       );
