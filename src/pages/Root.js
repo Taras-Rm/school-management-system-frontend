@@ -1,27 +1,25 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
-import AdminSchoolPage from "./admins/SchoolPage/SchoolPage";
+import SchoolPage from "./SchoolPage/SchoolPage";
 import { routes } from "./routes";
-import TeachersPage from "./admins/TeachersPage/TeachersPage";
-import StudentsPage from "./admins/StudentsPage/StudentsPage";
-import LoginPage from "./common/LoginPage/LoginPage";
-import NotFoundPage from "./common/NotFoundPage/NotFoundPage";
+import TeachersPage from "./TeachersPage/TeachersPage";
+import StudentsPage from "./StudentsPage/StudentsPage";
+import LoginPage from "./LoginPage/LoginPage";
+import NotFoundPage from "./NotFoundPage/NotFoundPage";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import TeacherSchoolPage from "./techers/SchoolPage/SchoolPage";
-import ClassesPage from "./admins/ClassesPage/ClassesPage";
-import ClassPage from "./admins/ClassPage/ClassPage";
-import SubjectsPage from "./admins/SubjectsPage/SubjectsPage";
-import EditSchoolPage from "./admins/EditSchoolPage/EditSchoolPage";
-import CallSchedulePage from "./admins/CallSchedulePage/CallSchedulePage";
-import ClassSubjects from "./admins/ClassSubjectsPage/ClassSubjectsPage";
-import ClassSchedulePage from "./admins/ClassSchedulePage/ClassSchedulePage";
-import EditClassSchedulePage from "./admins/EditClassSchedulePage/EditClassSchedulePage";
-import EditCallSchedulePage from "./admins/EditCallSchedulePage/EditCallSchedulePage";
-import ClassJournalsPage from "./admins/ClassJournalsPage/ClassJournalsPage";
-import ClassJournalPage from "./admins/ClassJournalPage/ClassJournalPage";
-import FirstPage from "./common/FirstPage/FirstPage";
-import MyClassesPage from "./techers/MyClassesPage/MyClassesPage";
+import ClassesPage from "./ClassesPage/ClassesPage";
+import ClassPage from "./ClassPage/ClassPage";
+import SubjectsPage from "./SubjectsPage/SubjectsPage";
+import EditSchoolPage from "./EditSchoolPage/EditSchoolPage";
+import CallSchedulePage from "./CallSchedulePage/CallSchedulePage";
+import ClassSubjects from "./ClassSubjectsPage/ClassSubjectsPage";
+import ClassSchedulePage from "./ClassSchedulePage/ClassSchedulePage";
+import EditClassSchedulePage from "./EditClassSchedulePage/EditClassSchedulePage";
+import EditCallSchedulePage from "./EditCallSchedulePage/EditCallSchedulePage";
+import ClassJournalsPage from "./ClassJournalsPage/ClassJournalsPage";
+import ClassJournalPage from "./ClassJournalPage/ClassJournalPage";
+import FirstPage from "./FirstPage/FirstPage";
 
 function Root() {
   return (
@@ -37,61 +35,45 @@ function Root() {
             </PrivateRoute>
           }
         >
-          <Route path={routes.adminSchoolPage} element={<AdminSchoolPage />} />
+          <Route path={routes.schoolPage} element={<SchoolPage />} />
           <Route
-            path={routes.adminEditSchoolPage}
+            path={routes.editSchoolPage}
             element={<EditSchoolPage />}
           />
 
-          <Route path={routes.adminTeachersPage} element={<TeachersPage />} />
-          <Route path={routes.adminStudentsPage} element={<StudentsPage />} />
-          <Route path={routes.adminClassesPage} element={<ClassesPage />} />
-          <Route path={routes.adminClassPage} element={<ClassPage />} />
-          <Route path={routes.adminSubjectsPage} element={<SubjectsPage />} />
+          <Route path={routes.teachersPage} element={<TeachersPage />} />
+          <Route path={routes.studentsPage} element={<StudentsPage />} />
+          <Route path={routes.classesPage} element={<ClassesPage />} />
+          <Route path={routes.classPage} element={<ClassPage />} />
+          <Route path={routes.subjectsPage} element={<SubjectsPage />} />
           <Route
-            path={routes.adminCallSchedulePage}
+            path={routes.callSchedulePage}
             element={<CallSchedulePage />}
           />
           <Route
-            path={routes.adminEditCallSchedulePage}
+            path={routes.editCallSchedulePage}
             element={<EditCallSchedulePage />}
           />
 
           <Route
-            path={routes.adminClassSubjectsPage}
+            path={routes.classSubjectsPage}
             element={<ClassSubjects />}
           />
           <Route
-            path={routes.adminClassSchedulePage}
+            path={routes.classSchedulePage}
             element={<ClassSchedulePage />}
           />
           <Route
-            path={routes.adminEditClassSchedulePage}
+            path={routes.editClassSchedulePage}
             element={<EditClassSchedulePage />}
           />
           <Route
-            path={routes.adminClassJournalsPage}
+            path={routes.classJournalsPage}
             element={<ClassJournalsPage />}
           />
           <Route
-            path={routes.adminClassJournalPage}
+            path={routes.classJournalPage}
             element={<ClassJournalPage />}
-          />
-        </Route>
-        <Route
-          element={
-            <PrivateRoute role={"teacher"}>
-              <Layout />
-            </PrivateRoute>
-          }
-        >
-          <Route
-            path={routes.teacherSchoolPage}
-            element={<TeacherSchoolPage />}
-          />
-          <Route
-            path={routes.teacherMyClassesPage}
-            element={<MyClassesPage />}
           />
         </Route>
         <Route path="*" element={<NotFoundPage />} />

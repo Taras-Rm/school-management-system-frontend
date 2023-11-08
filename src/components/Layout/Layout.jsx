@@ -22,12 +22,12 @@ import { logout, me } from "../../api/auth";
 import { useMutation, useQuery } from "react-query";
 
 const menuOptionsRoutes = [
-  routes.adminSchoolPage,
-  routes.adminTeachersPage,
-  routes.adminStudentsPage,
-  routes.adminClassesPage,
-  routes.adminSubjectsPage,
-  routes.adminCallSchedulePage,
+  routes.schoolPage,
+  routes.teachersPage,
+  routes.studentsPage,
+  routes.classesPage,
+  routes.subjectsPage,
+  routes.callSchedulePage,
 ];
 
 function Layout() {
@@ -81,8 +81,8 @@ function Layout() {
       availableItems.push(
         getItem(
           "School",
-          routes.adminSchoolPage,
-          <Link to={routes.adminSchoolPage}>
+          routes.schoolPage,
+          <Link to={routes.schoolPage}>
             <HomeOutlined />
           </Link>
         )
@@ -91,36 +91,36 @@ function Layout() {
         availableItems.push(
           getItem(
             "Teachers",
-            routes.adminTeachersPage,
-            <Link to={routes.adminTeachersPage}>
+            routes.teachersPage,
+            <Link to={routes.teachersPage}>
               <UserOutlined />
             </Link>
           ),
           getItem(
             "Students",
-            routes.adminStudentsPage,
-            <Link to={routes.adminStudentsPage}>
+            routes.studentsPage,
+            <Link to={routes.studentsPage}>
               <ContactsOutlined />
             </Link>
           ),
           getItem(
             "Classes",
-            routes.adminClassesPage,
-            <Link to={routes.adminClassesPage}>
+            routes.classesPage,
+            <Link to={routes.classesPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
             "Subjects",
-            routes.adminSubjectsPage,
-            <Link to={routes.adminSubjectsPage}>
+            routes.subjectsPage,
+            <Link to={routes.subjectsPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
             "Schedule",
-            routes.adminCallSchedulePage,
-            <Link to={routes.adminCallSchedulePage}>
+            routes.callSchedulePage,
+            <Link to={routes.callSchedulePage}>
               <ScheduleOutlined />
             </Link>
           )
