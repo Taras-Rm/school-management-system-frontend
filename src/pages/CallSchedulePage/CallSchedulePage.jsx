@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { routes } from "../routes";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumb, Button, Table, Typography, message } from "antd";
 import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { useQuery } from "react-query";
 import { formatTime } from "../../utils/date";
+import UserContext from "../../user-context";
 
 function CallSchedulePage() {
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   const { data: callsSchedule = [], isLoading: isCallScheduleLoading } =
     useQuery(["callsSchedule"], getSchoolCallsSchedule, {
@@ -67,13 +70,15 @@ function CallSchedulePage() {
         Schedule
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => navigate(routes.editCallSchedulePage)}
-        >
-          Edit schedule
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => navigate(routes.editCallSchedulePage)}
+          >
+            Edit schedule
+          </Button>
+        )}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Table

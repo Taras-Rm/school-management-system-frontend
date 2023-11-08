@@ -149,6 +149,13 @@ function Layout() {
           <Link to={routes.subjectsPage}>
             <BlockOutlined />
           </Link>
+        ),
+        getItem(
+          "Schedule",
+          routes.callSchedulePage,
+          <Link to={routes.callSchedulePage}>
+            <ScheduleOutlined />
+          </Link>
         )
       );
     }
