@@ -6,7 +6,7 @@ import { routes } from "../../routes";
 import {
   deleteSchoolClass,
   getSchoolClassStudents,
-} from "../../../api/admins/classes";
+} from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 function ClassCard({ classInfo, setEditClassId }) {

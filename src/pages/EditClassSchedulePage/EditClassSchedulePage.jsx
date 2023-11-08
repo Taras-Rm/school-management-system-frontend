@@ -18,9 +18,9 @@ import {
   getClassSubjects,
   getSchoolClass,
   updateClassSchedule,
-} from "../../api/admins/classes";
+} from "../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getSchoolCallsSchedule } from "../../api/admins/callsSchedule";
+import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { workingWeekDays } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 

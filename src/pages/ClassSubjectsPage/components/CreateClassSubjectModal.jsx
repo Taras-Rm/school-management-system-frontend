@@ -2,9 +2,9 @@ import { Form, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { createClassSubject } from "../../../api/admins/classes";
-import { getSchoolSubjects } from "../../../api/admins/subjects";
-import { getSchoolTeachers } from "../../../api/admins/teachers";
+import { createClassSubject } from "../../../api/classes";
+import { getSchoolSubjects } from "../../../api/subjects";
+import { getSchoolTeachers } from "../../../api/teachers";
 
 function CreateClassSubjectModal({
   isOpen,

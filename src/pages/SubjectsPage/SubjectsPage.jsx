@@ -11,7 +11,7 @@ import {
   message,
 } from "antd";
 import { Link } from "react-router-dom";
-import { deleteSchoolSubject, getSchoolSubjects } from "../../api/admins/subjects";
+import { deleteSchoolSubject, getSchoolSubjects } from "../../api/subjects";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import CreateSubjectModal from "./components/CreateSubjectModal";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";

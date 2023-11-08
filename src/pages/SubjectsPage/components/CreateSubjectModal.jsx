@@ -2,7 +2,7 @@ import { Form, Input, Modal, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { createSchoolSubject } from "../../../api/admins/subjects";
+import { createSchoolSubject } from "../../../api/subjects";
 
 function CreateSubjectModal({ isOpen, setIsCreateSubjectModalOpen }) {
   const queryClient = useQueryClient();

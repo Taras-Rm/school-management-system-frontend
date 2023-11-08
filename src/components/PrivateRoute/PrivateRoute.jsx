@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
 import { Spin } from "antd";
 
-function PrivateRoute({ children, role }) {
+function PrivateRoute({ children, roles }) {
   const navigate = useNavigate();
 
   const {
@@ -15,7 +15,7 @@ function PrivateRoute({ children, role }) {
   } = useQuery(["me"], me, {
     retry: false,
     onSuccess: (data) => {
-      if (data.role != role) {
+      if (!roles.find(r => r === data.role)) {
         navigate(routes.loginPage);
       }
     },

@@ -2,7 +2,7 @@ import { Form, Modal, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { createSchoolClass } from "../../../api/admins/classes";
+import { createSchoolClass } from "../../../api/classes";
 import {
   classLevelOptions,
   classSectionOptions,

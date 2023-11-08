@@ -1,17 +1,17 @@
-import api from "../api";
+import api from "./api";
 
 export const getSchoolClasses = async () => {
-  const response = await api.get(`/admins/school/classes`);
+  const response = await api.get(`/school/classes`);
   return response.data;
 };
 
 export const getSchoolClass = async ({ id }) => {
-  const response = await api.get(`/admins/school/classes/${id}`);
+  const response = await api.get(`/school/classes/${id}`);
   return response.data;
 };
 
 export const createSchoolClass = async ({ level, section, description }) => {
-  const response = await api.post(`/admins/school/classes`, {
+  const response = await api.post(`/school/classes`, {
     level,
     section,
     description,
@@ -26,7 +26,7 @@ export const updateSchoolClass = async ({
   description,
   teacherId,
 }) => {
-  const response = await api.put(`/admins/school/classes/${id}`, {
+  const response = await api.put(`/school/classes/${id}`, {
     level,
     section,
     description,
@@ -36,20 +36,20 @@ export const updateSchoolClass = async ({
 };
 
 export const getSchoolClassStudents = async ({ id }) => {
-  const response = await api.get(`/admins/school/classes/${id}/students`);
+  const response = await api.get(`/school/classes/${id}/students`);
   return response.data;
 };
 
 export const getStudentsAvailableForSchoolClassAssign = async ({ id }) => {
   const response = await api.get(
-    `/admins/school/classes/${id}/students/assign`
+    `/school/classes/${id}/students/assign`
   );
   return response.data;
 };
 
 export const assignClassForStudents = async ({ id, studentsIds }) => {
   const response = await api.put(
-    `/admins/school/classes/${id}/students/assign`,
+    `/school/classes/${id}/students/assign`,
     { studentsIds: studentsIds }
   );
   return response.data;
@@ -57,20 +57,20 @@ export const assignClassForStudents = async ({ id, studentsIds }) => {
 
 export const unassignClassForStudents = async ({ id, studentsIds }) => {
   const response = await api.put(
-    `/admins/school/classes/${id}/students/unassign`,
+    `/school/classes/${id}/students/unassign`,
     { studentsIds: studentsIds }
   );
   return response.data;
 };
 
 export const deleteSchoolClass = async ({ classId }) => {
-  const response = await api.delete(`/admins/school/classes/${classId}`);
+  const response = await api.delete(`/school/classes/${classId}`);
   return response.data;
 };
 
 export const createClassSubject = async ({ subjectId, classId, teacherId }) => {
   const response = await api.post(
-    `/admins/school/classes/${classId}/subjects`,
+    `/school/classes/${classId}/subjects`,
     {
       subjectId,
       teacherId,
@@ -80,13 +80,13 @@ export const createClassSubject = async ({ subjectId, classId, teacherId }) => {
 };
 
 export const getClassSubjects = async ({ id }) => {
-  const response = await api.get(`/admins/school/classes/${id}/subjects`);
+  const response = await api.get(`/school/classes/${id}/subjects`);
   return response.data;
 };
 
 export const deleteClassSubject = async ({ classId, subjectId }) => {
   const response = await api.delete(
-    `/admins/school/classes/${classId}/subjects/${subjectId}`
+    `/school/classes/${classId}/subjects/${subjectId}`
   );
   return response.data;
 };
@@ -98,7 +98,7 @@ export const updateClassSubject = async ({
   teacherId,
 }) => {
   const response = await api.put(
-    `/admins/school/classes/${classId}/subjects/${id}`,
+    `/school/classes/${classId}/subjects/${id}`,
     {
       id,
       classId,
@@ -111,31 +111,31 @@ export const updateClassSubject = async ({
 
 export const getClassSubject = async ({ classId, classSubjectId }) => {
   const response = await api.get(
-    `/admins/school/classes/${classId}/subjects/${classSubjectId}`
+    `/school/classes/${classId}/subjects/${classSubjectId}`
   );
   return response.data;
 };
 
 export const getClassSchedule = async ({ classId }) => {
-  const response = await api.get(`/admins/school/classes/${classId}/schedule`);
+  const response = await api.get(`/school/classes/${classId}/schedule`);
   return response.data;
 };
 
 export const updateClassSchedule = async ({ schedule, classId }) => {
-  const response = await api.put(`/admins/school/classes/${classId}/schedule`, {
+  const response = await api.put(`/school/classes/${classId}/schedule`, {
     schedule,
   });
   return response.data;
 };
 
 export const getClassJournals = async ({ id }) => {
-  const response = await api.get(`/admins/school/classes/${id}/journals`);
+  const response = await api.get(`/school/classes/${id}/journals`);
   return response.data;
 };
 
 export const createClassJournals = async ({ classId, classSubjectsIds }) => {
   const response = await api.post(
-    `/admins/school/classes/${classId}/journals`,
+    `/school/classes/${classId}/journals`,
     {
       classSubjectsIds,
     }
@@ -145,21 +145,21 @@ export const createClassJournals = async ({ classId, classSubjectsIds }) => {
 
 export const getClassJournal = async ({ id, journalId }) => {
   const response = await api.get(
-    `/admins/school/classes/${id}/journals/${journalId}`
+    `/school/classes/${id}/journals/${journalId}`
   );
   return response.data;
 };
 
 export const getClassJournalColumns = async ({ id, journalId }) => {
   const response = await api.get(
-    `/admins/school/classes/${id}/journals/${journalId}/columns`
+    `/school/classes/${id}/journals/${journalId}/columns`
   );
   return response.data;
 };
 
 export const getClassJournalStudentsGrades = async ({ id, journalId }) => {
   const response = await api.get(
-    `/admins/school/classes/${id}/journals/${journalId}/students_grades`
+    `/school/classes/${id}/journals/${journalId}/students_grades`
   );
   return response.data;
 };
@@ -173,7 +173,7 @@ export const upsertClassJournalStudentGrade = async ({
   grade,
 }) => {
   const response = await api.post(
-    `/admins/school/classes/${classId}/journals/${journalId}/students_grades`,
+    `/school/classes/${classId}/journals/${journalId}/students_grades`,
     {
       id: journalGradeId,
       journalId,
@@ -191,7 +191,7 @@ export const deleteClassJournalStudentGrade = async ({
   journalGradeId,
 }) => {
   const response = await api.delete(
-    `/admins/school/classes/${classId}/journals/${journalId}/students_grades/${journalGradeId}`
+    `/school/classes/${classId}/journals/${journalId}/students_grades/${journalGradeId}`
   );
   return response.data;
 };

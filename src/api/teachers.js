@@ -1,7 +1,7 @@
-import api from "../api";
+import api from "./api";
 
 export const getSchoolTeachers = async () => {
-  const response = await api.get(`/admins/school/teachers`);
+  const response = await api.get(`/school/teachers`);
   return response.data;
 };
 
@@ -15,7 +15,7 @@ export const createSchoolTeacher = async ({
   gender,
   degree,
 }) => {
-  const response = await api.post(`/admins/school/teachers`, {
+  const response = await api.post(`/school/teachers`, {
     name,
     surname,
     email,
@@ -39,7 +39,7 @@ export const updateSchoolTeacher = async ({
   gender,
   degree,
 }) => {
-  const response = await api.put(`/admins/school/teachers/${id}`, {
+  const response = await api.put(`/school/teachers/${id}`, {
     name,
     surname,
     email,
@@ -53,11 +53,11 @@ export const updateSchoolTeacher = async ({
 };
 
 export const deleteSchoolTeacher = async ({ teacherId }) => {
-  const response = await api.delete(`/admins/school/teachers/${teacherId}`);
+  const response = await api.delete(`/school/teachers/${teacherId}`);
   return response.data;
 };
 
 export const getSchoolTeacher = async ({ id }) => {
-  const response = await api.get(`/admins/school/teachers/${id}`);
+  const response = await api.get(`/school/teachers/${id}`);
   return response.data;
 };

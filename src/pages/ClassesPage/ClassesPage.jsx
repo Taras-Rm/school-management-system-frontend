@@ -1,6 +1,6 @@
 import { Breadcrumb, Button, Col, Row, Spin, Typography, message } from "antd";
 import React, { useState } from "react";
-import { getSchoolClasses } from "../../api/admins/classes";
+import { getSchoolClasses } from "../../api/classes";
 import ClassCard from "./components/ClassCard";
 import { useQuery } from "react-query";
 import CreateClassModal from "./components/CreateClassModal";

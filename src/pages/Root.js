@@ -30,16 +30,13 @@ function Root() {
 
         <Route
           element={
-            <PrivateRoute role={"admin"}>
+            <PrivateRoute roles={["admin", "teacher"]}>
               <Layout />
             </PrivateRoute>
           }
         >
           <Route path={routes.schoolPage} element={<SchoolPage />} />
-          <Route
-            path={routes.editSchoolPage}
-            element={<EditSchoolPage />}
-          />
+          <Route path={routes.editSchoolPage} element={<EditSchoolPage />} />
 
           <Route path={routes.teachersPage} element={<TeachersPage />} />
           <Route path={routes.studentsPage} element={<StudentsPage />} />
@@ -55,10 +52,7 @@ function Root() {
             element={<EditCallSchedulePage />}
           />
 
-          <Route
-            path={routes.classSubjectsPage}
-            element={<ClassSubjects />}
-          />
+          <Route path={routes.classSubjectsPage} element={<ClassSubjects />} />
           <Route
             path={routes.classSchedulePage}
             element={<ClassSchedulePage />}

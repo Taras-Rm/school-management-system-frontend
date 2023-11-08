@@ -8,7 +8,7 @@ import {
   getClassJournalColumns,
   getClassJournalStudentsGrades,
   getSchoolClass,
-} from "../../api/admins/classes";
+} from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
 
 function ClassJournalPage() {

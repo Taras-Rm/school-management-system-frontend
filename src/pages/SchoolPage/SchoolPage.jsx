@@ -19,8 +19,8 @@ import EditStudyPeriodModal from "./components/EditStudyPeriod";
 import { formatDate } from "../../utils/date";
 import EditSchoolDrawer from "../../components/EditSchoolDrawer/EditSchoolDrawer";
 import SchoolCardInfo from "../../components/SchoolCardInfo/SchoolCardInfo";
-import { getAdminSchool, getSchoolBasicInfo } from "../../api/admins/school";
-import { getSchoolStudyPeriods } from "../../api/admins/studyPeriods";
+import { getAdminSchool, getSchoolBasicInfo } from "../../api/school";
+import { getSchoolStudyPeriods } from "../../api/studyPeriods";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);

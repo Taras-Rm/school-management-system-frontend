@@ -16,7 +16,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createStudyPeriod,
   getSchoolStudyPeriods,
-} from "../../../api/admins/studyPeriods";
+} from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
 
 function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {

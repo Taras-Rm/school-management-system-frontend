@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import { getClassJournals, getSchoolClass } from "../../api/admins/classes";
+import { getClassJournals, getSchoolClass } from "../../api/classes";
 import CreateClassJournalsModal from "./components/CreateClassJournalsModal";
 import JournalCard from "./components/JournalCard";
 

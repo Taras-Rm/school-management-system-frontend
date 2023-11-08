@@ -3,8 +3,8 @@ import React from "react";
 import { Link, generatePath, useNavigate, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import { getClassSchedule, getSchoolClass } from "../../api/admins/classes";
-import { getSchoolCallsSchedule } from "../../api/admins/callsSchedule";
+import { getClassSchedule, getSchoolClass } from "../../api/classes";
+import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { prepareScheduleTable } from "./classScheduleHelper";
 import { formatTime } from "../../utils/date";
 

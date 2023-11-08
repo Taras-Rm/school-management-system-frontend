@@ -2,8 +2,8 @@ import { Form, Modal, Spin, Table, Typography, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { createClassJournals, getClassSubjects } from "../../../api/admins/classes";
-import { getSchoolActiveStudyPeriod } from "../../../api/admins/studyPeriods";
+import { createClassJournals, getClassSubjects } from "../../../api/classes";
+import { getSchoolActiveStudyPeriod } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
 
 function CreateClassJournalsModal({

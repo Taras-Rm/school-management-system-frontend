@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "./api";
 
 export const createStudyPeriod = async ({
   startDate,
@@ -14,11 +14,11 @@ export const createStudyPeriod = async ({
 };
 
 export const getSchoolStudyPeriods = async () => {
-  const response = await api.get(`/admins/school/study_periods`);
+  const response = await api.get(`/school/study_periods`);
   return response.data;
 };
 
 export const getSchoolActiveStudyPeriod = async () => {
-  const response = await api.get(`/admins/school/study_periods/active`);
+  const response = await api.get(`/school/study_periods/active`);
   return response.data;
 };

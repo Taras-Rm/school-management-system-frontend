@@ -5,7 +5,7 @@ import React from "react";
 import {
   assignClassForStudents,
   getStudentsAvailableForSchoolClassAssign,
-} from "../../../api/admins/classes";
+} from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 function AssignClassForStudentsModal({

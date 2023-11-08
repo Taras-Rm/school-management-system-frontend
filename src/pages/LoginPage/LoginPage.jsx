@@ -13,13 +13,8 @@ function LoginPage() {
       message.success("Logined");
 
       let role = form.getFieldValue("role");
-      let path =
-        role === "admin"
-          ? routes.schoolPage
-          : role === "teacher"
-          ? routes.teacherSchoolPage
-          : "";
-      window.location.href = path;
+
+      window.location.href = routes.schoolPage;
     },
     onError: () => {
       message.error("Failed to login");
