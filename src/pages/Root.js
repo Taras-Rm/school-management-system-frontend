@@ -20,6 +20,8 @@ import EditCallSchedulePage from "./EditCallSchedulePage/EditCallSchedulePage";
 import ClassJournalsPage from "./ClassJournalsPage/ClassJournalsPage";
 import ClassJournalPage from "./ClassJournalPage/ClassJournalPage";
 import FirstPage from "./FirstPage/FirstPage";
+import JournalsPage from "./JournalsPage/JournalsPage";
+import JournalPage from "./JournalPage/JournalPage";
 
 function Root() {
   return (
@@ -69,6 +71,8 @@ function Root() {
             path={routes.classJournalPage}
             element={<ClassJournalPage />}
           />
+          <Route path={routes.journalsPage} element={<JournalsPage />} />
+          <Route path={routes.journalPage} element={<JournalPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

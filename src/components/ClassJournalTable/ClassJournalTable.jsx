@@ -112,6 +112,7 @@ function ClassJournalTable({
           journalId,
           "grades",
         ]);
+        queryClient.invalidateQueries(["journals", journalId, "grades"]);
       },
       onError: (err) => {
         message.error("Failed to set a grade: " + err.response.data?.message);

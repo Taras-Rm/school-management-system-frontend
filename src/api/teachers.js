@@ -66,3 +66,8 @@ export const getTeacherSchoolClasses = async ({ id }) => {
   const response = await api.get(`/school/teachers/${id}/classes`);
   return response.data;
 };
+
+export const getTeacherJournals = async ({ id }) => {
+  const response = await api.get(`/school/teachers/${id}/journals`);
+  return response.data;
+};

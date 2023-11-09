@@ -15,4 +15,6 @@ export const routes = {
   editClassSchedulePage: "/classes/:id/schedule/edit",
   classJournalsPage: "/classes/:id/journals",
   classJournalPage: "/classes/:id/journals/:journalId",
+  journalsPage: "/journals",
+  journalPage: "/journals/:id",
 };

@@ -31,6 +31,7 @@ const menuOptionsRoutes = [
   routes.classesPage,
   routes.subjectsPage,
   routes.callSchedulePage,
+  routes.journalsPage,
 ];
 
 function Layout() {
@@ -164,6 +165,13 @@ function Layout() {
           routes.callSchedulePage,
           <Link to={routes.callSchedulePage}>
             <ScheduleOutlined />
+          </Link>
+        ),
+        getItem(
+          "Journals",
+          routes.journalsPage,
+          <Link to={routes.journalsPage}>
+            <BlockOutlined />
           </Link>
         )
       );
