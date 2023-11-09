@@ -3,6 +3,7 @@ import {
   Layout as AntdLayout,
   Avatar,
   Button,
+  Image,
   Menu,
   Typography,
   message,
@@ -21,6 +22,7 @@ import { routes } from "../../pages/routes";
 import { logout, me } from "../../api/auth";
 import { useMutation, useQuery } from "react-query";
 import UserContext from "../../user-context";
+import logo from "../../assets/images/logo.png";
 
 const menuOptionsRoutes = [
   routes.schoolPage,
@@ -181,26 +183,31 @@ function Layout() {
             height: 70,
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
           }}
         >
-          <Typography.Text style={{ color: "white" }}>
-            {user?.email}
-          </Typography.Text>
-          <Avatar
-            size={"large"}
-            icon={<UserOutlined />}
-            style={{
-              backgroundColor: "#5b5959",
-              marginLeft: 20,
-            }}
-          />
-          <Button
-            style={{ marginLeft: 20 }}
-            shape="circle"
-            icon={<LogoutOutlined />}
-            onClick={() => handleLogout()}
-          />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Image src={logo} width={"45px"} />
+          </div>
+          <div>
+            <Typography.Text style={{ color: "white" }}>
+              {user?.email}
+            </Typography.Text>
+            <Avatar
+              size={"large"}
+              icon={<UserOutlined />}
+              style={{
+                backgroundColor: "#5b5959",
+                marginLeft: 20,
+              }}
+            />
+            <Button
+              style={{ marginLeft: 20 }}
+              shape="circle"
+              icon={<LogoutOutlined />}
+              onClick={() => handleLogout()}
+            />
+          </div>
         </Header>
         <AntdLayout
           hasSider
