@@ -1,7 +1,8 @@
 export function prepareClassJournalTableColumns(
   journalColumns = [],
   handleUpsertClassJournalStudentGrade,
-  handleDeleteClassJournalStudentGrade
+  handleDeleteClassJournalStudentGrade,
+  disabled
 ) {
   let columns = [];
   // student name
@@ -31,6 +32,7 @@ export function prepareClassJournalTableColumns(
         editable: true,
         dataIndex,
         title,
+        disabled,
         handleUpsertClassJournalStudentGrade,
         handleDeleteClassJournalStudentGrade,
         journalColumnId: journalColumns[i].id,

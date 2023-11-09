@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Col, Row, Spin, Typography, message } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { getSchoolClasses } from "../../api/classes";
 import ClassCard from "./components/ClassCard";
 import { useQuery } from "react-query";
@@ -7,17 +7,28 @@ import CreateClassModal from "./components/CreateClassModal";
 import { Link } from "react-router-dom";
 import { routes } from "../routes";
 import EditClassDrawer from "../../components/EditClassDrawer/EditClassDrawer";
+import UserContext from "../../user-context";
+import { getTeacherSchoolClasses } from "../../api/teachers";
 
 function ClassesPage() {
+  const { user } = useContext(UserContext);
+
   const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
 
   const [editClassId, setEditClassId] = useState(null);
 
-  const { data: classes, isLoading } = useQuery(["classes"], getSchoolClasses, {
-    onError: (error) => {
-      message.error(error);
-    },
-  });
+  const { data: classes, isLoading } = useQuery(
+    ["classes"],
+    user.role === "admin"
+      ? () => getSchoolClasses()
+      : () => getTeacherSchoolClasses({ id: user.id }),
+    {
+      onError: (error) => {
+        message.error(error);
+      },
+      enabled: !!user,
+    }
+  );
 
   if (isLoading) return <Spin spinning />;
 
@@ -41,18 +52,24 @@ function ClassesPage() {
         Classes
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsCreateClassModalOpen(true)}
-        >
-          Add class
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsCreateClassModalOpen(true)}
+          >
+            Add class
+          </Button>
+        )}
       </div>
       <Row gutter={20}>
         {classes.map((c) => (
           <Col span={6} style={{ marginBottom: 20 }} key={c.id}>
-            <ClassCard classInfo={c} setEditClassId={setEditClassId} />
+            <ClassCard
+              classInfo={c}
+              setEditClassId={setEditClassId}
+              showActions={user.role === "admin"}
+            />
           </Col>
         ))}
       </Row>

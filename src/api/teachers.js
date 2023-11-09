@@ -61,3 +61,8 @@ export const getSchoolTeacher = async ({ id }) => {
   const response = await api.get(`/school/teachers/${id}`);
   return response.data;
 };
+
+export const getTeacherSchoolClasses = async ({ id }) => {
+  const response = await api.get(`/school/teachers/${id}/classes`);
+  return response.data;
+};

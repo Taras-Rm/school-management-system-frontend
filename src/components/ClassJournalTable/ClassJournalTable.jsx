@@ -36,6 +36,7 @@ const EditableCell = ({
   handleDeleteClassJournalStudentGrade,
   record,
   journalColumnId,
+  disabled,
   ...restProps
 }) => {
   let journalGradeId = record?.grades[Number(dataIndex[1])]
@@ -44,6 +45,7 @@ const EditableCell = ({
 
   const childNode = editable ? (
     <Popconfirm
+      disabled={disabled}
       title="Please set grade"
       description={
         <div>
@@ -95,6 +97,7 @@ function ClassJournalTable({
   journalGrades,
   classId,
   journalId,
+  disabled,
 }) {
   const queryClient = useQueryClient();
 
@@ -164,7 +167,8 @@ function ClassJournalTable({
     return prepareClassJournalTableColumns(
       journalColumns,
       handleUpsertClassJournalStudentGrade,
-      handleDeleteClassJournalStudentGrade
+      handleDeleteClassJournalStudentGrade,
+      disabled
     );
   }, [journalColumns]);
 

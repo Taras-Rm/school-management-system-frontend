@@ -8,7 +8,7 @@ import {
   Typography,
   message,
 } from "antd";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -20,10 +20,14 @@ import {
 import CreateClassSubjectModal from "./components/CreateClassSubjectModal";
 import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditClassSubjectModal from "./components/EditClassSubjectModal";
+import { useContext } from "react";
+import UserContext from "../../user-context";
 
 function ClassSubjectsPage() {
   const { id } = useParams();
   const queryClient = useQueryClient();
+
+  const { user } = useContext(UserContext);
 
   const [isCreateClassSubjectModalOpen, setIsCreateClassSubjectModalOpen] =
     useState(false);
@@ -71,53 +75,58 @@ function ClassSubjectsPage() {
     };
   });
 
-  const tableColumns = [
-    {
-      title: "Subject",
-      dataIndex: "subject",
-      key: "subject",
-      render: (value, item) => {
-        return value.name;
+  const tableColumns = useMemo(() => {
+    let columns = [
+      {
+        title: "Subject",
+        dataIndex: "subject",
+        key: "subject",
+        render: (value, item) => {
+          return value.name;
+        },
       },
-    },
-    {
-      title: "Teacher",
-      dataIndex: "teacherId",
-      key: "teacherId",
-      render: (value, item) => {
-        return value ? `${item.teacher.name} ${item.teacher.surname}` : "";
+      {
+        title: "Teacher",
+        dataIndex: "teacherId",
+        key: "teacherId",
+        render: (value, item) => {
+          return value ? `${item.teacher.name} ${item.teacher.surname}` : "";
+        },
       },
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      align: "center",
-      render: (value, item) => {
-        return (
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <Tooltip title="Edit subject">
-              <EditTwoTone
-                onClick={() => setUpdateClassSubjectId(item.id)}
-                style={{ cursor: "pointer" }}
-              />
-            </Tooltip>
-            <Tooltip title="Delete subject">
-              <Popconfirm
-                title="Do you really want to delete subject ?"
-                onConfirm={() => handleDeleteClassSubject(item.id)}
-              >
-                <DeleteTwoTone
-                  twoToneColor="#eb2f96"
+    ];
+    if (user.role === "admin") {
+      columns.push({
+        title: "Action",
+        dataIndex: "action",
+        key: "action",
+        align: "center",
+        render: (value, item) => {
+          return (
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <Tooltip title="Edit subject">
+                <EditTwoTone
+                  onClick={() => setUpdateClassSubjectId(item.id)}
                   style={{ cursor: "pointer" }}
                 />
-              </Popconfirm>
-            </Tooltip>
-          </div>
-        );
-      },
-    },
-  ];
+              </Tooltip>
+              <Tooltip title="Delete subject">
+                <Popconfirm
+                  title="Do you really want to delete subject ?"
+                  onConfirm={() => handleDeleteClassSubject(item.id)}
+                >
+                  <DeleteTwoTone
+                    twoToneColor="#eb2f96"
+                    style={{ cursor: "pointer" }}
+                  />
+                </Popconfirm>
+              </Tooltip>
+            </div>
+          );
+        },
+      });
+    }
+    return columns;
+  }, [user.role]);
 
   if (isLoading) return <Spin spinning />;
 
@@ -161,13 +170,15 @@ function ClassSubjectsPage() {
           alignItems: "center",
         }}
       >
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsCreateClassSubjectModalOpen(true)}
-        >
-          Add
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsCreateClassSubjectModalOpen(true)}
+          >
+            Add
+          </Button>
+        )}
       </div>
       <Table
         columns={tableColumns}

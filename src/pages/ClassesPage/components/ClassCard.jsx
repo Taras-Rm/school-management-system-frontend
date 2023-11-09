@@ -9,7 +9,7 @@ import {
 } from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-function ClassCard({ classInfo, setEditClassId }) {
+function ClassCard({ classInfo, setEditClassId, showActions }) {
   const queryClient = useQueryClient();
 
   const { data: students, isLoading: isLoadingStudents } = useQuery(
@@ -49,21 +49,23 @@ function ClassCard({ classInfo, setEditClassId }) {
           {`${classInfo.level}-${classInfo.section}`}
         </Typography.Link>
       }
-      actions={[
-        <Link
-          style={{ width: "fit-content" }}
-          onClick={() => setEditClassId(classInfo.id)}
-        >
-          <EditOutlined />
-        </Link>,
-        <Popconfirm
-          title="Delete class"
-          description="Are you sure you want to delete a class ?"
-          onConfirm={() => handleDeleteSchoolClass(classInfo.id)}
-        >
-          <DeleteOutlined />
-        </Popconfirm>,
-      ]}
+      actions={
+        showActions && [
+          <Link
+            style={{ width: "fit-content" }}
+            onClick={() => setEditClassId(classInfo.id)}
+          >
+            <EditOutlined />
+          </Link>,
+          <Popconfirm
+            title="Delete class"
+            description="Are you sure you want to delete a class ?"
+            onConfirm={() => handleDeleteSchoolClass(classInfo.id)}
+          >
+            <DeleteOutlined />
+          </Popconfirm>,
+        ]
+      }
       bordered={false}
       loading={isLoadingStudents}
     >

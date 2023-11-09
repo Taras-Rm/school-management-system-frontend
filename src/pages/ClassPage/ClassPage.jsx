@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import {
   Breadcrumb,
   Button,
@@ -19,11 +19,14 @@ import AssignClassForStudentsModal from "./components/AssignClassForStudentsModa
 import { routes } from "../routes";
 import { Link } from "react-router-dom";
 import { CloseCircleTwoTone } from "@ant-design/icons";
+import UserContext from "../../user-context";
 
 function ClassPage() {
   const { id } = useParams();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   const [
     isAssignClassForStudentsModalOpen,
@@ -71,43 +74,49 @@ function ClassPage() {
     });
   };
 
-  const tableColumns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (value, item) => {
-        return `${value} ${item.surname}`;
+  const tableColumns = useMemo(() => {
+    let columns = [
+      {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+        render: (value, item) => {
+          return `${value} ${item.surname}`;
+        },
       },
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      render: (value, item) => {
-        return value;
+      {
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
+        render: (value, item) => {
+          return value;
+        },
       },
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      align: "center",
-      render: (_, item) => {
-        return (
-          <div>
-            <Tooltip title="Unassign student from class">
-              <CloseCircleTwoTone
-                onClick={() => handleUnassignStudentForClass(item.id)}
-                twoToneColor="#eb2f96"
-                style={{ cursor: "pointer" }}
-              />
-            </Tooltip>
-          </div>
-        );
-      },
-    },
-  ];
+    ];
+
+    if (user.role === "admin") {
+      columns.push({
+        title: "Action",
+        dataIndex: "action",
+        key: "action",
+        align: "center",
+        render: (_, item) => {
+          return (
+            <div>
+              <Tooltip title="Unassign student from class">
+                <CloseCircleTwoTone
+                  onClick={() => handleUnassignStudentForClass(item.id)}
+                  twoToneColor="#eb2f96"
+                  style={{ cursor: "pointer" }}
+                />
+              </Tooltip>
+            </div>
+          );
+        },
+      });
+    }
+    return columns;
+  }, user);
 
   const tableData = students?.map((t) => {
     return {
@@ -152,13 +161,15 @@ function ClassPage() {
         }}
       >
         <div>
-          <Button
-            type="primary"
-            style={{ backgroundColor: "green" }}
-            onClick={() => setIsAssignClassForStudentsModalOpen(true)}
-          >
-            Assign students
-          </Button>
+          {user.role === "admin" && (
+            <Button
+              type="primary"
+              style={{ backgroundColor: "green" }}
+              onClick={() => setIsAssignClassForStudentsModalOpen(true)}
+            >
+              Assign students
+            </Button>
+          )}
           <Button
             type="primary"
             style={{ backgroundColor: "green", marginLeft: 10 }}

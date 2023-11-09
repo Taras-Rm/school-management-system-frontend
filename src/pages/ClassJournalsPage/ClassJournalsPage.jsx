@@ -1,16 +1,19 @@
 import { Breadcrumb, Button, Col, Row, Spin, Typography, message } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
 import { getClassJournals, getSchoolClass } from "../../api/classes";
 import CreateClassJournalsModal from "./components/CreateClassJournalsModal";
 import JournalCard from "./components/JournalCard";
+import UserContext from "../../user-context";
 
 function ClassJournalsPage() {
   const { id } = useParams();
   const [isCreateClassJournalsModalOpen, setIsCreateClassJournalsModalOpen] =
     useState(false);
+
+  const { user } = useContext(UserContext);
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -67,18 +70,20 @@ function ClassJournalsPage() {
         {`${classData.level}-${classData.section}`} class journals
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() => setIsCreateClassJournalsModalOpen(true)}
-        >
-          Create
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() => setIsCreateClassJournalsModalOpen(true)}
+          >
+            Create
+          </Button>
+        )}
       </div>
       <Row gutter={20}>
         {classJournals.map((c) => (
           <Col span={8} style={{ marginBottom: 20 }} key={c.id}>
-            <JournalCard journalInfo={c} classId={id}/>
+            <JournalCard journalInfo={c} classId={id} />
           </Col>
         ))}
       </Row>

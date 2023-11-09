@@ -1,5 +1,5 @@
 import { Breadcrumb, Spin, Typography, message } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
@@ -10,9 +10,12 @@ import {
   getSchoolClass,
 } from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
+import UserContext from "../../user-context";
 
 function ClassJournalPage() {
   const { id, journalId } = useParams();
+
+  const { user } = useContext(UserContext);
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -112,6 +115,7 @@ function ClassJournalPage() {
         journalGrades={journalGrades}
         classId={id}
         journalId={journalId}
+        disabled={user.id !== classJournal.classSubject.teacherId}
       />
     </div>
   );

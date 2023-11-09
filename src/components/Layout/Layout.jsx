@@ -144,6 +144,13 @@ function Layout() {
           </Link>
         ),
         getItem(
+          "My Classes",
+          routes.classesPage,
+          <Link to={routes.classesPage}>
+            <BlockOutlined />
+          </Link>
+        ),
+        getItem(
           "Subjects",
           routes.subjectsPage,
           <Link to={routes.subjectsPage}>

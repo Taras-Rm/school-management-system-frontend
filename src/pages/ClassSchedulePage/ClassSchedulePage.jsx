@@ -7,10 +7,14 @@ import { getClassSchedule, getSchoolClass } from "../../api/classes";
 import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { prepareScheduleTable } from "./classScheduleHelper";
 import { formatTime } from "../../utils/date";
+import { useContext } from "react";
+import UserContext from "../../user-context";
 
 function ClassSchedulePage() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   const { data: classData, isLoading } = useQuery(
     ["classes", id],
@@ -168,15 +172,17 @@ function ClassSchedulePage() {
         {`${classData.level}-${classData.section}`} class schedule
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
-        <Button
-          type="primary"
-          style={{ backgroundColor: "green" }}
-          onClick={() =>
-            navigate(generatePath(routes.editClassSchedulePage, { id }))
-          }
-        >
-          Edit
-        </Button>
+        {user.role === "admin" && (
+          <Button
+            type="primary"
+            style={{ backgroundColor: "green" }}
+            onClick={() =>
+              navigate(generatePath(routes.editClassSchedulePage, { id }))
+            }
+          >
+            Edit
+          </Button>
+        )}
       </div>
       <Table
         columns={tableColumns}
