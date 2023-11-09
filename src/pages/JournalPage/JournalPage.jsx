@@ -3,15 +3,14 @@ import React, { useContext } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import {
-  getClassJournal,
-  getClassJournalColumns,
-  getClassJournalStudentsGrades,
-  getSchoolClass,
-} from "../../api/classes";
+import { getSchoolClass } from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
 import UserContext from "../../user-context";
-import { getJournal } from "../../api/journals";
+import {
+  getJournal,
+  getJournalColumns,
+  getJournalStudentsGrades,
+} from "../../api/journals";
 
 function JournalPage() {
   const { id } = useParams();
@@ -30,7 +29,7 @@ function JournalPage() {
 
   const { data: journalColumns, isLoading: isLoadingJournalColumns } = useQuery(
     ["journals", id, "columns"],
-    () => getClassJournalColumns({ id: journal.classId, journalId: id }),
+    () => getJournalColumns({ id }),
     {
       onError: (error) => {
         message.error(error);
@@ -41,7 +40,7 @@ function JournalPage() {
 
   const { data: journalGrades, isLoading: isLoadingJournalGrades } = useQuery(
     ["journals", id, "grades"],
-    () => getClassJournalStudentsGrades({ id: journal.classId, journalId: id }),
+    () => getJournalStudentsGrades({ id }),
     {
       onError: (error) => {
         message.error(error);

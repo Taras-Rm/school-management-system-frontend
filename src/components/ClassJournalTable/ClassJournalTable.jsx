@@ -7,10 +7,7 @@ import {
 } from "./classJournalHelper";
 import { journalGrades } from "../../utils/staticData";
 import { useMutation, useQueryClient } from "react-query";
-import {
-  deleteClassJournalStudentGrade,
-  upsertClassJournalStudentGrade,
-} from "../../api/classes";
+import { deleteJournalStudentGrade, upsertJournalStudentGrade } from "../../api/journals";
 
 const EditableContext = React.createContext(null);
 
@@ -101,8 +98,8 @@ function ClassJournalTable({
 }) {
   const queryClient = useQueryClient();
 
-  const upsertClassJournalStudentGradeMutation = useMutation(
-    upsertClassJournalStudentGrade,
+  const upsertJournalStudentGradeMutation = useMutation(
+    upsertJournalStudentGrade,
     {
       onSuccess: () => {
         queryClient.invalidateQueries([
@@ -120,14 +117,13 @@ function ClassJournalTable({
     }
   );
 
-  const handleUpsertClassJournalStudentGrade = ({
+  const handleUpsertJournalStudentGrade = ({
     journalGradeId,
     journalColumnId,
     studentId,
     grade,
   }) => {
-    upsertClassJournalStudentGradeMutation.mutate({
-      classId,
+    upsertJournalStudentGradeMutation.mutate({
       journalGradeId,
       journalId: Number(journalId),
       journalColumnId,
@@ -136,8 +132,8 @@ function ClassJournalTable({
     });
   };
 
-  const deleteClassJournalStudentGradeMutation = useMutation(
-    deleteClassJournalStudentGrade,
+  const deleteJournalStudentGradeMutation = useMutation(
+    deleteJournalStudentGrade,
     {
       onSuccess: () => {
         queryClient.invalidateQueries([
@@ -147,6 +143,7 @@ function ClassJournalTable({
           journalId,
           "grades",
         ]);
+        queryClient.invalidateQueries(["journals", journalId, "grades"]);
       },
       onError: (err) => {
         message.error(
@@ -156,9 +153,8 @@ function ClassJournalTable({
     }
   );
 
-  const handleDeleteClassJournalStudentGrade = ({ journalGradeId }) => {
-    deleteClassJournalStudentGradeMutation.mutate({
-      classId,
+  const handleDeleteJournalStudentGrade = ({ journalGradeId }) => {
+    deleteJournalStudentGradeMutation.mutate({
       journalGradeId,
       journalId: Number(journalId),
     });
@@ -167,8 +163,8 @@ function ClassJournalTable({
   const tableColumns = useMemo(() => {
     return prepareClassJournalTableColumns(
       journalColumns,
-      handleUpsertClassJournalStudentGrade,
-      handleDeleteClassJournalStudentGrade,
+      handleUpsertJournalStudentGrade,
+      handleDeleteJournalStudentGrade,
       disabled
     );
   }, [journalColumns]);

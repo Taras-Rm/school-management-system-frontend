@@ -3,14 +3,14 @@ import React, { useContext } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import {
-  getClassJournal,
-  getClassJournalColumns,
-  getClassJournalStudentsGrades,
-  getSchoolClass,
-} from "../../api/classes";
+import { getClassJournal, getSchoolClass } from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
 import UserContext from "../../user-context";
+import {
+  getJournal,
+  getJournalColumns,
+  getJournalStudentsGrades,
+} from "../../api/journals";
 
 function ClassJournalPage() {
   const { id, journalId } = useParams();
@@ -29,7 +29,7 @@ function ClassJournalPage() {
 
   const { data: classJournal, isLoading: isLoadingJournal } = useQuery(
     ["classes", id, "journals", journalId],
-    () => getClassJournal({ id, journalId }),
+    () => getJournal({ id: journalId }),
     {
       onError: (error) => {
         message.error(error);
@@ -39,7 +39,7 @@ function ClassJournalPage() {
 
   const { data: journalColumns, isLoading: isLoadingJournalColumns } = useQuery(
     ["classes", id, "journals", journalId, "columns"],
-    () => getClassJournalColumns({ id, journalId }),
+    () => getJournalColumns({ id: journalId }),
     {
       onError: (error) => {
         message.error(error);
@@ -49,7 +49,7 @@ function ClassJournalPage() {
 
   const { data: journalGrades, isLoading: isLoadingJournalGrades } = useQuery(
     ["classes", id, "journals", journalId, "grades"],
-    () => getClassJournalStudentsGrades({ id, journalId }),
+    () => getJournalStudentsGrades({ id: journalId }),
     {
       onError: (error) => {
         message.error(error);
