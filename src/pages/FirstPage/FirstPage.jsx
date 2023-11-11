@@ -31,8 +31,18 @@ function FirstPage() {
         </Button>
         <Typography.Text className={s.boxRight_description}>
           If you want to register your school in the system, you should contant
-          with system administration team.
+          with system administration team
         </Typography.Text>
+        <Typography.Text strong style={{ margin: "20px 0", fontSize: 20 }}>
+          OR
+        </Typography.Text>
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => navigate(generatePath(routes.registerPage))}
+        >
+          Register on my own
+        </Button>
       </div>
     </div>
   );

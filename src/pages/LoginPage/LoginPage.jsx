@@ -11,9 +11,6 @@ function LoginPage() {
     onSuccess: (data) => {
       localStorage.setItem("authToken", data.token);
       message.success("Logined");
-
-      let role = form.getFieldValue("role");
-
       window.location.href = routes.schoolPage;
     },
     onError: () => {

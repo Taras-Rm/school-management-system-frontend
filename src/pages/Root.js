@@ -22,12 +22,14 @@ import ClassJournalPage from "./ClassJournalPage/ClassJournalPage";
 import FirstPage from "./FirstPage/FirstPage";
 import JournalsPage from "./JournalsPage/JournalsPage";
 import JournalPage from "./JournalPage/JournalPage";
+import RegisterPage from "./RegisterPage/RegisterPage";
 
 function Root() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={routes.loginPage} element={<LoginPage />} />
+        <Route path={routes.registerPage} element={<RegisterPage />} />
         <Route path={routes.firstPage} element={<FirstPage />} />
 
         <Route
