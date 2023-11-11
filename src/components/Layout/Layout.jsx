@@ -195,7 +195,7 @@ function Layout() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Image src={logo} width={"45px"} />
+            <Image src={logo} width={"45px"} preview={false} />
           </div>
           <div>
             <Typography.Text style={{ color: "white" }}>
