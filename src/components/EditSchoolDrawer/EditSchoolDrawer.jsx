@@ -14,7 +14,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useForm } from "antd/es/form/Form";
 import { getAdminSchool, updateSchool } from "../../api/school";
 
-function EditSchoolDrawer({ isOpen, onClose }) {
+function EditSchoolDrawer({ t, isOpen, onClose }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -55,7 +55,7 @@ function EditSchoolDrawer({ isOpen, onClose }) {
 
   return (
     <Drawer
-      title="Edit school info"
+      title={t("forms.editSchool.title")}
       open={isOpen}
       getContainer={false}
       onClose={onDrawerClose}
@@ -64,9 +64,9 @@ function EditSchoolDrawer({ isOpen, onClose }) {
       destroyOnClose
       extra={
         <Space>
-          <Button onClick={onDrawerClose}>Cancel</Button>
+          <Button onClick={onDrawerClose}>{t("buttons.cancel")}</Button>
           <Button onClick={() => form.submit()} type="primary">
-            Update
+            {t("buttons.update")}
           </Button>
         </Space>
       }
@@ -84,10 +84,10 @@ function EditSchoolDrawer({ isOpen, onClose }) {
             <Col span={24}>
               <Form.Item
                 name={"name"}
-                label="Name"
+                label={t("formFields.name")}
                 rules={[{ required: true }]}
               >
-                <Input />
+                <Input placeholder={t("formFields.name")} />
               </Form.Item>
             </Col>
           </Row>

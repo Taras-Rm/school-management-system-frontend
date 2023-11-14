@@ -19,10 +19,11 @@ import {
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../pages/routes";
-import { logout, me } from "../../api/auth";
-import { useMutation, useQuery } from "react-query";
+import { logout } from "../../api/auth";
+import { useMutation } from "react-query";
 import UserContext from "../../user-context";
 import logo from "../../assets/images/logo.png";
+import { useTranslation } from "react-i18next";
 
 const menuOptionsRoutes = [
   routes.schoolPage,
@@ -40,6 +41,8 @@ function Layout() {
   const { user } = useContext(UserContext);
 
   const [selecteMenuItem, setSelecteMenuItem] = useState(location.pathname);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     let path = location.pathname;
@@ -77,7 +80,7 @@ function Layout() {
     if (user.role === "admin") {
       availableItems.push(
         getItem(
-          "School",
+          t("common.school"),
           routes.schoolPage,
           <Link to={routes.schoolPage}>
             <HomeOutlined />
@@ -87,35 +90,35 @@ function Layout() {
       if (user.schoolId) {
         availableItems.push(
           getItem(
-            "Teachers",
+            t("common.teachers"),
             routes.teachersPage,
             <Link to={routes.teachersPage}>
               <UserOutlined />
             </Link>
           ),
           getItem(
-            "Students",
+            t("common.students"),
             routes.studentsPage,
             <Link to={routes.studentsPage}>
               <ContactsOutlined />
             </Link>
           ),
           getItem(
-            "Classes",
+            t("common.classes"),
             routes.classesPage,
             <Link to={routes.classesPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
-            "Subjects",
+            t("common.subjects"),
             routes.subjectsPage,
             <Link to={routes.subjectsPage}>
               <BlockOutlined />
             </Link>
           ),
           getItem(
-            "Schedule",
+            t("common.schedule"),
             routes.callSchedulePage,
             <Link to={routes.callSchedulePage}>
               <ScheduleOutlined />
@@ -126,49 +129,49 @@ function Layout() {
     } else if (user.role === "teacher") {
       availableItems.push(
         getItem(
-          "School",
+          t("common.school"),
           routes.schoolPage,
           <Link to={routes.schoolPage}>
             <HomeOutlined />
           </Link>
         ),
         getItem(
-          "Teachers",
+          t("common.teachers"),
           routes.teachersPage,
           <Link to={routes.teachersPage}>
             <UserOutlined />
           </Link>
         ),
         getItem(
-          "Students",
+          t("common.students"),
           routes.studentsPage,
           <Link to={routes.studentsPage}>
             <ContactsOutlined />
           </Link>
         ),
         getItem(
-          "My Classes",
+          t("common.myClasses"),
           routes.classesPage,
           <Link to={routes.classesPage}>
             <BlockOutlined />
           </Link>
         ),
         getItem(
-          "Subjects",
+          t("common.subjects"),
           routes.subjectsPage,
           <Link to={routes.subjectsPage}>
             <BlockOutlined />
           </Link>
         ),
         getItem(
-          "Schedule",
+          t("common.schedule"),
           routes.callSchedulePage,
           <Link to={routes.callSchedulePage}>
             <ScheduleOutlined />
           </Link>
         ),
         getItem(
-          "Journals",
+          t("common.journals"),
           routes.journalsPage,
           <Link to={routes.journalsPage}>
             <BlockOutlined />

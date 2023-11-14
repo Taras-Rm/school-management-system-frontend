@@ -19,9 +19,8 @@ import {
 } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
 
-function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
+function EditStudyPeriodModal({ t, isOpen, setIsEditStudyPeriodModalOpen }) {
   const queryClient = useQueryClient();
-  const [form] = useForm();
   const [newPeriodForm] = useForm();
 
   const [isAddNewPeriodOpen, setIsAddNewPeriodOpen] = useState(false);
@@ -62,11 +61,13 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
     <Modal
       open={isOpen}
       onCancel={() => setIsEditStudyPeriodModalOpen(false)}
-      title="Edit study period"
+      title={t("forms.editStudyPeriod.title")}
       footer={null}
     >
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Typography style={{ marginRight: 10 }}>Period</Typography>
+        <Typography style={{ marginRight: 10 }}>
+          {t("formFields.period")}
+        </Typography>
         <Select
           loading={isStudyPeriodsLoading}
           value={studyPeriods.find((sp) => sp.isActive)?.id}
@@ -81,7 +82,9 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
         />
       </div>
       <div style={{ display: "flex" }}>
-        <Typography style={{ marginRight: 10 }}>Add new period</Typography>
+        <Typography style={{ marginRight: 10 }}>
+          {t("forms.editStudyPeriod.addNew")}
+        </Typography>
         <Switch
           checked={isAddNewPeriodOpen}
           onChange={(e) => setIsAddNewPeriodOpen(e)}
@@ -103,23 +106,29 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
             <div style={{ display: "flex" }}>
               <Form.Item
                 name={"startDate"}
-                label="Start date"
+                label={t("formFields.startDate")}
                 rules={[{ required: true }]}
                 style={{ width: "100%" }}
               >
-                <DatePicker style={{ width: "100%" }} />
+                <DatePicker
+                  style={{ width: "100%" }}
+                  placeholder={t("formFields.selectDate")}
+                />
               </Form.Item>
               <Form.Item
                 name={"endDate"}
-                label="End date"
+                label={t("formFields.endDate")}
                 rules={[{ required: true }]}
                 style={{ width: "100%", marginLeft: 10 }}
               >
-                <DatePicker style={{ width: "100%" }} />
+                <DatePicker
+                  style={{ width: "100%" }}
+                  placeholder={t("formFields.selectDate")}
+                />
               </Form.Item>
             </div>
             <Form.Item name={"incrementClassesLevels"} valuePropName="checked">
-              <Checkbox>Increment classes levels</Checkbox>
+              <Checkbox>{t("forms.editStudyPeriod.increment")}</Checkbox>
             </Form.Item>
             <Form.Item>
               <Button
@@ -127,7 +136,7 @@ function EditStudyPeriodModal({ isOpen, setIsEditStudyPeriodModalOpen }) {
                 htmlType="submit"
                 style={{ width: "25%", float: "right" }}
               >
-                Set period
+                {t("buttons.set")}
               </Button>
             </Form.Item>
           </Spin>

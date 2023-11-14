@@ -22,6 +22,7 @@ import SchoolCardInfo from "../../components/SchoolCardInfo/SchoolCardInfo";
 import { getAdminSchool, getSchoolBasicInfo } from "../../api/school";
 import { getSchoolStudyPeriods } from "../../api/studyPeriods";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -97,6 +98,8 @@ function SchoolPage() {
     }
   );
 
+  const { t } = useTranslation();
+
   if (isLoading || isLoadingSchoolBasicInfo) {
     return <Spin spinning />;
   }
@@ -114,12 +117,16 @@ function SchoolPage() {
           <Breadcrumb
             items={[
               {
-                title: <Link to={routes.schoolPage}>School</Link>,
+                title: (
+                  <Link to={routes.schoolPage}>
+                    {t("pages.school.breadcrumb.school")}
+                  </Link>
+                ),
               },
             ]}
           />
           <Typography.Title level={2} style={{ margin: "15px 0" }}>
-            {school.name} school
+            {school.name}
           </Typography.Title>
           <div style={{ marginBottom: 20 }}>
             {user.role === "admin" && (
@@ -128,7 +135,7 @@ function SchoolPage() {
                 style={{ backgroundColor: "green" }}
                 onClick={() => setIsEditSchoolDrawer(true)}
               >
-                Edit school
+                {t("buttons.change")}
               </Button>
             )}
           </div>
@@ -156,14 +163,14 @@ function SchoolPage() {
                         type="secondary"
                         style={{ fontSize: 18 }}
                       >
-                        Study period
+                        {t("common.studyPeriod")}
                       </Typography.Text>
                       {user.role === "admin" && (
                         <Button
                           type="primary"
                           onClick={() => setIsEditStudyPeriodModalOpen(true)}
                         >
-                          Change
+                          {t("buttons.change")}
                         </Button>
                       )}
                     </div>
@@ -181,35 +188,41 @@ function SchoolPage() {
               <Col span={12} />
               <Col span={6}>
                 <SchoolCardInfo
-                  title={"Teachers"}
+                  t={t}
+                  title={t("common.teachers")}
                   count={schoolBasicInfo.teachersCount}
                 />
               </Col>
               <Col span={6}>
                 <SchoolCardInfo
-                  title={"Classes"}
+                  t={t}
+                  title={t("common.classes")}
                   count={schoolBasicInfo.classesCount}
                 />
               </Col>
               <Col span={6}>
                 <SchoolCardInfo
-                  title={"Students"}
+                  t={t}
+                  title={t("common.students")}
                   count={schoolBasicInfo.studentsCount}
                 />
               </Col>
               <Col span={6}>
                 <SchoolCardInfo
-                  title={"Subjects"}
+                  t={t}
+                  title={t("common.subjects")}
                   count={schoolBasicInfo.subjectsCount}
                 />
               </Col>
             </Row>
           </div>
           <EditStudyPeriodModal
+            t={t}
             isOpen={isEditStudyPeriodModalOpen}
             setIsEditStudyPeriodModalOpen={setIsEditStudyPeriodModalOpen}
           />
           <EditSchoolDrawer
+            t={t}
             isOpen={!!isEditSchoolDrawer}
             onClose={() => setIsEditSchoolDrawer(false)}
           />

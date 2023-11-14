@@ -3,6 +3,8 @@ import "./App.css";
 import Root from "./pages/Root";
 import { UserProvider } from "./user-context";
 
+import './i18n/i18n.js'
+
 const queryClient = new QueryClient();
 
 function App() {

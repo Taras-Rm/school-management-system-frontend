@@ -1,7 +1,7 @@
 import { Card, Typography } from "antd";
 import React from "react";
 
-function SchoolCardInfo({ title, count }) {
+function SchoolCardInfo({ t, title, count }) {
   return (
     <Card
       title={
@@ -13,7 +13,10 @@ function SchoolCardInfo({ title, count }) {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {(count || count == 0) && (
           <>
-            <Typography.Text style={{ fontSize: 26 }}>Count:</Typography.Text>
+            <Typography.Text style={{ fontSize: 26 }}>
+              {" "}
+              {t("common.count")}:
+            </Typography.Text>
             <Typography.Text style={{ fontSize: 26 }}>{count}</Typography.Text>
           </>
         )}
