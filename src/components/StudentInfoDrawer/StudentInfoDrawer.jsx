@@ -8,7 +8,7 @@ const DescriptionItem = ({ title, content }) => (
   </div>
 );
 
-function StudentInfoDrawer({ isOpen, onClose, student = {} }) {
+function StudentInfoDrawer({ t, isOpen, onClose, student = {} }) {
   return (
     <Drawer
       open={isOpen}
@@ -17,19 +17,25 @@ function StudentInfoDrawer({ isOpen, onClose, student = {} }) {
       width={600}
       closable={false}
     >
-      <p style={{ fontSize: 20 }}>Profile</p>
+      <p style={{ fontSize: 20 }}>{t("formFields.profile")}</p>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="Name" content={student.name} />
+          <DescriptionItem
+            title={t("formFields.name")}
+            content={student.name}
+          />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Surname" content={student.surname} />
+          <DescriptionItem
+            title={t("formFields.surname")}
+            content={student.surname}
+          />
         </Col>
       </Row>
       <Row>
         <Col span={12}>
           <DescriptionItem
-            title="Birthday"
+            title={t("formFields.dob")}
             content={
               student.dob === "0001-01-01T00:00:00Z"
                 ? ""
@@ -38,20 +44,26 @@ function StudentInfoDrawer({ isOpen, onClose, student = {} }) {
           />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Gender" content={student.gender} />
+          <DescriptionItem
+            title={t("formFields.gender")}
+            content={student.gender}
+          />
         </Col>
       </Row>
       <Row>
         <Col span={24}>
-          <DescriptionItem title="Address" content={student.address} />
+          <DescriptionItem
+            title={t("formFields.address")}
+            content={student.address}
+          />
         </Col>
       </Row>
       <Divider />
-      <p style={{ fontSize: 20 }}>Contacts</p>
+      <p style={{ fontSize: 20 }}>{t("formFields.contacts")}</p>
       <Row>
         <Col span={12}>
           <DescriptionItem
-            title="Class"
+            title={t("formFields.class")}
             content={
               student.class
                 ? `${student.class.level}-${student.class.section}`
@@ -61,13 +73,19 @@ function StudentInfoDrawer({ isOpen, onClose, student = {} }) {
         </Col>
       </Row>
       <Divider />
-      <p style={{ fontSize: 20 }}>Contacts</p>
+      <p style={{ fontSize: 20 }}>{t("formFields.contacts")}</p>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="Email" content={student.email} />
+          <DescriptionItem
+            title={t("formFields.email")}
+            content={student.email}
+          />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Phone Number" content={student.phone} />
+          <DescriptionItem
+            title={t("formFields.phone")}
+            content={student.phone}
+          />
         </Col>
       </Row>
     </Drawer>

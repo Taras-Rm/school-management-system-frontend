@@ -28,6 +28,7 @@ const resources = {
         profile: "Profile",
         speciality: "Speciality",
         contacts: "Contacts",
+        class: "Class"
       },
       common: {
         school: "School",
@@ -60,6 +61,12 @@ const resources = {
         editTeacher: {
           title: "Edit teacher information",
         },
+        addStudent: {
+          title: "Add new student"
+        },
+        editStudent: {
+          title: "Edit student information"
+        }
       },
       tables: {
         name: "Name",
@@ -67,6 +74,7 @@ const resources = {
         action: "Action",
         edit: "Edit",
         delete: "Delete",
+        class: "Class"
       },
       pages: {
         school: {
@@ -84,6 +92,16 @@ const resources = {
             deleteTeacherConfirm: "Do you really want to delete a teacher ?",
           },
         },
+        students: {
+          breadcrumb: {
+            students: "Students",
+          },
+          title: "Students",
+          addStudentBtn: "Add student",
+          table: {
+            deleteStudentConfirm: "Do you really want to delete a student ?",
+          },
+        }
       },
     },
   },
@@ -113,6 +131,7 @@ const resources = {
         profile: "Профіль",
         speciality: "Спеціальність",
         contacts: "Контакти",
+        class: "Клас"
       },
       common: {
         school: "Школа",
@@ -144,6 +163,12 @@ const resources = {
         editTeacher: {
           title: "Редагувати інформацію про вчителя",
         },
+        addStudent: {
+          title: "Додати нового учня"
+        },
+        editStudent: {
+          title: "Редагувати інформацію про учня"
+        }
       },
       tables: {
         name: "Назва",
@@ -151,6 +176,7 @@ const resources = {
         action: "Дія",
         edit: "Редагувати",
         delete: "Видалити",
+        class: "Клас"
       },
       pages: {
         school: {
@@ -170,6 +196,16 @@ const resources = {
             deleteTeacherConfirm: "Ви справді бажаєте видалити вчителя ?",
           },
         },
+        students: {
+          breadcrumb: {
+            students: "Учні",
+          },
+          title: "Учні",
+          addStudentBtn: "Додати учня",
+          table: {
+            deleteStudentConfirm: "Ви справді бажаєте видалити учня ?",
+          },
+        }
       },
     },
   },

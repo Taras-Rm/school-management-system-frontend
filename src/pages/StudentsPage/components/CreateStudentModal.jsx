@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { createSchoolStudent } from "../../../api/students";
 import { genderOptions } from "../../../utils/staticData";
 
-function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
+function CreateStudentModal({ t, isOpen, setIsCreateStudentModalOpen }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -38,15 +38,16 @@ function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
     <Modal
       open={isOpen}
       onCancel={() => setIsCreateStudentModalOpen(false)}
-      title="Create student"
-      okText={"Create student"}
+      title={t("forms.addStudent.title")}
+      okText={t("buttons.add")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form form={form} onFinish={handleCreateStudent} layout="vertical">
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"name"}
-            label="Name"
+            label={t("formFields.name")}
             rules={[{ required: true }]}
             style={{ flex: 1 }}
           >
@@ -54,7 +55,7 @@ function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
           </Form.Item>
           <Form.Item
             name={"surname"}
-            label="Surname"
+            label={t("formFields.surname")}
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
@@ -64,14 +65,14 @@ function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"dob"}
-            label={"Date of birth"}
+            label={t("formFields.dob")}
             rules={[{ required: true }]}
           >
-            <DatePicker />
+            <DatePicker placeholder={t("formFields.selectDate")} />
           </Form.Item>
           <Form.Item
             name={"gender"}
-            label={"Gender"}
+            label={t("formFields.gender")}
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
@@ -80,20 +81,20 @@ function CreateStudentModal({ isOpen, setIsCreateStudentModalOpen }) {
         </div>
         <Form.Item
           name={"phone"}
-          label="Phone"
+          label={t("formFields.phone")}
           rules={[{ required: true, max: 10, min: 10 }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name={"email"}
-          label="Email"
+          label={t("formFields.email")}
           rules={[{ required: true, type: "email" }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name={"address"} label="Adress">
-          <Input placeholder="City, Street" />
+        <Form.Item name={"address"} label={t("formFields.address")}>
+          <Input placeholder={t("formFields.address")} />
         </Form.Item>
       </Form>
     </Modal>

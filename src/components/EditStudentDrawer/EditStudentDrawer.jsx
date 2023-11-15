@@ -13,13 +13,12 @@ import {
 } from "antd";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
 import dayjs from "dayjs";
-import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
+import { genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { getSchoolStudent, updateSchoolStudent } from "../../api/students";
 
-function EditStudentDrawer({ isOpen, onClose, id }) {
+function EditStudentDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -28,7 +27,7 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
     onClose();
   };
 
-  const { data: student, isLoading: isLoadingStudent } = useQuery(
+  const { isLoading: isLoadingStudent } = useQuery(
     ["students", id],
     () => getSchoolStudent({ id }),
     {
@@ -71,7 +70,7 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
 
   return (
     <Drawer
-      title="Edit student info"
+      title={t("forms.editStudent.title")}
       open={isOpen}
       getContainer={false}
       onClose={onDrawerClose}
@@ -80,9 +79,9 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
       destroyOnClose
       extra={
         <Space>
-          <Button onClick={onDrawerClose}>Cancel</Button>
+          <Button onClick={onDrawerClose}>{t("buttons.cancel")}</Button>
           <Button onClick={() => form.submit()} type="primary">
-            Update
+            {t("buttons.update")}
           </Button>
         </Space>
       }
@@ -100,19 +99,19 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"name"}
-                label="Name"
+                label={t("formFields.name")}
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Name" />
+                <Input placeholder={t("formFields.name")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"surname"}
-                label="Surname"
+                label={t("formFields.surname")}
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Surname" />
+                <Input placeholder={t("formFields.surname")} />
               </Form.Item>
             </Col>
           </Row>
@@ -120,16 +119,16 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"dob"}
-                label="Birthday"
+                label={t("formFields.dob")}
                 rules={[{ required: true }]}
               >
-                <DatePicker placeholder="Birthday" />
+                <DatePicker placeholder={t("formFields.selectDate")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"gender"}
-                label="Gender"
+                label={t("formFields.gender")}
                 rules={[{ required: true }]}
               >
                 <Select options={genderOptions} />
@@ -140,26 +139,26 @@ function EditStudentDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"phone"}
-                label="Phone"
+                label={t("formFields.phone")}
                 rules={[{ required: true, max: 10, min: 10 }]}
               >
-                <Input placeholder="Phone" />
+                <Input placeholder={t("formFields.phone")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"email"}
-                label="Email"
+                label={t("formFields.email")}
                 rules={[{ required: true, type: "email" }]}
               >
-                <Input placeholder="Email" />
+                <Input placeholder={"test@school.com"} />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name={"address"} label="Address">
-                <Input placeholder="Address" />
+              <Form.Item name={"address"} label={t("formFields.address")}>
+                <Input placeholder={t("formFields.address")} />
               </Form.Item>
             </Col>
           </Row>
