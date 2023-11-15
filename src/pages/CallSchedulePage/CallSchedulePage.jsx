@@ -6,8 +6,10 @@ import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { useQuery } from "react-query";
 import { formatTime } from "../../utils/date";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function CallSchedulePage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { user } = useContext(UserContext);
@@ -20,7 +22,7 @@ function CallSchedulePage() {
     });
   const tableColumns = [
     {
-      title: "Lesson",
+      title: t("tables.number"),
       dataIndex: "orderNumber",
       key: "orderNumber",
       align: "center",
@@ -30,7 +32,7 @@ function CallSchedulePage() {
       },
     },
     {
-      title: "Time",
+      title: t("tables.time"),
       dataIndex: "time",
       key: "time",
       align: "center",
@@ -62,12 +64,16 @@ function CallSchedulePage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.callSchedulePage}>Schedule</Link>,
+            title: (
+              <Link to={routes.callSchedulePage}>
+                {t("pages.callsSchedule.breadcrumb.callsSchedule")}
+              </Link>
+            ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Schedule
+        {t("pages.callsSchedule.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -76,7 +82,7 @@ function CallSchedulePage() {
             style={{ backgroundColor: "green" }}
             onClick={() => navigate(routes.editCallSchedulePage)}
           >
-            Edit schedule
+            {t("pages.callsSchedule.editCallsScheduleBtn")}
           </Button>
         )}
       </div>

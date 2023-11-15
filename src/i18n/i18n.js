@@ -35,6 +35,8 @@ const resources = {
         description: "Description",
         teacher: "Teacher",
         select: "Select",
+        startTime: "Start",
+        endTime: "Finish",
       },
       common: {
         school: "School",
@@ -94,6 +96,8 @@ const resources = {
         edit: "Edit",
         delete: "Delete",
         class: "Class",
+        number: "Number",
+        time: "Time",
       },
       pages: {
         school: {
@@ -143,6 +147,20 @@ const resources = {
             deleteSubjectConfirm: "Do you really want to delete a subject ?",
           },
         },
+        callsSchedule: {
+          breadcrumb: {
+            callsSchedule: "Calls schedule",
+          },
+          title: "Calls schedule",
+          editCallsScheduleBtn: "Edit",
+        },
+        editCallsSchedule: {
+          breadcrumb: {
+            callsSchedule: "Calls schedule",
+            edit: "Edit",
+          },
+          title: "Edit calls schedule",
+        },
       },
     },
   },
@@ -179,6 +197,8 @@ const resources = {
         description: "Опис",
         teacher: "Вчитель",
         select: "Вибрати",
+        startTime: "Початок",
+        endTime: "Завершення",
       },
       common: {
         school: "Школа",
@@ -237,6 +257,8 @@ const resources = {
         edit: "Редагувати",
         delete: "Видалити",
         class: "Клас",
+        number: "Номер",
+        time: "Час",
       },
       pages: {
         school: {
@@ -287,6 +309,20 @@ const resources = {
           list: {
             deleteSubjectConfirm: "Ви справді бажаєте видалити предмет ?",
           },
+        },
+        callsSchedule: {
+          breadcrumb: {
+            callsSchedule: "Розклад дзвінків",
+          },
+          title: "Розклад дзвінків",
+          editCallsScheduleBtn: "Редагувати",
+        },
+        editCallsSchedule: {
+          breadcrumb: {
+            callsSchedule: "Розклад дзвінків",
+            edit: "Редагувати",
+          },
+          title: "Редагувати розклад дзвінків",
         },
       },
     },

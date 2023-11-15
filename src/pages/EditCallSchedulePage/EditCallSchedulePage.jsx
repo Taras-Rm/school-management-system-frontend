@@ -19,8 +19,10 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import dayjs from "dayjs";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
+import { useTranslation } from "react-i18next";
 
 function EditCallSchedulePage() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [form] = useForm();
   const navigate = useNavigate();
@@ -86,19 +88,23 @@ function EditCallSchedulePage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.callSchedulePage}>Schedule</Link>,
+            title: (
+              <Link to={routes.callSchedulePage}>
+                {t("pages.editCallsSchedule.breadcrumb.callsSchedule")}
+              </Link>
+            ),
           },
           {
             title: (
               <Link to={generatePath(routes.editCallSchedulePage)}>
-                Edit
+                {t("pages.editCallsSchedule.breadcrumb.edit")}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Edit schedule
+        {t("pages.editCallsSchedule.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -147,7 +153,13 @@ function EditCallSchedulePage() {
                       ]}
                       style={{ margin: 0 }}
                     >
-                      <TimePicker.RangePicker format={"HH:mm"} minuteStep={5} />
+                      <TimePicker.RangePicker
+                        format={"HH:mm"}
+                        minuteStep={5}
+                        placeholder={[
+                          t("formFields.startTime"), t("formFields.endTime"),
+                        ]}
+                      />
                     </Form.Item>
                     <MinusCircleOutlined
                       onClick={() => remove(name)}
@@ -171,7 +183,7 @@ function EditCallSchedulePage() {
                     block
                     icon={<PlusOutlined />}
                   >
-                    Add row
+                    {t("buttons.add")}
                   </Button>
                 </Form.Item>
               </>
@@ -182,7 +194,7 @@ function EditCallSchedulePage() {
               style={{ backgroundColor: "green", color: "white" }}
               htmlType="submit"
             >
-              Update
+              {t("buttons.update")}
             </Button>
           </Form.Item>
         </Form>
