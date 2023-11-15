@@ -168,15 +168,18 @@ function TeachersPage() {
         pagination={false}
       />
       <CreateTeacherModal
+        t={t}
         isOpen={isCreateTeacherModalOpen}
         setIsCreateTeacherModalOpen={setIsCreateTeacherModalOpen}
       />
       <TeacherInfoDrawer
+        t={t}
         isOpen={!!teacherInfoId}
         teacher={teachers.find((t) => t.id === teacherInfoId)}
         onClose={() => setTeacherInfoId(null)}
       />
       <EditTeacherDrawer
+        t={t}
         isOpen={!!editTeacherId}
         id={editTeacherId}
         onClose={() => setEditTeacherId(null)}

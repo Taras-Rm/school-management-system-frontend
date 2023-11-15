@@ -10,6 +10,7 @@ const resources = {
         change: "Change",
         set: "Set",
         ok: "Ok",
+        add: "Add",
       },
       formFields: {
         name: "Name",
@@ -24,6 +25,9 @@ const resources = {
         email: "Email",
         address: "Address",
         degree: "Degree",
+        profile: "Profile",
+        speciality: "Speciality",
+        contacts: "Contacts",
       },
       common: {
         school: "School",
@@ -52,6 +56,9 @@ const resources = {
         },
         addTeacher: {
           title: "Add new teacher",
+        },
+        editTeacher: {
+          title: "Edit teacher information",
         },
       },
       tables: {
@@ -88,9 +95,10 @@ const resources = {
         change: "Змінити",
         set: "Встановити",
         ok: "Так",
+        add: "Додати",
       },
       formFields: {
-        name: "Назва",
+        name: "Імʼя",
         surname: "Прізвище",
         startDate: "Початкова дата",
         endDate: "Кінцева дата",
@@ -102,6 +110,9 @@ const resources = {
         email: "Емейл",
         address: "Адреса",
         degree: "Рівень",
+        profile: "Профіль",
+        speciality: "Спеціальність",
+        contacts: "Контакти",
       },
       common: {
         school: "Школа",
@@ -129,6 +140,9 @@ const resources = {
         },
         addTeacher: {
           title: "Додати нового вчителя",
+        },
+        editTeacher: {
+          title: "Редагувати інформацію про вчителя",
         },
       },
       tables: {

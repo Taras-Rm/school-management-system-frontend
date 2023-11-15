@@ -18,7 +18,7 @@ import dayjs from "dayjs";
 import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 
-function EditTeacherDrawer({ isOpen, onClose, id }) {
+function EditTeacherDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -71,7 +71,7 @@ function EditTeacherDrawer({ isOpen, onClose, id }) {
 
   return (
     <Drawer
-      title="Edit teacher info"
+      title={t("forms.editTeacher.title")}
       open={isOpen}
       getContainer={false}
       onClose={onDrawerClose}
@@ -80,9 +80,9 @@ function EditTeacherDrawer({ isOpen, onClose, id }) {
       destroyOnClose
       extra={
         <Space>
-          <Button onClick={onDrawerClose}>Cancel</Button>
+          <Button onClick={onDrawerClose}>{t("buttons.cancel")}</Button>
           <Button onClick={() => form.submit()} type="primary">
-            Update
+            {t("buttons.update")}
           </Button>
         </Space>
       }
@@ -100,19 +100,19 @@ function EditTeacherDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"name"}
-                label="Name"
+                label={t("formFields.name")}
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Name" />
+                <Input placeholder={t("formFields.name")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"surname"}
-                label="Surname"
+                label={t("formFields.surname")}
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Surname" />
+                <Input placeholder={t("formFields.surname")} />
               </Form.Item>
             </Col>
           </Row>
@@ -120,16 +120,16 @@ function EditTeacherDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"dob"}
-                label="Birthday"
+                label={t("formFields.dob")}
                 rules={[{ required: true }]}
               >
-                <DatePicker placeholder="Birthday" />
+                <DatePicker placeholder={t("formFields.selectDate")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"gender"}
-                label="Gender"
+                label={t("formFields.gender")}
                 rules={[{ required: true }]}
               >
                 <Select options={genderOptions} />
@@ -140,33 +140,36 @@ function EditTeacherDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"phone"}
-                label="Phone"
+                label={t("formFields.phone")}
                 rules={[{ required: true, max: 10, min: 10 }]}
               >
-                <Input placeholder="Phone" />
+                <Input placeholder={t("formFields.phone")} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name={"email"}
-                label="Email"
+                label={t("formFields.email")}
                 rules={[{ required: true, type: "email" }]}
               >
-                <Input placeholder="Email" />
+                <Input placeholder={"test@school.com"} />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name={"address"} label="Address">
-                <Input placeholder="Address" />
+              <Form.Item name={"address"} label={t("formFields.address")}>
+                <Input placeholder={t("formFields.address")} />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name={"degree"} label="Degree">
-                <Select placeholder="Degree" options={degreesLevelsOptions} />
+              <Form.Item name={"degree"} label={t("formFields.degree")}>
+                <Select
+                  placeholder={t("formFields.degree")}
+                  options={degreesLevelsOptions}
+                />
               </Form.Item>
             </Col>
           </Row>

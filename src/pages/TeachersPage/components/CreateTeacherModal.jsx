@@ -3,12 +3,9 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolTeacher } from "../../../api/teachers";
-import {
-  degreesLevelsOptions,
-  genderOptions,
-} from "../../../utils/staticData";
+import { degreesLevelsOptions, genderOptions } from "../../../utils/staticData";
 
-function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
+function CreateTeacherModal({ t, isOpen, setIsCreateTeacherModalOpen }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -42,15 +39,16 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
     <Modal
       open={isOpen}
       onCancel={() => setIsCreateTeacherModalOpen(false)}
-      title="Create teacher"
-      okText={"Create teacher"}
+      title={t("forms.addTeacher.title")}
+      okText={t("buttons.add")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form form={form} onFinish={handleCreateTeacher} layout="vertical">
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"name"}
-            label="Name"
+            label={t("formFields.name")}
             rules={[{ required: true }]}
             style={{ flex: 1 }}
           >
@@ -58,7 +56,7 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
           </Form.Item>
           <Form.Item
             name={"surname"}
-            label="Surname"
+            label={t("formFields.surname")}
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
@@ -68,14 +66,14 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"dob"}
-            label={"Date of birth"}
+            label={t("formFields.dob")}
             rules={[{ required: true }]}
           >
-            <DatePicker />
+            <DatePicker placeholder={t("formFields.selectDate")} />
           </Form.Item>
           <Form.Item
             name={"gender"}
-            label={"Gender"}
+            label={t("formFields.gender")}
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
@@ -84,24 +82,24 @@ function CreateTeacherModal({ isOpen, setIsCreateTeacherModalOpen }) {
         </div>
         <Form.Item
           name={"phone"}
-          label="Phone"
+          label={t("formFields.phone")}
           rules={[{ required: true, max: 10, min: 10 }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name={"email"}
-          label="Email"
+          label={t("formFields.email")}
           rules={[{ required: true, type: "email" }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name={"address"} label="Adress">
-          <Input placeholder="City, Street" />
+        <Form.Item name={"address"} label={t("formFields.address")}>
+          <Input />
         </Form.Item>
         <Form.Item
           name={"degree"}
-          label={"Degree"}
+          label={t("formFields.degree")}
           rules={[{ required: true }]}
         >
           <Select options={degreesLevelsOptions} />
