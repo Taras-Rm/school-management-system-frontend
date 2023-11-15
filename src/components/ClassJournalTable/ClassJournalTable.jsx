@@ -7,7 +7,10 @@ import {
 } from "./classJournalHelper";
 import { journalGrades } from "../../utils/staticData";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteJournalStudentGrade, upsertJournalStudentGrade } from "../../api/journals";
+import {
+  deleteJournalStudentGrade,
+  upsertJournalStudentGrade,
+} from "../../api/journals";
 
 const EditableContext = React.createContext(null);
 
@@ -34,6 +37,7 @@ const EditableCell = ({
   record,
   journalColumnId,
   disabled,
+  t,
   ...restProps
 }) => {
   let journalGradeId = record?.grades[Number(dataIndex[1])]
@@ -43,7 +47,8 @@ const EditableCell = ({
   const childNode = editable ? (
     <Popconfirm
       disabled={disabled}
-      title="Please set grade"
+      title={t("common.setGrade")}
+      okText={t("buttons.set")}
       description={
         <div>
           <div style={{ marginBottom: 10 }}>
@@ -71,7 +76,7 @@ const EditableCell = ({
               handleDeleteClassJournalStudentGrade({ journalGradeId })
             }
           >
-            Delete
+            {t("buttons.delete")}
           </Button>
         </div>
       }
@@ -90,6 +95,7 @@ const EditableCell = ({
 };
 
 function ClassJournalTable({
+  t,
   journalColumns,
   journalGrades,
   classId,
@@ -162,6 +168,7 @@ function ClassJournalTable({
 
   const tableColumns = useMemo(() => {
     return prepareClassJournalTableColumns(
+      t,
       journalColumns,
       handleUpsertJournalStudentGrade,
       handleDeleteJournalStudentGrade,

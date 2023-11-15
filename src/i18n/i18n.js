@@ -11,6 +11,7 @@ const resources = {
         set: "Set",
         ok: "Ok",
         add: "Add",
+        delete: "Delete",
       },
       formFields: {
         name: "Name",
@@ -50,6 +51,7 @@ const resources = {
         journals: "Journals",
         myClasses: "My classes",
         notDefined: "not defined",
+        setGrade: "Please set grade",
       },
       forms: {
         editSchool: {
@@ -161,6 +163,20 @@ const resources = {
           },
           title: "Edit calls schedule",
         },
+        journals: {
+          breadcrumb: {
+            journals: "Journals",
+          },
+          title: "Journals",
+          card: {
+            teacher: "Teacher",
+          },
+        },
+        journal: {
+          breadcrumb: {
+            journals: "Journals",
+          },
+        },
       },
     },
   },
@@ -173,6 +189,7 @@ const resources = {
         set: "Встановити",
         ok: "Так",
         add: "Додати",
+        delete: "Видалити",
       },
       formFields: {
         name: "Імʼя",
@@ -212,6 +229,7 @@ const resources = {
         journals: "Журнали",
         myClasses: "Мої класи",
         notDefined: "не призначено",
+        setGrade: "Будь ласка виберіть оцінку",
       },
       forms: {
         editSchool: {
@@ -323,6 +341,20 @@ const resources = {
             edit: "Редагувати",
           },
           title: "Редагувати розклад дзвінків",
+        },
+        journals: {
+          breadcrumb: {
+            journals: "Журнали",
+          },
+          title: "Журнали",
+          card: {
+            teacher: "Вчитель",
+          },
+        },
+        journal: {
+          breadcrumb: {
+            journals: "Журнали",
+          },
         },
       },
     },

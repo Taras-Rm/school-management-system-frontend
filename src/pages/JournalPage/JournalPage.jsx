@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import { getSchoolClass } from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
 import UserContext from "../../user-context";
 import {
@@ -11,8 +10,10 @@ import {
   getJournalColumns,
   getJournalStudentsGrades,
 } from "../../api/journals";
+import { useTranslation } from "react-i18next";
 
 function JournalPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { user } = useContext(UserContext);
@@ -63,7 +64,11 @@ function JournalPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.journalsPage}>Journals</Link>,
+            title: (
+              <Link to={routes.journalsPage}>
+                {t("pages.journals.breadcrumb.journals")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -75,10 +80,11 @@ function JournalPage() {
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${journal.classSubject.subject.name}`} journal
+        {`${journal.classSubject.subject.name}`}
       </Typography.Title>
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
       <ClassJournalTable
+        t={t}
         journalColumns={journalColumns}
         journalGrades={journalGrades}
         classId={journal.classId}
