@@ -9,13 +9,21 @@ const resources = {
         update: "Update",
         change: "Change",
         set: "Set",
+        ok: "Ok",
       },
       formFields: {
         name: "Name",
+        surname: "Surname",
         startDate: "Start date",
         endDate: "End date",
         selectDate: "Select date",
         period: "Period",
+        dob: "Date of birth",
+        gender: "Gender",
+        phone: "Phone",
+        email: "Email",
+        address: "Address",
+        degree: "Degree",
       },
       common: {
         school: "School",
@@ -42,11 +50,31 @@ const resources = {
           increment: "Increment classes levels",
           addNew: "Add new period",
         },
+        addTeacher: {
+          title: "Add new teacher",
+        },
+      },
+      tables: {
+        name: "Name",
+        email: "Email",
+        action: "Action",
+        edit: "Edit",
+        delete: "Delete",
       },
       pages: {
         school: {
           breadcrumb: {
             school: "School",
+          },
+        },
+        teachers: {
+          breadcrumb: {
+            teachers: "Teachers",
+          },
+          title: "Teachers",
+          addTeacherBtn: "Add teacher",
+          table: {
+            deleteTeacherConfirm: "Do you really want to delete a teacher ?",
           },
         },
       },
@@ -59,13 +87,21 @@ const resources = {
         update: "Оновити",
         change: "Змінити",
         set: "Встановити",
+        ok: "Так",
       },
       formFields: {
         name: "Назва",
+        surname: "Прізвище",
         startDate: "Початкова дата",
         endDate: "Кінцева дата",
         selectDate: "Обрати дату",
         period: "Період",
+        dob: "Дата народження",
+        gender: "Стать",
+        phone: "Телефон",
+        email: "Емейл",
+        address: "Адреса",
+        degree: "Рівень",
       },
       common: {
         school: "Школа",
@@ -91,6 +127,16 @@ const resources = {
           increment: "Перевести класи на наступний рік",
           addNew: "Додати новий період",
         },
+        addTeacher: {
+          title: "Додати нового вчителя",
+        },
+      },
+      tables: {
+        name: "Назва",
+        email: "Емейл",
+        action: "Дія",
+        edit: "Редагувати",
+        delete: "Видалити",
       },
       pages: {
         school: {
@@ -98,19 +144,29 @@ const resources = {
             school: "Школа",
           },
         },
+        teachers: {
+          breadcrumb: {
+            teachers: "Вчителі",
+          },
+          title: "Вчителі",
+          addTeacherBtn: "Додати вчителя",
+          table: {
+            editTeacher: "Редагувати вчителя",
+            deleteTeacher: "Видалити вчителя",
+            deleteTeacherConfirm: "Ви справді бажаєте видалити вчителя ?",
+          },
+        },
       },
     },
   },
 };
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: "uk",
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "uk",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export default i18n;

@@ -18,8 +18,10 @@ import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import TeacherInfoDrawer from "../../components/TeacherInfoDrawer/TeacherInfoDrawer";
 import EditTeacherDrawer from "../../components/EditTeacherDrawer/EditTeacherDrawer";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function TeachersPage() {
+  const { t } = useTranslation();
   const { user } = useContext(UserContext);
 
   const queryClient = useQueryClient();
@@ -58,7 +60,7 @@ function TeachersPage() {
   const getTableColumns = useMemo(() => {
     let columns = [
       {
-        title: "Name",
+        title: t("tables.name"),
         dataIndex: "name",
         key: "name",
         render: (value, item) => {
@@ -70,7 +72,7 @@ function TeachersPage() {
         },
       },
       {
-        title: "Email",
+        title: t("tables.email"),
         dataIndex: "email",
         key: "email",
         render: (value, item) => {
@@ -80,23 +82,25 @@ function TeachersPage() {
     ];
     if (user.role === "admin") {
       columns.push({
-        title: "Action",
+        title: t("tables.action"),
         dataIndex: "action",
         key: "action",
         align: "center",
         render: (value, item) => {
           return (
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <Tooltip title="Edit teacher">
+              <Tooltip title={t("tables.edit")}>
                 <EditTwoTone
                   onClick={() => setEditTeacherId(item.id)}
                   style={{ cursor: "pointer" }}
                 />
               </Tooltip>
-              <Tooltip title="Delete teacher">
+              <Tooltip title={t("tables.delete")}>
                 <Popconfirm
-                  title="Do you really want to delete teacher ?"
+                  title={t("pages.teachers.table.deleteTeacherConfirm")}
                   onConfirm={() => handleDeleteSchoolTeacher(item.id)}
+                  okText={t("buttons.ok")}
+                  cancelText={t("buttons.cancel")}
                 >
                   <DeleteTwoTone
                     twoToneColor="#eb2f96"
@@ -135,12 +139,16 @@ function TeachersPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.teachersPage}>Teachers</Link>,
+            title: (
+              <Link to={routes.teachersPage}>
+                {t("pages.teachers.breadcrumb.teachers")}
+              </Link>
+            ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Teachers
+        {t("pages.teachers.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -149,7 +157,7 @@ function TeachersPage() {
             style={{ backgroundColor: "green" }}
             onClick={() => setIsCreateTeacherModalOpen(true)}
           >
-            Add teacher
+            {t("pages.teachers.addTeacherBtn")}
           </Button>
         )}
       </div>
