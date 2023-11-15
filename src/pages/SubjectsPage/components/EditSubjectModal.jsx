@@ -2,12 +2,9 @@ import { Form, Input, Modal, Spin, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-  getSchoolSubject,
-  updateSchoolSubject,
-} from "../../../api/subjects";
+import { getSchoolSubject, updateSchoolSubject } from "../../../api/subjects";
 
-function EditSubjectModal({ subjectId, setEditSubjectId }) {
+function EditSubjectModal({ t, subjectId, setEditSubjectId }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -53,14 +50,19 @@ function EditSubjectModal({ subjectId, setEditSubjectId }) {
     <Modal
       open={subjectId}
       onCancel={() => setEditSubjectId(false)}
-      title="Update subject"
-      okText={"Update subject"}
+      title={t("forms.editSubject.title")}
+      okText={t("buttons.update")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
       closable
       destroyOnClose
     >
       <Form form={form} onFinish={handleUpdateSubject} layout="vertical">
-        <Form.Item name={"name"} label="Name" rules={[{ required: true }]}>
+        <Form.Item
+          name={"name"}
+          label={t("formFields.name2")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
       </Form>

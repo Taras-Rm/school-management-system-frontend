@@ -18,8 +18,10 @@ import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditSubjectModal from "./components/EditSubjectModal";
 import { useContext } from "react";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function SubjectsPage() {
+  const { t } = useTranslation();
   const { user } = useContext(UserContext);
 
   const queryClient = useQueryClient();
@@ -68,12 +70,16 @@ function SubjectsPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.subjectsPage}>Subjects</Link>,
+            title: (
+              <Link to={routes.subjectsPage}>
+                {t("pages.subjects.breadcrumb.subjects")}
+              </Link>
+            ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Subjects
+        {t("pages.subjects.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -82,7 +88,7 @@ function SubjectsPage() {
             style={{ backgroundColor: "green" }}
             onClick={() => setIsCreateSubjectModalOpen(true)}
           >
-            Add subject
+            {t("pages.subjects.addSubjectBtn")}
           </Button>
         )}
       </div>
@@ -95,15 +101,17 @@ function SubjectsPage() {
               actions={
                 item.schoolId &&
                 user.role === "admin" && [
-                  <Tooltip title="Edit subject">
+                  <Tooltip title={t("tables.edit")}>
                     <EditTwoTone
                       onClick={() => setEditSubjectId(item.id)}
                       style={{ cursor: "pointer" }}
                     />
                   </Tooltip>,
-                  <Tooltip title="Edit subject">
+                  <Tooltip title={t("tables.delete")}>
                     <Popconfirm
-                      title="Do you really want to delete subject ?"
+                      okText={t("buttons.ok")}
+                      cancelText={t("buttons.cancel")}
+                      title={t("pages.subjects.list.deleteSubjectConfirm")}
                       onConfirm={() => handleDeleteSubject(item.id)}
                     >
                       <DeleteTwoTone
@@ -123,10 +131,12 @@ function SubjectsPage() {
         style={{ backgroundColor: "white" }}
       />
       <CreateSubjectModal
+        t={t}
         isOpen={isCreateSubjectModalOpen}
         setIsCreateSubjectModalOpen={setIsCreateSubjectModalOpen}
       />
       <EditSubjectModal
+        t={t}
         subjectId={editSubjectId}
         setEditSubjectId={setEditSubjectId}
       />

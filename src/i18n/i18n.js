@@ -14,6 +14,7 @@ const resources = {
       },
       formFields: {
         name: "Name",
+        name2: "Name",
         surname: "Surname",
         startDate: "Start date",
         endDate: "End date",
@@ -79,6 +80,12 @@ const resources = {
         editClass: {
           title: "Edit class information",
         },
+        addSubject: {
+          title: "Add new subject",
+        },
+        editSubject: {
+          title: "Edit subject",
+        },
       },
       tables: {
         name: "Name",
@@ -126,6 +133,16 @@ const resources = {
             deleteClassConfirm: "Do you really want to delete a class ?",
           },
         },
+        subjects: {
+          breadcrumb: {
+            subjects: "Subjects",
+          },
+          title: "Subjects",
+          addSubjectBtn: "Add subject",
+          list: {
+            deleteSubjectConfirm: "Do you really want to delete a subject ?",
+          },
+        },
       },
     },
   },
@@ -141,6 +158,7 @@ const resources = {
       },
       formFields: {
         name: "Імʼя",
+        name2: "Назва",
         surname: "Прізвище",
         startDate: "Початкова дата",
         endDate: "Кінцева дата",
@@ -205,6 +223,12 @@ const resources = {
         editClass: {
           title: "Редагувати інформацію про клас",
         },
+        addSubject: {
+          title: "Додати новий предмет",
+        },
+        editSubject: {
+          title: "Редагувати інформацію про предмет",
+        },
       },
       tables: {
         name: "Назва",
@@ -252,6 +276,16 @@ const resources = {
             classTeacher: "Класний керівник",
             numberOfStudents: "Кількість учнів",
             deleteClassConfirm: "Ви справді бажаєте видалити клас ?",
+          },
+        },
+        subjects: {
+          breadcrumb: {
+            subjects: "Предмети",
+          },
+          title: "Предмети",
+          addSubjectBtn: "Додати предмет",
+          list: {
+            deleteSubjectConfirm: "Ви справді бажаєте видалити предмет ?",
           },
         },
       },

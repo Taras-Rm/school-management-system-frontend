@@ -4,7 +4,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolSubject } from "../../../api/subjects";
 
-function CreateSubjectModal({ isOpen, setIsCreateSubjectModalOpen }) {
+function CreateSubjectModal({ t, isOpen, setIsCreateSubjectModalOpen }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -31,12 +31,17 @@ function CreateSubjectModal({ isOpen, setIsCreateSubjectModalOpen }) {
     <Modal
       open={isOpen}
       onCancel={() => setIsCreateSubjectModalOpen(false)}
-      title="Create subject"
-      okText={"Create subject"}
+      title={t("forms.addSubject.title")}
+      okText={t("buttons.add")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form form={form} onFinish={handleCreateSubject} layout="vertical">
-        <Form.Item name={"name"} label="Name" rules={[{ required: true }]}>
+        <Form.Item
+          name={"name"}
+          label={t("formFields.name2")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
       </Form>
