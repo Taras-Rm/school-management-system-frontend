@@ -43,7 +43,12 @@ function CreateStudentModal({ t, isOpen, setIsCreateStudentModalOpen }) {
       cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
-      <Form form={form} onFinish={handleCreateStudent} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleCreateStudent}
+        layout="vertical"
+        requiredMark={false}
+      >
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"name"}

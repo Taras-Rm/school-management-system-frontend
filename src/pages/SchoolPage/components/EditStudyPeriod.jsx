@@ -101,6 +101,7 @@ function EditStudyPeriodModal({ t, isOpen, setIsEditStudyPeriodModalOpen }) {
             borderRadius: "10px",
             padding: 10,
           }}
+          requiredMark={false}
         >
           <Spin spinning={isCreateStudyPeriodMutationLoading}>
             <div style={{ display: "flex" }}>

@@ -83,7 +83,12 @@ function EditClassSubjectModal({
       closable
       destroyOnClose
     >
-      <Form form={form} onFinish={handleUpdateClassSubject} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleUpdateClassSubject}
+        layout="vertical"
+        requiredMark={false}
+      >
         <Form.Item
           name={"subjectId"}
           label="Subject"

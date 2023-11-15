@@ -36,7 +36,12 @@ function CreateSubjectModal({ t, isOpen, setIsCreateSubjectModalOpen }) {
       cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
-      <Form form={form} onFinish={handleCreateSubject} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleCreateSubject}
+        layout="vertical"
+        requiredMark={false}
+      >
         <Form.Item
           name={"name"}
           label={t("formFields.name2")}

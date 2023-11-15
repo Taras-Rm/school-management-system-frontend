@@ -57,7 +57,12 @@ function EditSubjectModal({ t, subjectId, setEditSubjectId }) {
       closable
       destroyOnClose
     >
-      <Form form={form} onFinish={handleUpdateSubject} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleUpdateSubject}
+        layout="vertical"
+        requiredMark={false}
+      >
         <Form.Item
           name={"name"}
           label={t("formFields.name2")}

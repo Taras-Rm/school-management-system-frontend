@@ -41,7 +41,12 @@ function CreateClassModal({ t, isOpen, setIsCreateClassModalOpen }) {
       cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
-      <Form form={form} onFinish={handleCreateClass} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleCreateClass}
+        layout="vertical"
+        requiredMark={false}
+      >
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"level"}

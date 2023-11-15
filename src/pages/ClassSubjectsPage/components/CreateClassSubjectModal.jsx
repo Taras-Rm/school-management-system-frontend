@@ -61,7 +61,12 @@ function CreateClassSubjectModal({
       okText={"Create class"}
       onOk={() => form.submit()}
     >
-      <Form form={form} onFinish={handleCreateClassSubject} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleCreateClassSubject}
+        layout="vertical"
+        requiredMark={false}
+      >
         <Form.Item
           name={"subjectId"}
           label="Subjects"
@@ -72,10 +77,7 @@ function CreateClassSubjectModal({
             options={subjects.map((s) => ({ value: s.id, label: s.name }))}
           />
         </Form.Item>
-        <Form.Item
-          name={"teacherId"}
-          label="Teacher"
-        >
+        <Form.Item name={"teacherId"} label="Teacher">
           <Select
             loading={isLoadingTeachers}
             options={teachers.map((s) => ({
