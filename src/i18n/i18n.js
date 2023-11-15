@@ -28,7 +28,12 @@ const resources = {
         profile: "Profile",
         speciality: "Speciality",
         contacts: "Contacts",
-        class: "Class"
+        class: "Class",
+        level: "Level",
+        section: "Section",
+        description: "Description",
+        teacher: "Teacher",
+        select: "Select",
       },
       common: {
         school: "School",
@@ -41,6 +46,7 @@ const resources = {
         schedule: "Schedule",
         journals: "Journals",
         myClasses: "My classes",
+        notDefined: "not defined",
       },
       forms: {
         editSchool: {
@@ -62,11 +68,17 @@ const resources = {
           title: "Edit teacher information",
         },
         addStudent: {
-          title: "Add new student"
+          title: "Add new student",
         },
         editStudent: {
-          title: "Edit student information"
-        }
+          title: "Edit student information",
+        },
+        addClass: {
+          title: "Add new class",
+        },
+        editClass: {
+          title: "Edit class information",
+        },
       },
       tables: {
         name: "Name",
@@ -74,7 +86,7 @@ const resources = {
         action: "Action",
         edit: "Edit",
         delete: "Delete",
-        class: "Class"
+        class: "Class",
       },
       pages: {
         school: {
@@ -101,7 +113,19 @@ const resources = {
           table: {
             deleteStudentConfirm: "Do you really want to delete a student ?",
           },
-        }
+        },
+        classes: {
+          breadcrumb: {
+            classes: "Classes",
+          },
+          title: "Classes",
+          addClassBtn: "Add class",
+          card: {
+            classTeacher: "Class teacher",
+            numberOfStudents: "Number of students",
+            deleteClassConfirm: "Do you really want to delete a class ?",
+          },
+        },
       },
     },
   },
@@ -131,7 +155,12 @@ const resources = {
         profile: "Профіль",
         speciality: "Спеціальність",
         contacts: "Контакти",
-        class: "Клас"
+        class: "Клас",
+        level: "Рівень",
+        section: "Літера",
+        description: "Опис",
+        teacher: "Вчитель",
+        select: "Вибрати",
       },
       common: {
         school: "Школа",
@@ -144,6 +173,7 @@ const resources = {
         schedule: "Розклад",
         journals: "Журнали",
         myClasses: "Мої класи",
+        notDefined: "не призначено",
       },
       forms: {
         editSchool: {
@@ -164,11 +194,17 @@ const resources = {
           title: "Редагувати інформацію про вчителя",
         },
         addStudent: {
-          title: "Додати нового учня"
+          title: "Додати нового учня",
         },
         editStudent: {
-          title: "Редагувати інформацію про учня"
-        }
+          title: "Редагувати інформацію про учня",
+        },
+        addClass: {
+          title: "Додати новий клас",
+        },
+        editClass: {
+          title: "Редагувати інформацію про клас",
+        },
       },
       tables: {
         name: "Назва",
@@ -176,7 +212,7 @@ const resources = {
         action: "Дія",
         edit: "Редагувати",
         delete: "Видалити",
-        class: "Клас"
+        class: "Клас",
       },
       pages: {
         school: {
@@ -205,7 +241,19 @@ const resources = {
           table: {
             deleteStudentConfirm: "Ви справді бажаєте видалити учня ?",
           },
-        }
+        },
+        classes: {
+          breadcrumb: {
+            classes: "Класи",
+          },
+          title: "Класи",
+          addClassBtn: "Додати клас",
+          card: {
+            classTeacher: "Класний керівник",
+            numberOfStudents: "Кількість учнів",
+            deleteClassConfirm: "Ви справді бажаєте видалити клас ?",
+          },
+        },
       },
     },
   },

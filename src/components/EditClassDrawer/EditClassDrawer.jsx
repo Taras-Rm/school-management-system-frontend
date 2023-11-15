@@ -17,7 +17,7 @@ import { useForm } from "antd/es/form/Form";
 import { getSchoolClass, updateSchoolClass } from "../../api/classes";
 import TextArea from "antd/es/input/TextArea";
 
-function EditClassDrawer({ isOpen, onClose, id }) {
+function EditClassDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -26,7 +26,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
     onClose();
   };
 
-  const { data: classData, isLoading: isLoadingClass } = useQuery(
+  const { isLoading: isLoadingClass } = useQuery(
     ["classes", id],
     () => getSchoolClass({ id }),
     {
@@ -53,7 +53,6 @@ function EditClassDrawer({ isOpen, onClose, id }) {
   const updateClassMutation = useMutation(updateSchoolClass, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes"]);
-      queryClient.invalidateQueries(["classes", id]);
       message.success("Class is updated");
       onDrawerClose();
     },
@@ -74,7 +73,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
 
   return (
     <Drawer
-      title="Edit class info"
+      title={t("forms.editClass.title")}
       open={isOpen}
       getContainer={false}
       onClose={onDrawerClose}
@@ -83,9 +82,9 @@ function EditClassDrawer({ isOpen, onClose, id }) {
       destroyOnClose
       extra={
         <Space>
-          <Button onClick={onDrawerClose}>Cancel</Button>
+          <Button onClick={onDrawerClose}>{t("buttons.cancel")}</Button>
           <Button onClick={() => form.submit()} type="primary">
-            Update
+            {t("buttons.update")}
           </Button>
         </Space>
       }
@@ -103,7 +102,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"level"}
-                label="Level"
+                label={t("formFields.level")}
                 rules={[{ required: true }]}
               >
                 <Select options={classLevelOptions} style={{ width: 200 }} />
@@ -112,7 +111,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
             <Col span={12}>
               <Form.Item
                 name={"section"}
-                label="Section"
+                label={t("formFields.section")}
                 rules={[{ required: true }]}
               >
                 <Select options={classSectionOptions} style={{ width: 200 }} />
@@ -121,7 +120,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
           </Row>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name={"teacherId"} label="Teacher">
+              <Form.Item name={"teacherId"} label={t("formFields.teacher")}>
                 <Select
                   style={{ width: 200 }}
                   loading={teachersIsLoading}
@@ -129,7 +128,7 @@ function EditClassDrawer({ isOpen, onClose, id }) {
                     value: teacher.id,
                     label: `${teacher.name} ${teacher.surname}`,
                   }))}
-                  placeholder={"Select class teacher"}
+                  placeholder={t("formFields.select")}
                   allowClear
                 />
               </Form.Item>
@@ -137,7 +136,10 @@ function EditClassDrawer({ isOpen, onClose, id }) {
           </Row>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name={"description"} label="Description">
+              <Form.Item
+                name={"description"}
+                label={t("formFields.description")}
+              >
                 <TextArea />
               </Form.Item>
             </Col>

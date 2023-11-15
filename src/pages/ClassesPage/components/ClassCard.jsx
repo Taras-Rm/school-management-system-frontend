@@ -9,7 +9,7 @@ import {
 } from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-function ClassCard({ classInfo, setEditClassId, showActions }) {
+function ClassCard({ t, classInfo, setEditClassId, showActions }) {
   const queryClient = useQueryClient();
 
   const { data: students, isLoading: isLoadingStudents } = useQuery(
@@ -58,9 +58,10 @@ function ClassCard({ classInfo, setEditClassId, showActions }) {
             <EditOutlined />
           </Link>,
           <Popconfirm
-            title="Delete class"
-            description="Are you sure you want to delete a class ?"
+            description={t("pages.classes.card.deleteClassConfirm")}
             onConfirm={() => handleDeleteSchoolClass(classInfo.id)}
+            okText={t("buttons.ok")}
+            cancelText={t("buttons.cancel")}
           >
             <DeleteOutlined />
           </Popconfirm>,
@@ -70,17 +71,21 @@ function ClassCard({ classInfo, setEditClassId, showActions }) {
       loading={isLoadingStudents}
     >
       <div>
-        <Typography.Text>Class teacher: </Typography.Text>
+        <Typography.Text>
+          {t("pages.classes.card.classTeacher")}:{" "}
+        </Typography.Text>
         {classInfo.teacher ? (
           <Typography.Text
             strong
           >{`${classInfo.teacher.name} ${classInfo.teacher.surname}`}</Typography.Text>
         ) : (
-          <Typography.Text>not defined</Typography.Text>
+          <Typography.Text>{t("common.notDefined")}</Typography.Text>
         )}
       </div>
       <div>
-        <Typography.Text>Number of students: </Typography.Text>
+        <Typography.Text>
+          {t("pages.classes.card.numberOfStudents")}:{" "}
+        </Typography.Text>
         <Typography.Text strong>{students?.length}</Typography.Text>
       </div>
     </Card>

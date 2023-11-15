@@ -9,7 +9,7 @@ import {
 } from "../../../utils/staticData";
 import TextArea from "antd/es/input/TextArea";
 
-function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
+function CreateClassModal({ t, isOpen, setIsCreateClassModalOpen }) {
   const queryClient = useQueryClient();
   const [form] = useForm();
 
@@ -36,15 +36,16 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
     <Modal
       open={isOpen}
       onCancel={() => setIsCreateClassModalOpen(false)}
-      title="Create class"
-      okText={"Create class"}
+      title={t("forms.addClass.title")}
+      okText={t("buttons.add")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form form={form} onFinish={handleCreateClass} layout="vertical">
         <div style={{ display: "flex" }}>
           <Form.Item
             name={"level"}
-            label="Level"
+            label={t("formFields.level")}
             rules={[{ required: true }]}
             style={{ flex: 1 }}
           >
@@ -52,14 +53,14 @@ function CreateClassModal({ isOpen, setIsCreateClassModalOpen }) {
           </Form.Item>
           <Form.Item
             name={"section"}
-            label="Section"
+            label={t("formFields.section")}
             rules={[{ required: true }]}
             style={{ flex: 1, marginLeft: 10 }}
           >
             <Select options={classSectionOptions} />
           </Form.Item>
         </div>
-        <Form.Item name={"description"} label="Description">
+        <Form.Item name={"description"} label={t("formFields.description")}>
           <TextArea />
         </Form.Item>
       </Form>

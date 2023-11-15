@@ -9,8 +9,10 @@ import { routes } from "../routes";
 import EditClassDrawer from "../../components/EditClassDrawer/EditClassDrawer";
 import UserContext from "../../user-context";
 import { getTeacherSchoolClasses } from "../../api/teachers";
+import { useTranslation } from "react-i18next";
 
 function ClassesPage() {
+  const { t } = useTranslation();
   const { user } = useContext(UserContext);
 
   const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
@@ -43,13 +45,17 @@ function ClassesPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.classes.breadcrumb.classes")}
+              </Link>
+            ),
           },
         ]}
       />
 
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Classes
+        {t("pages.classes.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -58,7 +64,7 @@ function ClassesPage() {
             style={{ backgroundColor: "green" }}
             onClick={() => setIsCreateClassModalOpen(true)}
           >
-            Add class
+            {t("pages.classes.addClassBtn")}
           </Button>
         )}
       </div>
@@ -66,6 +72,7 @@ function ClassesPage() {
         {classes.map((c) => (
           <Col span={6} style={{ marginBottom: 20 }} key={c.id}>
             <ClassCard
+              t={t}
               classInfo={c}
               setEditClassId={setEditClassId}
               showActions={user.role === "admin"}
@@ -74,10 +81,12 @@ function ClassesPage() {
         ))}
       </Row>
       <CreateClassModal
+        t={t}
         isOpen={isCreateClassModalOpen}
         setIsCreateClassModalOpen={setIsCreateClassModalOpen}
       />
       <EditClassDrawer
+        t={t}
         isOpen={!!editClassId}
         id={editClassId}
         onClose={() => setEditClassId(null)}
