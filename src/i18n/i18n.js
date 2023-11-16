@@ -61,6 +61,7 @@ const resources = {
         myClasses: "My classes",
         notDefined: "not defined",
         setGrade: "Please set grade",
+        notSelected: "Not swlwcted",
       },
       forms: {
         editSchool: {
@@ -233,6 +234,14 @@ const resources = {
           editSheduleBtn: "Edit schedule",
           table: {},
         },
+        editClassSchedule: {
+          breadcrumb: {
+            classes: "Classes",
+            schedule: "Schedule",
+            edit: "Edit",
+          },
+          title: "Edit schedule",
+        },
       },
     },
   },
@@ -295,6 +304,7 @@ const resources = {
         myClasses: "Мої класи",
         notDefined: "не призначено",
         setGrade: "Будь ласка виберіть оцінку",
+        notSelected: "Не обрано",
       },
       forms: {
         editSchool: {
@@ -467,6 +477,14 @@ const resources = {
           title: "розклад",
           editSheduleBtn: "Редагувати розклад",
           table: {},
+        },
+        editClassSchedule: {
+          breadcrumb: {
+            classes: "Класи",
+            schedule: "Розклад",
+            edit: "Редагувати",
+          },
+          title: "Редагувати розклад",
         },
       },
     },

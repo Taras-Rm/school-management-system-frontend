@@ -23,8 +23,10 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { workingWeekDays } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
+import { useTranslation } from "react-i18next";
 
 function EditClassSchedulePage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const queryClient = useQueryClient();
   const [form] = useForm();
@@ -141,7 +143,11 @@ function EditClassSchedulePage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.editClassSchedule.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -153,23 +159,23 @@ function EditClassSchedulePage() {
           {
             title: (
               <Link to={generatePath(routes.classSchedulePage, { id })}>
-                Schedule
+                {t("pages.editClassSchedule.breadcrumb.schedule")}
               </Link>
             ),
           },
           {
             title: (
-              <Link
-                to={generatePath(routes.editClassSchedulePage, { id })}
-              >
-                Edit
+              <Link to={generatePath(routes.editClassSchedulePage, { id })}>
+                {t("pages.editClassSchedule.breadcrumb.edit")}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        Edit {`${classData.level}-${classData.section}`} schedule
+        {`${t("pages.editClassSchedule.title")} ${classData.level}-${
+          classData.section
+        }`}
       </Typography.Title>
       <div
         style={{
@@ -178,11 +184,7 @@ function EditClassSchedulePage() {
           justifyContent: "space-between",
           alignItems: "center",
         }}
-      >
-        <Button type="primary" style={{ backgroundColor: "green" }} disabled>
-          Smth
-        </Button>
-      </div>
+      ></div>
       <div>
         <Form
           form={form}
@@ -220,7 +222,7 @@ function EditClassSchedulePage() {
                                   style={{ width: "80%", margin: 0 }}
                                 >
                                   <Select
-                                    placeholder="Not selected"
+                                    placeholder={t("common.notSelected")}
                                     options={classSubjects.map((cS) => ({
                                       label: cS.subject.name,
                                       value: cS.id,
@@ -247,7 +249,7 @@ function EditClassSchedulePage() {
               style={{ backgroundColor: "green" }}
               htmlType="submit"
             >
-              Update
+              {t("buttons.update")}
             </Button>
           </Form.Item>
         </Form>
