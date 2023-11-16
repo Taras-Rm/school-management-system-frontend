@@ -4,6 +4,13 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      days: {
+        monday: "Monday",
+        tuesday: "Tuesday",
+        wednesday: "Wednesday",
+        thursday: "Thursday",
+        friday: "Friday",
+      },
       buttons: {
         cancel: "Cancel",
         update: "Update",
@@ -217,11 +224,27 @@ const resources = {
               "Do you really want to delete a class subject ?",
           },
         },
+        classSchedule: {
+          breadcrumb: {
+            classes: "Classes",
+            schedule: "Schedule",
+          },
+          title: "schedule",
+          editSheduleBtn: "Edit schedule",
+          table: {},
+        },
       },
     },
   },
   uk: {
     translation: {
+      days: {
+        monday: "Понеділок",
+        tuesday: "Вівторок",
+        wednesday: "Середа",
+        thursday: "Четвер",
+        friday: "Пʼятниця",
+      },
       buttons: {
         cancel: "Скасувати",
         update: "Оновити",
@@ -435,6 +458,15 @@ const resources = {
             deleteClassSubjectConfirm:
               "Ви справді бажаєте видалити предмет з класу ?",
           },
+        },
+        classSchedule: {
+          breadcrumb: {
+            classes: "Класи",
+            schedule: "Розклад",
+          },
+          title: "розклад",
+          editSheduleBtn: "Редагувати розклад",
+          table: {},
         },
       },
     },

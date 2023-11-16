@@ -9,8 +9,10 @@ import { prepareScheduleTable } from "./classScheduleHelper";
 import { formatTime } from "../../utils/date";
 import { useContext } from "react";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function ClassSchedulePage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -75,7 +77,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Time",
+      title: t("tables.time"),
       dataIndex: "time",
       key: "time",
       align: "center",
@@ -86,7 +88,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Monday",
+      title: t("days.monday"),
       dataIndex: "mon",
       key: "mon",
       render: (value, item) => {
@@ -94,7 +96,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Tuesday",
+      title: t("days.tuesday"),
       dataIndex: "tue",
       key: "tue",
       render: (value, item) => {
@@ -102,7 +104,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Wednesday",
+      title: t("days.wednesday"),
       dataIndex: "wed",
       key: "wed",
       render: (value, item) => {
@@ -110,7 +112,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Thursday",
+      title: t("days.thursday"),
       dataIndex: "thu",
       key: "thu",
       render: (value, item) => {
@@ -118,7 +120,7 @@ function ClassSchedulePage() {
       },
     },
     {
-      title: "Friday",
+      title: t("days.friday"),
       dataIndex: "fri",
       key: "fri",
       render: (value, item) => {
@@ -150,7 +152,11 @@ function ClassSchedulePage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.classSchedule.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -162,14 +168,15 @@ function ClassSchedulePage() {
           {
             title: (
               <Link to={generatePath(routes.classSchedulePage, { id })}>
-                Schedule
+                {t("pages.classSchedule.breadcrumb.schedule")}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${classData.level}-${classData.section}`} class schedule
+        {`${classData.level}-${classData.section}`}{" "}
+        {t("pages.classSchedule.title")}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -180,7 +187,7 @@ function ClassSchedulePage() {
               navigate(generatePath(routes.editClassSchedulePage, { id }))
             }
           >
-            Edit
+            {t("pages.classSchedule.editSheduleBtn")}
           </Button>
         )}
       </div>
