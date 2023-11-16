@@ -20,6 +20,7 @@ const resources = {
         add: "Add",
         delete: "Delete",
         assign: "Assign",
+        create: "Create",
       },
       formFields: {
         name: "Name",
@@ -109,6 +110,14 @@ const resources = {
         },
         editClassSubject: {
           title: "Edit class subject",
+        },
+        createClassJournals: {
+          title: "Create journals",
+          studyPeriod: "Study period",
+          description1:
+            "It is neccessary set up correct schedule for subjects you want to create journals",
+          description2:
+            "Please, select subjects for which you want to create journals",
         },
       },
       tables: {
@@ -242,6 +251,15 @@ const resources = {
           },
           title: "Edit schedule",
         },
+        classJournals: {
+          breadcrumb: {
+            classes: "Classes",
+            journals: "Journals",
+          },
+          title: "journals",
+          createJournalBtn: "Create journal",
+          teacher: "Teacher",
+        },
       },
     },
   },
@@ -263,6 +281,7 @@ const resources = {
         add: "Додати",
         delete: "Видалити",
         assign: "Додати",
+        create: "Створити",
       },
       formFields: {
         name: "Імʼя",
@@ -351,6 +370,14 @@ const resources = {
         },
         editClassSubject: {
           title: "Редагувати предмет класу",
+        },
+        createClassJournals: {
+          title: "Створити журнали",
+          studyPeriod: "Навчальний період",
+          description1:
+            "Необхідно створити правильний розклад для предметів, перед створенням журналів",
+          description2:
+            "Будь ласка оберіть предмети, для яких бажаєте створити журнали",
         },
       },
       tables: {
@@ -485,6 +512,15 @@ const resources = {
             edit: "Редагувати",
           },
           title: "Редагувати розклад",
+        },
+        classJournals: {
+          breadcrumb: {
+            classes: "Класи",
+            journals: "Журнали",
+          },
+          title: "журнали",
+          createJournalBtn: "Створити журнал",
+          teacher: "Вчитель",
         },
       },
     },

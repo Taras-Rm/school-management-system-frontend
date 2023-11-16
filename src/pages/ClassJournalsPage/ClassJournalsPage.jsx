@@ -7,8 +7,10 @@ import { getClassJournals, getSchoolClass } from "../../api/classes";
 import CreateClassJournalsModal from "./components/CreateClassJournalsModal";
 import JournalCard from "./components/JournalCard";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function ClassJournalsPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [isCreateClassJournalsModalOpen, setIsCreateClassJournalsModalOpen] =
     useState(false);
@@ -48,7 +50,11 @@ function ClassJournalsPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.classJournals.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -60,14 +66,16 @@ function ClassJournalsPage() {
           {
             title: (
               <Link to={generatePath(routes.classJournalsPage, { id })}>
-                Journals
+                {t("pages.classJournals.breadcrumb.journals")}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${classData.level}-${classData.section}`} class journals
+        {`${classData.level}-${classData.section} ${t(
+          "pages.classJournals.title"
+        )}`}
       </Typography.Title>
       <div style={{ marginBottom: 20 }}>
         {user.role === "admin" && (
@@ -76,18 +84,19 @@ function ClassJournalsPage() {
             style={{ backgroundColor: "green" }}
             onClick={() => setIsCreateClassJournalsModalOpen(true)}
           >
-            Create
+            {t("pages.classJournals.createJournalBtn")}
           </Button>
         )}
       </div>
       <Row gutter={20}>
         {classJournals.map((c) => (
           <Col span={8} style={{ marginBottom: 20 }} key={c.id}>
-            <JournalCard journalInfo={c} classId={id} />
+            <JournalCard t={t} journalInfo={c} classId={id} />
           </Col>
         ))}
       </Row>
       <CreateClassJournalsModal
+        t={t}
         isOpen={isCreateClassJournalsModalOpen}
         setIsCreateClassJournalsModalOpen={setIsCreateClassJournalsModalOpen}
         classId={id}

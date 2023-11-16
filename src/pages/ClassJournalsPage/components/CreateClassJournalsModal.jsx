@@ -7,6 +7,7 @@ import { getSchoolActiveStudyPeriod } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
 
 function CreateClassJournalsModal({
+  t,
   isOpen,
   setIsCreateClassJournalsModalOpen,
   classId,
@@ -62,7 +63,7 @@ function CreateClassJournalsModal({
 
   const tableColumns = [
     {
-      title: "Subject",
+      title: t("tables.name"),
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
@@ -70,7 +71,7 @@ function CreateClassJournalsModal({
       },
     },
     {
-      title: "Teacher",
+      title: t("tables.teacher"),
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
@@ -97,23 +98,23 @@ function CreateClassJournalsModal({
     <Modal
       open={isOpen}
       onCancel={() => onModalCancel()}
-      title="Create journals"
-      okText={"Create journals"}
+      title={t("forms.createClassJournals.title")}
+      okText={t("buttons.create")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
       destroyOnClose
     >
       <div>
         <Typography.Text style={{ display: "inline-block", marginBottom: 5 }}>
-          Study period:
-          {`${formatDate(new Date(studyPeriod.startDate))} - ${formatDate(
-            new Date(studyPeriod.endDate)
-          )}`}
+          {`${t("forms.createClassJournals.studyPeriod")}: ${formatDate(
+            new Date(studyPeriod.startDate)
+          )} - ${formatDate(new Date(studyPeriod.endDate))}`}
         </Typography.Text>
         <Typography.Text style={{ display: "inline-block", marginBottom: 15 }}>
-          It is neccessary set up correct schedule for subjects you want to create journals
+          {t("forms.createClassJournals.description1")}
         </Typography.Text>
         <Typography.Text style={{ display: "inline-block", marginBottom: 15 }}>
-          Please, select subjects for which you want to create journals
+          {t("forms.createClassJournals.description2")}
         </Typography.Text>
       </div>
 
