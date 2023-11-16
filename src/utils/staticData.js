@@ -1,3 +1,5 @@
+import { LOCALES } from "../i18n/constants";
+
 export const genderOptions = [
   { value: "male", label: "Male" },
   { value: "female", label: "Female" },
@@ -103,4 +105,9 @@ export const journalGrades = [
 export const degreesLevelsOptions = [
   { value: "basic", label: "Basic" },
   { value: "specialist", label: "Specialist" },
+];
+
+export const languagesOptions = [
+  { value: LOCALES.EN, label: "Eng" },
+  { value: LOCALES.UK, label: "Ukr" },
 ];

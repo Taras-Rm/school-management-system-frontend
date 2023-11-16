@@ -5,6 +5,7 @@ import {
   Button,
   Image,
   Menu,
+  Select,
   Typography,
   message,
 } from "antd";
@@ -24,6 +25,8 @@ import { useMutation } from "react-query";
 import UserContext from "../../user-context";
 import logo from "../../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
+import { languagesOptions } from "../../utils/staticData";
+import i18next from "i18next";
 
 const menuOptionsRoutes = [
   routes.schoolPage,
@@ -180,7 +183,7 @@ function Layout() {
       );
     }
     return availableItems;
-  }, [user.role, user.schoolId]);
+  }, [user.role, user.schoolId, i18next.language]);
 
   return (
     <div>
@@ -210,6 +213,16 @@ function Layout() {
               style={{
                 backgroundColor: "#5b5959",
                 marginLeft: 20,
+              }}
+            />
+            <Select
+              onSelect={(e) => i18next.changeLanguage(e)}
+              value={i18next.language}
+              options={languagesOptions}
+              style={{
+                backgroundColor: "transparent",
+                marginLeft: 30,
+                width: 80,
               }}
             />
             <Button
