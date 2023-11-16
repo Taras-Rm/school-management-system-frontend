@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Link, generatePath, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import { useQuery } from "react-query";
-import { getClassJournal, getSchoolClass } from "../../api/classes";
+import { getSchoolClass } from "../../api/classes";
 import ClassJournalTable from "../../components/ClassJournalTable/ClassJournalTable";
 import UserContext from "../../user-context";
 import {
@@ -11,8 +11,10 @@ import {
   getJournalColumns,
   getJournalStudentsGrades,
 } from "../../api/journals";
+import { useTranslation } from "react-i18next";
 
 function ClassJournalPage() {
+  const { t } = useTranslation();
   const { id, journalId } = useParams();
 
   const { user } = useContext(UserContext);
@@ -76,7 +78,11 @@ function ClassJournalPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.classJournal.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -88,7 +94,7 @@ function ClassJournalPage() {
           {
             title: (
               <Link to={generatePath(routes.classJournalsPage, { id })}>
-                Journals
+                {t("pages.classJournal.breadcrumb.journals")}
               </Link>
             ),
           },
@@ -107,10 +113,13 @@ function ClassJournalPage() {
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${classJournal.classSubject.subject.name}`} journal
+        {`${t("pages.classJournal.title")} - ${
+          classJournal.classSubject.subject.name
+        }`}
       </Typography.Title>
       <div style={{ marginBottom: 20, minHeight: 32 }}></div>
       <ClassJournalTable
+        t={t}
         journalColumns={journalColumns}
         journalGrades={journalGrades}
         classId={id}

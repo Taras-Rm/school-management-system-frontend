@@ -260,6 +260,13 @@ const resources = {
           createJournalBtn: "Create journal",
           teacher: "Teacher",
         },
+        classJournal: {
+          breadcrumb: {
+            classes: "Classes",
+            journals: "Journals",
+          },
+          title: "Journal",
+        },
       },
     },
   },
@@ -521,6 +528,13 @@ const resources = {
           title: "журнали",
           createJournalBtn: "Створити журнал",
           teacher: "Вчитель",
+        },
+        classJournal: {
+          breadcrumb: {
+            classes: "Класи",
+            journals: "Журнали",
+          },
+          title: "Журнал",
         },
       },
     },

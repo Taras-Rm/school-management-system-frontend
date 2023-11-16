@@ -11,6 +11,7 @@ import {
   deleteJournalStudentGrade,
   upsertJournalStudentGrade,
 } from "../../api/journals";
+import { useTranslation } from "react-i18next";
 
 const EditableContext = React.createContext(null);
 
