@@ -22,8 +22,10 @@ import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import EditClassSubjectModal from "./components/EditClassSubjectModal";
 import { useContext } from "react";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function ClassSubjectsPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const queryClient = useQueryClient();
 
@@ -78,7 +80,7 @@ function ClassSubjectsPage() {
   const tableColumns = useMemo(() => {
     let columns = [
       {
-        title: "Subject",
+        title: t("tables.subject"),
         dataIndex: "subject",
         key: "subject",
         render: (value, item) => {
@@ -86,7 +88,7 @@ function ClassSubjectsPage() {
         },
       },
       {
-        title: "Teacher",
+        title: t("tables.teacher"),
         dataIndex: "teacherId",
         key: "teacherId",
         render: (value, item) => {
@@ -96,22 +98,26 @@ function ClassSubjectsPage() {
     ];
     if (user.role === "admin") {
       columns.push({
-        title: "Action",
+        title: t("tables.action"),
         dataIndex: "action",
         key: "action",
         align: "center",
         render: (value, item) => {
           return (
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <Tooltip title="Edit subject">
+              <Tooltip title={t("tables.edit")}>
                 <EditTwoTone
                   onClick={() => setUpdateClassSubjectId(item.id)}
                   style={{ cursor: "pointer" }}
                 />
               </Tooltip>
-              <Tooltip title="Delete subject">
+              <Tooltip title={t("tables.delete")}>
                 <Popconfirm
-                  title="Do you really want to delete subject ?"
+                  title={t(
+                    "pages.classSubjects.table.deleteClassSubjectConfirm"
+                  )}
+                  okText={t("buttons.delete")}
+                  cancelText={t("buttons.cancel")}
                   onConfirm={() => handleDeleteClassSubject(item.id)}
                 >
                   <DeleteTwoTone
@@ -141,7 +147,11 @@ function ClassSubjectsPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.classSubjects.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -153,14 +163,16 @@ function ClassSubjectsPage() {
           {
             title: (
               <Link to={generatePath(routes.classSubjectsPage, { id })}>
-                Subjects
+                {t("pages.classSubjects.breadcrumb.subjects")}
               </Link>
             ),
           },
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${classData.level}-${classData.section}`} subjects
+        {`${t("pages.classSubjects.title")} ${classData.level}-${
+          classData.section
+        }`}
       </Typography.Title>
       <div
         style={{
@@ -176,7 +188,7 @@ function ClassSubjectsPage() {
             style={{ backgroundColor: "green" }}
             onClick={() => setIsCreateClassSubjectModalOpen(true)}
           >
-            Add
+            {t("pages.classSubjects.addClassSubjectBtn")}
           </Button>
         )}
       </div>
@@ -187,11 +199,13 @@ function ClassSubjectsPage() {
         loading={isLoadingClassSubjects}
       />
       <CreateClassSubjectModal
+        t={t}
         isOpen={isCreateClassSubjectModalOpen}
         setIsCreateClassSubjectModalOpen={setIsCreateClassSubjectModalOpen}
         classId={id}
       />
       <EditClassSubjectModal
+        t={t}
         classSubjectId={updateClassSubjectId}
         setUpdateClassSubjectId={setUpdateClassSubjectId}
         classId={id}

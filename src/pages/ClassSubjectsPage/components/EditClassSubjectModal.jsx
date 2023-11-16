@@ -7,6 +7,7 @@ import { getSchoolSubjects } from "../../../api/subjects";
 import { getSchoolTeachers } from "../../../api/teachers";
 
 function EditClassSubjectModal({
+  t,
   classSubjectId,
   classId,
   setUpdateClassSubjectId,
@@ -77,8 +78,9 @@ function EditClassSubjectModal({
     <Modal
       open={classSubjectId}
       onCancel={() => setUpdateClassSubjectId(false)}
-      title="Update class subject"
-      okText={"Update class subject"}
+      title={t("forms.editClassSubject.title")}
+      okText={t("buttons.update")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
       closable
       destroyOnClose
@@ -91,7 +93,7 @@ function EditClassSubjectModal({
       >
         <Form.Item
           name={"subjectId"}
-          label="Subject"
+          label={t("tables.subject")}
           rules={[{ required: true }]}
         >
           <Select
@@ -100,7 +102,7 @@ function EditClassSubjectModal({
             disabled
           />
         </Form.Item>
-        <Form.Item name={"teacherId"} label="Teacher">
+        <Form.Item name={"teacherId"} label={t("tables.teacher")}>
           <Select
             loading={isLoadingTeachers}
             options={teachers.map((s) => ({

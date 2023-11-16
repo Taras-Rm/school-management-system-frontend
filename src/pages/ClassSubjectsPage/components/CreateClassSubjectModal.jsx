@@ -7,6 +7,7 @@ import { getSchoolSubjects } from "../../../api/subjects";
 import { getSchoolTeachers } from "../../../api/teachers";
 
 function CreateClassSubjectModal({
+  t,
   isOpen,
   setIsCreateClassSubjectModalOpen,
   classId,
@@ -57,8 +58,9 @@ function CreateClassSubjectModal({
     <Modal
       open={isOpen}
       onCancel={() => setIsCreateClassSubjectModalOpen(false)}
-      title="Create class"
-      okText={"Create class"}
+      title={t("forms.addClassSubject.title")}
+      okText={t("buttons.add")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form
@@ -69,16 +71,18 @@ function CreateClassSubjectModal({
       >
         <Form.Item
           name={"subjectId"}
-          label="Subjects"
+          label={t("tables.subject")}
           rules={[{ required: true }]}
         >
           <Select
+            placeholder={t("formFields.select")}
             loading={isLoadingSubjects}
             options={subjects.map((s) => ({ value: s.id, label: s.name }))}
           />
         </Form.Item>
-        <Form.Item name={"teacherId"} label="Teacher">
+        <Form.Item name={"teacherId"} label={t("tables.teacher")}>
           <Select
+            placeholder={t("formFields.select")}
             loading={isLoadingTeachers}
             options={teachers.map((s) => ({
               value: s.id,

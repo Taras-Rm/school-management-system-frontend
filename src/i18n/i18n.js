@@ -39,6 +39,7 @@ const resources = {
         select: "Select",
         startTime: "Start",
         endTime: "Finish",
+        subject: "Subject",
       },
       common: {
         school: "School",
@@ -95,6 +96,12 @@ const resources = {
           title: "Assign students",
           noData: "No students",
         },
+        addClassSubject: {
+          title: "Add subject to class",
+        },
+        editClassSubject: {
+          title: "Edit class subject",
+        },
       },
       tables: {
         name: "Name",
@@ -105,6 +112,8 @@ const resources = {
         class: "Class",
         number: "Number",
         time: "Time",
+        subject: "Subject",
+        teacher: "Teacher",
       },
       pages: {
         school: {
@@ -196,6 +205,18 @@ const resources = {
             unassignStudent: "Unassign student from class",
           },
         },
+        classSubjects: {
+          breadcrumb: {
+            classes: "Classes",
+            subjects: "Subjects",
+          },
+          title: "Subjects",
+          addClassSubjectBtn: "Add subject",
+          table: {
+            deleteClassSubjectConfirm:
+              "Do you really want to delete a class subject ?",
+          },
+        },
       },
     },
   },
@@ -236,6 +257,7 @@ const resources = {
         select: "Вибрати",
         startTime: "Початок",
         endTime: "Завершення",
+        subject: "Предмет",
       },
       common: {
         school: "Школа",
@@ -291,6 +313,12 @@ const resources = {
           title: "Додати учнів",
           noData: "Немає учнів",
         },
+        addClassSubject: {
+          title: "Додати предмет до класу",
+        },
+        editClassSubject: {
+          title: "Редагувати предмет класу",
+        },
       },
       tables: {
         name: "Назва",
@@ -301,6 +329,8 @@ const resources = {
         class: "Клас",
         number: "Номер",
         time: "Час",
+        subject: "Предмет",
+        teacher: "Вчитель",
       },
       pages: {
         school: {
@@ -392,6 +422,18 @@ const resources = {
           classTeacher: "Класний керівник",
           table: {
             unassignStudent: "Видалити учня з класу",
+          },
+        },
+        classSubjects: {
+          breadcrumb: {
+            classes: "Класи",
+            subjects: "Предмети",
+          },
+          title: "Предмети",
+          addClassSubjectBtn: "Додати предмет",
+          table: {
+            deleteClassSubjectConfirm:
+              "Ви справді бажаєте видалити предмет з класу ?",
           },
         },
       },
