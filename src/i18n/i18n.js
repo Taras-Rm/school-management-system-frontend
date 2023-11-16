@@ -12,6 +12,7 @@ const resources = {
         ok: "Ok",
         add: "Add",
         delete: "Delete",
+        assign: "Assign",
       },
       formFields: {
         name: "Name",
@@ -89,6 +90,10 @@ const resources = {
         },
         editSubject: {
           title: "Edit subject",
+        },
+        assignStudentsToClass: {
+          title: "Assign students",
+          noData: "No students",
         },
       },
       tables: {
@@ -177,6 +182,20 @@ const resources = {
             journals: "Journals",
           },
         },
+        class: {
+          breadcrumb: {
+            classes: "Classes",
+          },
+          title: "class",
+          assignStudentsBtn: "Assign students",
+          subjectsBtn: "Subjects",
+          scheduleBtn: "Schedule",
+          journalsBtn: "Journals",
+          classTeacher: "Class teacher",
+          table: {
+            unassignStudent: "Unassign student from class",
+          },
+        },
       },
     },
   },
@@ -190,6 +209,7 @@ const resources = {
         ok: "Так",
         add: "Додати",
         delete: "Видалити",
+        assign: "Додати",
       },
       formFields: {
         name: "Імʼя",
@@ -266,6 +286,10 @@ const resources = {
         },
         editSubject: {
           title: "Редагувати інформацію про предмет",
+        },
+        assignStudentsToClass: {
+          title: "Додати учнів",
+          noData: "Немає учнів",
         },
       },
       tables: {
@@ -354,6 +378,20 @@ const resources = {
         journal: {
           breadcrumb: {
             journals: "Журнали",
+          },
+        },
+        class: {
+          breadcrumb: {
+            classes: "Класи",
+          },
+          title: "клас",
+          assignStudentsBtn: "Додати учнів",
+          subjectsBtn: "Предмети",
+          scheduleBtn: "Розклад",
+          journalsBtn: "Журнали",
+          classTeacher: "Класний керівник",
+          table: {
+            unassignStudent: "Видалити учня з класу",
           },
         },
       },

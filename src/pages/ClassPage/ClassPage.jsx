@@ -20,8 +20,10 @@ import { routes } from "../routes";
 import { Link } from "react-router-dom";
 import { CloseCircleTwoTone } from "@ant-design/icons";
 import UserContext from "../../user-context";
+import { useTranslation } from "react-i18next";
 
 function ClassPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ function ClassPage() {
   const tableColumns = useMemo(() => {
     let columns = [
       {
-        title: "Name",
+        title: t("tables.name"),
         dataIndex: "name",
         key: "name",
         render: (value, item) => {
@@ -85,7 +87,7 @@ function ClassPage() {
         },
       },
       {
-        title: "Email",
+        title: t("tables.email"),
         dataIndex: "email",
         key: "email",
         render: (value, item) => {
@@ -96,14 +98,14 @@ function ClassPage() {
 
     if (user.role === "admin") {
       columns.push({
-        title: "Action",
+        title: t("tables.action"),
         dataIndex: "action",
         key: "action",
         align: "center",
         render: (_, item) => {
           return (
             <div>
-              <Tooltip title="Unassign student from class">
+              <Tooltip title={t("pages.class.table.unassignStudent")}>
                 <CloseCircleTwoTone
                   onClick={() => handleUnassignStudentForClass(item.id)}
                   twoToneColor="#eb2f96"
@@ -138,7 +140,11 @@ function ClassPage() {
       <Breadcrumb
         items={[
           {
-            title: <Link to={routes.classesPage}>Classes</Link>,
+            title: (
+              <Link to={routes.classesPage}>
+                {t("pages.class.breadcrumb.classes")}
+              </Link>
+            ),
           },
           {
             title: (
@@ -150,7 +156,7 @@ function ClassPage() {
         ]}
       />
       <Typography.Title level={2} style={{ margin: "15px 0" }}>
-        {`${classData.level}-${classData.section}`} class
+        {`${classData.level}-${classData.section}`} {t("pages.class.title")}
       </Typography.Title>
       <div
         style={{
@@ -167,7 +173,7 @@ function ClassPage() {
               style={{ backgroundColor: "green" }}
               onClick={() => setIsAssignClassForStudentsModalOpen(true)}
             >
-              Assign students
+              {t("pages.class.assignStudentsBtn")}
             </Button>
           )}
           <Button
@@ -177,7 +183,7 @@ function ClassPage() {
               navigate(generatePath(routes.classSubjectsPage, { id: id }))
             }
           >
-            Subjects
+            {t("pages.class.subjectsBtn")}
           </Button>
           <Button
             type="primary"
@@ -186,7 +192,7 @@ function ClassPage() {
               navigate(generatePath(routes.classSchedulePage, { id: id }))
             }
           >
-            Schedule
+            {t("pages.class.scheduleBtn")}
           </Button>
           <Button
             type="primary"
@@ -195,20 +201,20 @@ function ClassPage() {
               navigate(generatePath(routes.classJournalsPage, { id: id }))
             }
           >
-            Journals
+            {t("pages.class.journalsBtn")}
           </Button>
         </div>
         <div>
           <div style={{ display: "flex", alignItems: "center", fontSize: 18 }}>
             <Typography.Text style={{ marginRight: 5 }}>
-              Class teacher:
+              {t("pages.class.classTeacher")}:
             </Typography.Text>
             {classData.teacher ? (
               <Typography.Text
                 strong
               >{`${classData.teacher.name} ${classData.teacher.surname}`}</Typography.Text>
             ) : (
-              <Typography.Text>not defined</Typography.Text>
+              <Typography.Text>{t("common.notDefined")}</Typography.Text>
             )}
           </div>
         </div>
@@ -222,6 +228,7 @@ function ClassPage() {
       />
 
       <AssignClassForStudentsModal
+        t={t}
         isOpen={isAssignClassForStudentsModalOpen}
         setIsAssignClassForStudentsModalOpen={
           setIsAssignClassForStudentsModalOpen

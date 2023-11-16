@@ -9,6 +9,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 function AssignClassForStudentsModal({
+  t,
   isOpen,
   setIsAssignClassForStudentsModalOpen,
   classId,
@@ -51,7 +52,7 @@ function AssignClassForStudentsModal({
 
   const tableColumns = [
     {
-      title: "Name",
+      title: t("tables.name"),
       dataIndex: "name",
       key: "name",
       render: (value, item) => {
@@ -59,7 +60,7 @@ function AssignClassForStudentsModal({
       },
     },
     {
-      title: "Email",
+      title: t("tables.email"),
       dataIndex: "email",
       key: "email",
       render: (value, item) => {
@@ -79,8 +80,9 @@ function AssignClassForStudentsModal({
     <Modal
       open={isOpen}
       onCancel={() => setIsAssignClassForStudentsModalOpen(false)}
-      title="Assign students"
-      okText={"Assign students"}
+      title={t("forms.assignStudentsToClass.title")}
+      okText={t("buttons.assign")}
+      cancelText={t("buttons.cancel")}
       onOk={() => form.submit()}
     >
       <Form
