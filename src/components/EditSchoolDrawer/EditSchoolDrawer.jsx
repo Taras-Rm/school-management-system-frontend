@@ -39,7 +39,7 @@ function EditSchoolDrawer({ t, isOpen, onClose }) {
   const updateSchoolMutation = useMutation(updateSchool, {
     onSuccess: () => {
       queryClient.invalidateQueries(["school"]);
-      message.success("School is updated");
+      message.success(t('forms.editSchool.msgUpdated'));
       onDrawerClose();
     },
     onError: (err) => {

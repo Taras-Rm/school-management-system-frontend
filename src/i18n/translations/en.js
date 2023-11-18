@@ -65,18 +65,22 @@ export const en = {
       title: "Edit school information",
       descrp: "Period",
       addNew: "Add new period",
+      msgUpdated: "School is updated"
     },
     editStudyPeriod: {
       button: "Edit school",
       title: "Study period",
       increment: "Increment classes levels",
       addNew: "Add new period",
+      msgUpdated: "Study period is setted"
     },
     addTeacher: {
       title: "Add new teacher",
+      msgAdded: "Teacher is added"
     },
     editTeacher: {
       title: "Edit teacher information",
+      msgUpdated: "Information about teacher updated",
     },
     addStudent: {
       title: "Add new student",
@@ -141,6 +145,7 @@ export const en = {
       addTeacherBtn: "Add teacher",
       table: {
         deleteTeacherConfirm: "Do you really want to delete a teacher ?",
+        msgDeleted: "Teacher is deleted",
       },
     },
     students: {

@@ -12,7 +12,7 @@ function CreateTeacherModal({ t, isOpen, setIsCreateTeacherModalOpen }) {
   const createTeacherMutation = useMutation(createSchoolTeacher, {
     onSuccess: () => {
       queryClient.invalidateQueries(["teachers"]);
-      message.success("Teacher is created");
+      message.success(t('forms.addTeacher.msgAdded'));
       setIsCreateTeacherModalOpen(false);
     },
     onError: (err) => {

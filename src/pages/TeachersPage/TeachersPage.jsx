@@ -44,7 +44,7 @@ function TeachersPage() {
   const deleteSchoolTeacherMutation = useMutation(deleteSchoolTeacher, {
     onSuccess: () => {
       queryClient.invalidateQueries(["teachers"]);
-      message.success("Teacher is deleted!");
+      message.success(t('pages.teachers.table.msgDeleted'));
     },
     onError: (err) => {
       message.error("Failed to delete teacher: " + err.response.data?.message);

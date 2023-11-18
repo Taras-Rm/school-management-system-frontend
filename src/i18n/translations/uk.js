@@ -65,17 +65,21 @@ export const uk = {
       title: "Редагувати інформацію про школу",
       descrp: "Період",
       addNew: "Додати новий період",
+      msgUpdated: "Школу оновлено",
     },
     editStudyPeriod: {
       title: "Редагувати навчальний період",
       increment: "Перевести класи на наступний рік",
       addNew: "Додати новий період",
+      msgUpdated: "Навчальний період встановлено",
     },
     addTeacher: {
       title: "Додати нового вчителя",
+      msgAdded: "Вчителя додано",
     },
     editTeacher: {
       title: "Редагувати інформацію про вчителя",
+      msgUpdated: "Інформацію про вчителя оновлено",
     },
     addStudent: {
       title: "Додати нового учня",
@@ -142,6 +146,7 @@ export const uk = {
         editTeacher: "Редагувати вчителя",
         deleteTeacher: "Видалити вчителя",
         deleteTeacherConfirm: "Ви справді бажаєте видалити вчителя ?",
+        msgDeleted: "Вчителя видалено",
       },
     },
     students: {

@@ -40,7 +40,7 @@ function EditStudyPeriodModal({ t, isOpen, setIsEditStudyPeriodModalOpen }) {
   } = useMutation(createStudyPeriod, {
     onSuccess: () => {
       queryClient.invalidateQueries(["studyPeriods"]);
-      message.success("Study period is created");
+      message.success(t("forms.editStudyPeriod.msgUpdated"));
       newPeriodForm.resetFields();
       setIsEditStudyPeriodModalOpen(false);
     },
