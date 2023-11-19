@@ -248,7 +248,6 @@ function Layout() {
               bottom: 0,
               marginTop: 70,
             }}
-            collapsed
           >
             <Menu
               theme="dark"
