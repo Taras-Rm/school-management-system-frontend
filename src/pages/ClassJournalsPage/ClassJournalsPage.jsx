@@ -8,6 +8,7 @@ import CreateClassJournalsModal from "./components/CreateClassJournalsModal";
 import JournalCard from "./components/JournalCard";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassJournalsPage() {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ function ClassJournalsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -34,6 +36,7 @@ function ClassJournalsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

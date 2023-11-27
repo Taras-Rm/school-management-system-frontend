@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { createClassSubject } from "../../../api/classes";
 import { getSchoolSubjects } from "../../../api/subjects";
 import { getSchoolTeachers } from "../../../api/teachers";
+import { RETRY_COUNT } from "../../../api/api";
 
 function CreateClassSubjectModal({
   t,
@@ -22,6 +23,7 @@ function CreateClassSubjectModal({
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -32,6 +34,7 @@ function CreateClassSubjectModal({
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

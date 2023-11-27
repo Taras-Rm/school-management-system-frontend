@@ -19,6 +19,7 @@ import EditSubjectModal from "./components/EditSubjectModal";
 import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function SubjectsPage() {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ function SubjectsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

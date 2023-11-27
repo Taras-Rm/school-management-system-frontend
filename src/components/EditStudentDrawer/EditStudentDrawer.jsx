@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 import { genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { getSchoolStudent, updateSchoolStudent } from "../../api/students";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditStudentDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
@@ -38,6 +39,7 @@ function EditStudentDrawer({ t, isOpen, onClose, id }) {
         form.setFieldsValue({ ...data, dob: dayjs(data.dob) });
       },
       enabled: !!id,
+      retry: RETRY_COUNT
     }
   );
 

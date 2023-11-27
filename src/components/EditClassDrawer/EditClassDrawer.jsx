@@ -16,6 +16,7 @@ import { classLevelOptions, classSectionOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { getSchoolClass, updateSchoolClass } from "../../api/classes";
 import TextArea from "antd/es/input/TextArea";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditClassDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
@@ -37,6 +38,7 @@ function EditClassDrawer({ t, isOpen, onClose, id }) {
         form.setFieldsValue(data);
       },
       enabled: !!id,
+      retry: RETRY_COUNT
     }
   );
 
@@ -47,6 +49,7 @@ function EditClassDrawer({ t, isOpen, onClose, id }) {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT
     }
   );
 

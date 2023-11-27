@@ -24,6 +24,7 @@ import { getSchoolCallsSchedule } from "../../api/callsSchedule";
 import { workingWeekDays } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditClassSchedulePage() {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ function EditClassSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -46,6 +48,7 @@ function EditClassSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     });
 
   const { data: callsSchedule = [], isLoading: isCallScheduleLoading } =
@@ -53,6 +56,7 @@ function EditClassSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     });
 
   const { data: classSchedule = [], isLoading: isClassScheduleLoading } =
@@ -63,6 +67,7 @@ function EditClassSchedulePage() {
         onError: (error) => {
           message.error(error);
         },
+        retry: RETRY_COUNT,
       }
     );
 

@@ -7,6 +7,7 @@ import UserContext from "../../user-context";
 import { getTeacherJournals } from "../../api/teachers";
 import JournalCard from "./components/JournalCard";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function JournalsPage() {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ function JournalsPage() {
         message.error(error);
       },
       enabled: !!user,
+      retry: RETRY_COUNT
     }
   );
 

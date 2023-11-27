@@ -17,6 +17,7 @@ import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
 import dayjs from "dayjs";
 import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditTeacherDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
@@ -27,7 +28,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
     onClose();
   };
 
-  const { data: teacher, isLoading: isLoadingTeacher } = useQuery(
+  const { isLoading: isLoadingTeacher } = useQuery(
     ["teachers", id],
     () => getSchoolTeacher({ id }),
     {
@@ -38,6 +39,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
         form.setFieldsValue({ ...data, dob: dayjs(data.dob) });
       },
       enabled: !!id,
+      retry: RETRY_COUNT
     }
   );
 

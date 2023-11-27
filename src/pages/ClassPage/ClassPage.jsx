@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { CloseCircleTwoTone } from "@ant-design/icons";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassPage() {
   const { t } = useTranslation();
@@ -42,6 +43,7 @@ function ClassPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -52,6 +54,7 @@ function ClassPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

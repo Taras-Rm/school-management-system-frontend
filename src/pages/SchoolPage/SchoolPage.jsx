@@ -23,6 +23,7 @@ import { getAdminSchool, getSchoolBasicInfo } from "../../api/school";
 import { getSchoolStudyPeriods } from "../../api/studyPeriods";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -95,6 +96,7 @@ function SchoolPage() {
         );
       },
       enabled: !!school,
+      retry: RETRY_COUNT,
     }
   );
 

@@ -23,6 +23,7 @@ import EditClassSubjectModal from "./components/EditClassSubjectModal";
 import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassSubjectsPage() {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ function ClassSubjectsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -51,6 +53,7 @@ function ClassSubjectsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     });
 
   const deleteClassSubjectMutation = useMutation(deleteClassSubject, {

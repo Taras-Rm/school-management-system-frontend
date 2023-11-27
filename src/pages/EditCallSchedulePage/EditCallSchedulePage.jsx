@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditCallSchedulePage() {
   const { t } = useTranslation();
@@ -32,6 +33,7 @@ function EditCallSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT
     });
 
   const getCallScheduleMaxOrder = (calls = []) => {

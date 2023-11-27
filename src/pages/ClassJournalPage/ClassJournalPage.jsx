@@ -12,6 +12,7 @@ import {
   getJournalStudentsGrades,
 } from "../../api/journals";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassJournalPage() {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ function ClassJournalPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -36,6 +38,7 @@ function ClassJournalPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -46,6 +49,7 @@ function ClassJournalPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -56,6 +60,7 @@ function ClassJournalPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

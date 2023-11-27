@@ -10,6 +10,7 @@ import EditClassDrawer from "../../components/EditClassDrawer/EditClassDrawer";
 import UserContext from "../../user-context";
 import { getTeacherSchoolClasses } from "../../api/teachers";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassesPage() {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ function ClassesPage() {
         message.error(error);
       },
       enabled: !!user,
+      retry: RETRY_COUNT
     }
   );
 

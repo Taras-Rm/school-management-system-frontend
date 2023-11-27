@@ -13,6 +13,7 @@ import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useForm } from "antd/es/form/Form";
 import { getAdminSchool, updateSchool } from "../../api/school";
+import { RETRY_COUNT } from "../../api/api";
 
 function EditSchoolDrawer({ t, isOpen, onClose }) {
   const queryClient = useQueryClient();
@@ -33,6 +34,7 @@ function EditSchoolDrawer({ t, isOpen, onClose }) {
       onSuccess: (data) => {
         form.setFieldsValue(data);
       },
+      retry: RETRY_COUNT
     }
   );
 

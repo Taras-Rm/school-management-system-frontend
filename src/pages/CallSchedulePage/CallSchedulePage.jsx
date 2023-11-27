@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { formatTime } from "../../utils/date";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function CallSchedulePage() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ function CallSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT
     });
   const tableColumns = [
     {

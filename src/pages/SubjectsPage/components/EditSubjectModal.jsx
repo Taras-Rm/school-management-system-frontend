@@ -3,6 +3,7 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolSubject, updateSchoolSubject } from "../../../api/subjects";
+import { RETRY_COUNT } from "../../../api/api";
 
 function EditSubjectModal({ t, subjectId, setEditSubjectId }) {
   const queryClient = useQueryClient();
@@ -19,6 +20,7 @@ function EditSubjectModal({ t, subjectId, setEditSubjectId }) {
         form.setFieldsValue(data);
       },
       enabled: !!subjectId,
+      retry: RETRY_COUNT,
     }
   );
 

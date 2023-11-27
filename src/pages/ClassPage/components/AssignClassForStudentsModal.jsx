@@ -7,6 +7,7 @@ import {
   getStudentsAvailableForSchoolClassAssign,
 } from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { RETRY_COUNT } from "../../../api/api";
 
 function AssignClassForStudentsModal({
   t,
@@ -24,6 +25,7 @@ function AssignClassForStudentsModal({
       onError: (err) => {
         message.error("Failed to get students: " + err.response.data?.message);
       },
+      retry: RETRY_COUNT
     }
   );
 

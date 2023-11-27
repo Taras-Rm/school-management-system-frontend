@@ -19,6 +19,7 @@ import TeacherInfoDrawer from "../../components/TeacherInfoDrawer/TeacherInfoDra
 import EditTeacherDrawer from "../../components/EditTeacherDrawer/EditTeacherDrawer";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function TeachersPage() {
   const { t } = useTranslation();
@@ -38,13 +39,14 @@ function TeachersPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
   const deleteSchoolTeacherMutation = useMutation(deleteSchoolTeacher, {
     onSuccess: () => {
       queryClient.invalidateQueries(["teachers"]);
-      message.success(t('pages.teachers.table.msgDeleted'));
+      message.success(t("pages.teachers.table.msgDeleted"));
     },
     onError: (err) => {
       message.error("Failed to delete teacher: " + err.response.data?.message);

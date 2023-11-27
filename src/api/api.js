@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const RETRY_COUNT = 2
+
 const api = axios.create({
   baseURL: "https://d3a9lg5vn1dub1.cloudfront.net/api",
 });

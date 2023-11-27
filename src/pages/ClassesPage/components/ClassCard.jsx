@@ -8,6 +8,7 @@ import {
   getSchoolClassStudents,
 } from "../../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { RETRY_COUNT } from "../../../api/api";
 
 function ClassCard({ t, classInfo, setEditClassId, showActions }) {
   const queryClient = useQueryClient();
@@ -20,6 +21,7 @@ function ClassCard({ t, classInfo, setEditClassId, showActions }) {
         message.error(error);
       },
       enabled: !!classInfo.id,
+      retry: RETRY_COUNT,
     }
   );
 

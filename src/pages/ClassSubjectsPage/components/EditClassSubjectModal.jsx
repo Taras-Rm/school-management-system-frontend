@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getClassSubject, updateClassSubject } from "../../../api/classes";
 import { getSchoolSubjects } from "../../../api/subjects";
 import { getSchoolTeachers } from "../../../api/teachers";
+import { RETRY_COUNT } from "../../../api/api";
 
 function EditClassSubjectModal({
   t,
@@ -26,6 +27,7 @@ function EditClassSubjectModal({
         form.setFieldsValue(data);
       },
       enabled: !!classId && !!classSubjectId,
+      retry: RETRY_COUNT,
     }
   );
 
@@ -36,6 +38,7 @@ function EditClassSubjectModal({
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -46,6 +49,7 @@ function EditClassSubjectModal({
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

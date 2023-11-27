@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { createClassJournals, getClassSubjects } from "../../../api/classes";
 import { getSchoolActiveStudyPeriod } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
+import { RETRY_COUNT } from "../../../api/api";
 
 function CreateClassJournalsModal({
   t,
@@ -24,6 +25,7 @@ function CreateClassJournalsModal({
         onError: (error) => {
           message.error(error);
         },
+        retry: RETRY_COUNT,
       }
     );
 
@@ -34,6 +36,7 @@ function CreateClassJournalsModal({
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

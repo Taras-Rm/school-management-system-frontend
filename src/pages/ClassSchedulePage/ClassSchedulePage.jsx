@@ -10,6 +10,7 @@ import { formatTime } from "../../utils/date";
 import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function ClassSchedulePage() {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ function ClassSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 
@@ -33,6 +35,7 @@ function ClassSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     });
 
   const { data: classSchedule = [], isLoading: isClassScheduleLoading } =
@@ -43,6 +46,7 @@ function ClassSchedulePage() {
         onError: (error) => {
           message.error(error);
         },
+        retry: RETRY_COUNT,
       }
     );
 

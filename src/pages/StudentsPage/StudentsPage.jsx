@@ -20,6 +20,7 @@ import StudentInfoDrawer from "../../components/StudentInfoDrawer/StudentInfoDra
 import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
+import { RETRY_COUNT } from "../../api/api";
 
 function StudentsPage() {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ function StudentsPage() {
       onError: (error) => {
         message.error(error);
       },
+      retry: RETRY_COUNT,
     }
   );
 

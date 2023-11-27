@@ -18,6 +18,7 @@ import {
   getSchoolStudyPeriods,
 } from "../../../api/studyPeriods";
 import { formatDate } from "../../../utils/date";
+import { RETRY_COUNT } from "../../../api/api";
 
 function EditStudyPeriodModal({ t, isOpen, setIsEditStudyPeriodModalOpen }) {
   const queryClient = useQueryClient();
@@ -32,6 +33,7 @@ function EditStudyPeriodModal({ t, isOpen, setIsEditStudyPeriodModalOpen }) {
           "Failed to get school study periods: " + err.response.data?.message
         );
       },
+      retry: RETRY_COUNT,
     });
 
   const {
