@@ -77,7 +77,6 @@ function LoginPage() {
               options={[
                 { value: "admin", label: "Admin" },
                 { value: "teacher", label: "Teacher" },
-                { value: "student", label: "Student", disabled: true },
               ]}
               optionType="button"
               buttonStyle="solid"
