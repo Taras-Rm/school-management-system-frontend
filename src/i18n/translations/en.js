@@ -125,6 +125,7 @@ export const en = {
         "It is neccessary set up correct schedule for subjects you want to create journals",
       description2:
         "Please, select subjects for which you want to create journals",
+      msgCreated: "Journals are created",
     },
   },
   tables: {

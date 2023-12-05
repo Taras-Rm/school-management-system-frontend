@@ -43,7 +43,7 @@ function CreateClassJournalsModal({
   const createClassJournalsMutation = useMutation(createClassJournals, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes", classId, "journals"]);
-      message.success("Journals are created");
+      message.success(t("forms.createClassJournals.msgCreated"));
       setIsCreateClassJournalsModalOpen(false);
       form.resetFields();
     },
