@@ -83,15 +83,19 @@ export const uk = {
     },
     addStudent: {
       title: "Додати нового учня",
+      msgAdded: "Учня додано",
     },
     editStudent: {
       title: "Редагувати інформацію про учня",
+      msgUpdated: "Інформацію про учня оновлено",
     },
     addClass: {
       title: "Додати новий клас",
+      msgCreated: "Клас створено",
     },
     editClass: {
       title: "Редагувати інформацію про клас",
+      msgUpdated: "Клас оновлено",
     },
     addSubject: {
       title: "Додати новий предмет",
@@ -157,6 +161,7 @@ export const uk = {
       addStudentBtn: "Додати учня",
       table: {
         deleteStudentConfirm: "Ви справді бажаєте видалити учня ?",
+        msgDeleted: "Учня видалено",
       },
     },
     classes: {
@@ -169,6 +174,7 @@ export const uk = {
         classTeacher: "Класний керівник",
         numberOfStudents: "Кількість учнів",
         deleteClassConfirm: "Ви справді бажаєте видалити клас ?",
+        msgDeleted: "Клас видалено",
       },
     },
     subjects: {

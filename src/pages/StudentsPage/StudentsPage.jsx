@@ -47,7 +47,7 @@ function StudentsPage() {
   const deleteSchoolStudentMutation = useMutation(deleteSchoolStudent, {
     onSuccess: () => {
       queryClient.invalidateQueries(["students"]);
-      message.success("Student is deleted!");
+      message.success(t("pages.students.table.msgDeleted"));
     },
     onError: (err) => {
       message.error("Failed to delete student: " + err.response.data?.message);

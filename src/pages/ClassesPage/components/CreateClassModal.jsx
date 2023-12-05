@@ -16,7 +16,7 @@ function CreateClassModal({ t, isOpen, setIsCreateClassModalOpen }) {
   const createClassMutation = useMutation(createSchoolClass, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes"]);
-      message.success("Class is created");
+      message.success(t("forms.addClass.msgCreated"));
       setIsCreateClassModalOpen(false);
     },
     onError: (err) => {

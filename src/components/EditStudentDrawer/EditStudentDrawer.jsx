@@ -47,7 +47,7 @@ function EditStudentDrawer({ t, isOpen, onClose, id }) {
     onSuccess: () => {
       queryClient.invalidateQueries(["students"]);
       queryClient.invalidateQueries(["students", id]);
-      message.success("Student is updated");
+      message.success(t("forms.editStudent.msgUpdated"));
       onDrawerClose();
     },
     onError: (err) => {

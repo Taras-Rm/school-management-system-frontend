@@ -84,15 +84,19 @@ export const en = {
     },
     addStudent: {
       title: "Add new student",
+      msgAdded: "Student is added",
     },
     editStudent: {
       title: "Edit student information",
+      msgUpdated: "Information about student updated",
     },
     addClass: {
       title: "Add new class",
+      msgCreated: "Class is created",
     },
     editClass: {
       title: "Edit class information",
+      msgUpdated: "Class is updated",
     },
     addSubject: {
       title: "Add new subject",
@@ -156,6 +160,7 @@ export const en = {
       addStudentBtn: "Add student",
       table: {
         deleteStudentConfirm: "Do you really want to delete a student ?",
+        msgDeleted: "Student is deleted",
       },
     },
     classes: {
@@ -168,6 +173,7 @@ export const en = {
         classTeacher: "Class teacher",
         numberOfStudents: "Number of students",
         deleteClassConfirm: "Do you really want to delete a class ?",
+        msgDeleted: "Class is deleted",
       },
     },
     subjects: {

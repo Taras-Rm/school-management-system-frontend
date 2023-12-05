@@ -56,7 +56,7 @@ function EditClassDrawer({ t, isOpen, onClose, id }) {
   const updateClassMutation = useMutation(updateSchoolClass, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes"]);
-      message.success("Class is updated");
+      message.success(t("forms.editClass.msgUpdated"));
       onDrawerClose();
     },
     onError: (err) => {

@@ -28,7 +28,7 @@ function ClassCard({ t, classInfo, setEditClassId, showActions }) {
   const deleteSchoolClassMutation = useMutation(deleteSchoolClass, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes"]);
-      message.success("Class is deleted!");
+      message.success(t("pages.classes.card.msgDeleted"));
     },
     onError: (err) => {
       message.error("Failed to delete class: " + err.response.data?.message);

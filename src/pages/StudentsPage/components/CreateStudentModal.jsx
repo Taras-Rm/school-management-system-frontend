@@ -12,7 +12,7 @@ function CreateStudentModal({ t, isOpen, setIsCreateStudentModalOpen }) {
   const createStudentMutation = useMutation(createSchoolStudent, {
     onSuccess: () => {
       queryClient.invalidateQueries(["students"]);
-      message.success("Student is created");
+      message.success(t("forms.addStudent.msgAdded"));
       setIsCreateStudentModalOpen(false);
     },
     onError: (err) => {
