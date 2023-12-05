@@ -14,7 +14,7 @@ import {
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import dayjs from "dayjs";
-import { genderOptions } from "../../utils/staticData";
+import { getGenderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { getSchoolStudent, updateSchoolStudent } from "../../api/students";
 import { RETRY_COUNT } from "../../api/api";
@@ -39,7 +39,7 @@ function EditStudentDrawer({ t, isOpen, onClose, id }) {
         form.setFieldsValue({ ...data, dob: dayjs(data.dob) });
       },
       enabled: !!id,
-      retry: RETRY_COUNT
+      retry: RETRY_COUNT,
     }
   );
 
@@ -133,7 +133,7 @@ function EditStudentDrawer({ t, isOpen, onClose, id }) {
                 label={t("formFields.gender")}
                 rules={[{ required: true }]}
               >
-                <Select options={genderOptions} />
+                <Select options={getGenderOptions(t)} />
               </Form.Item>
             </Col>
           </Row>

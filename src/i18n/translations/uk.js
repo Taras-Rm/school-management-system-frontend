@@ -6,6 +6,10 @@ export const uk = {
     thursday: "Четвер",
     friday: "Пʼятниця",
   },
+  genders: {
+    male: "Чоловік",
+    female: "Жінка",
+  },
   buttons: {
     cancel: "Скасувати",
     update: "Оновити",

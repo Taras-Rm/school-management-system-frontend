@@ -1,9 +1,11 @@
 import { LOCALES } from "../i18n/constants";
 
-export const genderOptions = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-];
+export const getGenderOptions = (t) => {
+  return [
+    { value: "male", label: t("genders.male") },
+    { value: "female", label: t("genders.female") },
+  ];
+};
 
 export const classLevelOptions = [
   {

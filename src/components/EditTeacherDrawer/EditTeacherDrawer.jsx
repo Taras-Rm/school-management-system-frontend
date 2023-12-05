@@ -15,7 +15,7 @@ import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
 import dayjs from "dayjs";
-import { degreesLevelsOptions, genderOptions } from "../../utils/staticData";
+import { degreesLevelsOptions, getGenderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { RETRY_COUNT } from "../../api/api";
 
@@ -134,7 +134,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
                 label={t("formFields.gender")}
                 rules={[{ required: true }]}
               >
-                <Select options={genderOptions} />
+                <Select options={getGenderOptions(t)} />
               </Form.Item>
             </Col>
           </Row>

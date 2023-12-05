@@ -6,6 +6,10 @@ export const en = {
     thursday: "Thursday",
     friday: "Friday",
   },
+  genders: {
+    male: "Male",
+    female: "Female",
+  },
   buttons: {
     cancel: "Cancel",
     update: "Update",
