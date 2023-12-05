@@ -8,6 +8,7 @@ import { getTeacherJournals } from "../../api/teachers";
 import JournalCard from "./components/JournalCard";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function JournalsPage() {
   const { t } = useTranslation();
@@ -21,11 +22,11 @@ function JournalsPage() {
         message.error(error);
       },
       enabled: !!user,
-      retry: RETRY_COUNT
+      retry: RETRY_COUNT,
     }
   );
 
-  if (isLoadingJournals) return <Spin spinning />;
+  if (isLoadingJournals) return <Loader />;
 
   return (
     <div

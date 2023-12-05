@@ -11,6 +11,7 @@ import UserContext from "../../user-context";
 import { getTeacherSchoolClasses } from "../../api/teachers";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function ClassesPage() {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ function ClassesPage() {
     }
   );
 
-  if (isLoading) return <Spin spinning />;
+  if (isLoading) return <Loader />;
 
   return (
     <div

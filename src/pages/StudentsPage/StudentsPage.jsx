@@ -21,6 +21,7 @@ import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function StudentsPage() {
   const { t } = useTranslation();
@@ -137,7 +138,7 @@ function StudentsPage() {
   });
 
   if (isLoading) {
-    return <Spin spinning />;
+    return <Loader />;
   }
 
   return (

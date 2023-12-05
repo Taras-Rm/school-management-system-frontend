@@ -13,6 +13,7 @@ import {
 } from "../../api/journals";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function ClassJournalPage() {
   const { t } = useTranslation();
@@ -70,7 +71,7 @@ function ClassJournalPage() {
     isLoadingJournalColumns ||
     isLoadingJournalGrades
   )
-    return <Spin spinning />;
+    return <Loader />;
 
   return (
     <div

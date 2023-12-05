@@ -20,6 +20,7 @@ import { useContext } from "react";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function SubjectsPage() {
   const { t } = useTranslation();
@@ -59,7 +60,7 @@ function SubjectsPage() {
     });
   };
 
-  if (isLoading) return <Spin spinning />;
+  if (isLoading) return <Loader />;
 
   return (
     <div

@@ -20,6 +20,7 @@ import EditTeacherDrawer from "../../components/EditTeacherDrawer/EditTeacherDra
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function TeachersPage() {
   const { t } = useTranslation();
@@ -126,7 +127,7 @@ function TeachersPage() {
   });
 
   if (isLoading) {
-    return <Spin spinning />;
+    return <Loader />
   }
 
   return (

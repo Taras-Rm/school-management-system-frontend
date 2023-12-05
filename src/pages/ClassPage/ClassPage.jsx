@@ -22,6 +22,7 @@ import { CloseCircleTwoTone } from "@ant-design/icons";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function ClassPage() {
   const { t } = useTranslation();
@@ -130,7 +131,7 @@ function ClassPage() {
     };
   });
 
-  if (isLoading || isLoadingStudents) return <Spin spinning />;
+  if (isLoading || isLoadingStudents) return <Loader />;
 
   return (
     <div

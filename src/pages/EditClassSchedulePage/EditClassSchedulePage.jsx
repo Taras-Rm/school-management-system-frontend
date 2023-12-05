@@ -25,6 +25,7 @@ import { getWorkingWeekDays } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function EditClassSchedulePage() {
   const { t } = useTranslation();
@@ -139,7 +140,7 @@ function EditClassSchedulePage() {
   };
 
   if (isLoadingClass || isCallScheduleLoading || isClassScheduleLoading)
-    return <Spin spinning />;
+    return <Loader />;
 
   return (
     <div

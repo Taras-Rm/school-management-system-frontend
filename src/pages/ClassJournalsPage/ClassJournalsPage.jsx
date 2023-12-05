@@ -9,6 +9,7 @@ import JournalCard from "./components/JournalCard";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function ClassJournalsPage() {
   const { t } = useTranslation();
@@ -40,7 +41,7 @@ function ClassJournalsPage() {
     }
   );
 
-  if (isLoading || isLoadingJournals) return <Spin spinning />;
+  if (isLoading || isLoadingJournals) return <Loader />;
 
   return (
     <div

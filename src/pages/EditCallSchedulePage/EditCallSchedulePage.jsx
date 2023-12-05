@@ -21,6 +21,7 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function EditCallSchedulePage() {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ function EditCallSchedulePage() {
       onError: (error) => {
         message.error(error);
       },
-      retry: RETRY_COUNT
+      retry: RETRY_COUNT,
     });
 
   const getCallScheduleMaxOrder = (calls = []) => {
@@ -77,7 +78,7 @@ function EditCallSchedulePage() {
     });
   };
 
-  if (isCallScheduleLoading) return <Spin spinning />;
+  if (isCallScheduleLoading) return <Loader />;
 
   return (
     <div
@@ -159,7 +160,8 @@ function EditCallSchedulePage() {
                         format={"HH:mm"}
                         minuteStep={5}
                         placeholder={[
-                          t("formFields.startTime"), t("formFields.endTime"),
+                          t("formFields.startTime"),
+                          t("formFields.endTime"),
                         ]}
                       />
                     </Form.Item>

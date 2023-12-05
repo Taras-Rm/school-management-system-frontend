@@ -24,6 +24,7 @@ import { getSchoolStudyPeriods } from "../../api/studyPeriods";
 import UserContext from "../../user-context";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function WithoutSchoolBoard() {
   const [isCreateSchoolModalOpen, setIsCreateSchoolModalOpen] = useState(false);
@@ -103,7 +104,7 @@ function SchoolPage() {
   const { t } = useTranslation();
 
   if (isLoading || isLoadingSchoolBasicInfo) {
-    return <Spin spinning />;
+    return <Loader />;
   }
 
   return (
