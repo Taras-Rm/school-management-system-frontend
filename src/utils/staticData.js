@@ -63,28 +63,30 @@ export const classSectionOptions = [
   },
 ];
 
-export const workingWeekDays = [
-  {
-    code: "mon",
-    day: "Monday",
-  },
-  {
-    code: "tue",
-    day: "Tuesday",
-  },
-  {
-    code: "wed",
-    day: "Wednesday",
-  },
-  {
-    code: "thu",
-    day: "Thursday",
-  },
-  {
-    code: "fri",
-    day: "Friday",
-  },
-];
+export const getWorkingWeekDays = (t) => {
+  return [
+    {
+      code: "mon",
+      day: t("days.monday"),
+    },
+    {
+      code: "tue",
+      day: t("days.tuesday"),
+    },
+    {
+      code: "wed",
+      day: t("days.wednesday"),
+    },
+    {
+      code: "thu",
+      day: t("days.thursday"),
+    },
+    {
+      code: "fri",
+      day: t("days.friday"),
+    },
+  ];
+};
 
 export const journalGrades = [
   { value: "1", label: "1" },

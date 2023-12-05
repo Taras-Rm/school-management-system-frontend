@@ -33,7 +33,7 @@ function AssignClassForStudentsModal({
     onSuccess: () => {
       queryClient.invalidateQueries(["students", "class", classId]);
       queryClient.invalidateQueries(["students", "class", classId, "assign"]);
-      message.success("Students are assigned!");
+      message.success(t("forms.assignStudentsToClass.msgAssigned"));
       setIsAssignClassForStudentsModalOpen(false);
     },
     onError: (err) => {

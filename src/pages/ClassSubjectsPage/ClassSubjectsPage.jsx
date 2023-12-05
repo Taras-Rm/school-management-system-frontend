@@ -59,7 +59,7 @@ function ClassSubjectsPage() {
   const deleteClassSubjectMutation = useMutation(deleteClassSubject, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes", id, "subjects"]);
-      message.success("Subject is deleted!");
+      message.success(t("pages.classSubjects.table.msgDeleted"));
     },
     onError: (err) => {
       message.error("Failed to delete subject: " + err.response.data?.message);

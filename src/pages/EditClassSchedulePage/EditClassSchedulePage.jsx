@@ -11,7 +11,7 @@ import {
   message,
 } from "antd";
 import React, { useMemo } from "react";
-import { Link, generatePath, useParams } from "react-router-dom";
+import { Link, generatePath, useNavigate, useParams } from "react-router-dom";
 import { routes } from "../routes";
 import {
   getClassSchedule,
@@ -21,7 +21,7 @@ import {
 } from "../../api/classes";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolCallsSchedule } from "../../api/callsSchedule";
-import { workingWeekDays } from "../../utils/staticData";
+import { getWorkingWeekDays } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { useTranslation } from "react-i18next";
 import { RETRY_COUNT } from "../../api/api";
@@ -31,6 +31,9 @@ function EditClassSchedulePage() {
   const { id } = useParams();
   const queryClient = useQueryClient();
   const [form] = useForm();
+  const navigate = useNavigate();
+
+  const workingWeekDays = getWorkingWeekDays(t);
 
   const { data: classData, isLoading: isLoadingClass } = useQuery(
     ["classes", id],
@@ -97,7 +100,8 @@ function EditClassSchedulePage() {
   const updateClassScheduleMutation = useMutation(updateClassSchedule, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes", id, "schedule"]);
-      message.success("Schedule is updated");
+      message.success(t("pages.editCallsSchedule.msgUpdated"));
+      navigate(generatePath(routes.classSchedulePage, { id }));
     },
     onError: (err) => {
       message.error(

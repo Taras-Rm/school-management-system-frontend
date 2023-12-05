@@ -41,7 +41,7 @@ function CreateClassSubjectModal({
   const createClassSubjectMutation = useMutation(createClassSubject, {
     onSuccess: () => {
       queryClient.invalidateQueries(["classes"]);
-      message.success("Class subject added");
+      message.success(t("forms.addClassSubject.msgAdded"));
       setIsCreateClassSubjectModalOpen(false);
     },
     onError: (err) => {

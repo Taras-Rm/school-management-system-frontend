@@ -102,17 +102,20 @@ export const uk = {
     },
     editSubject: {
       title: "Редагувати інформацію про предмет",
-      msgUpdated: "Предмет оновлено"
+      msgUpdated: "Предмет оновлено",
     },
     assignStudentsToClass: {
       title: "Додати учнів",
       noData: "Немає учнів",
+      msgAssigned: "Учнів додано до класу",
     },
     addClassSubject: {
       title: "Додати предмет до класу",
+      msgAdded: "Додано предмет до класу",
     },
     editClassSubject: {
       title: "Редагувати предмет класу",
+      msgUpdated: "Предмет класу оновлено",
     },
     createClassJournals: {
       title: "Створити журнали",
@@ -187,7 +190,7 @@ export const uk = {
       list: {
         deleteSubjectConfirm: "Ви справді бажаєте видалити предмет ?",
         msgCreated: "Предмет створено",
-        msgDeleted: "Предмет видалено"
+        msgDeleted: "Предмет видалено",
       },
     },
     callsSchedule: {
@@ -203,7 +206,7 @@ export const uk = {
         edit: "Редагувати",
       },
       title: "Редагувати розклад дзвінків",
-      msgUpdated: "Розклад дзвінків оновлено"
+      msgUpdated: "Розклад дзвінків оновлено",
     },
     journals: {
       breadcrumb: {
@@ -243,6 +246,7 @@ export const uk = {
       table: {
         deleteClassSubjectConfirm:
           "Ви справді бажаєте видалити предмет з класу ?",
+        msgDeleted: "Предмет з класу видалено",
       },
     },
     classSchedule: {

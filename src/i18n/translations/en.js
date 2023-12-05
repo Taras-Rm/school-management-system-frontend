@@ -65,18 +65,18 @@ export const en = {
       title: "Edit school information",
       descrp: "Period",
       addNew: "Add new period",
-      msgUpdated: "School is updated"
+      msgUpdated: "School is updated",
     },
     editStudyPeriod: {
       button: "Edit school",
       title: "Study period",
       increment: "Increment classes levels",
       addNew: "Add new period",
-      msgUpdated: "Study period is setted"
+      msgUpdated: "Study period is setted",
     },
     addTeacher: {
       title: "Add new teacher",
-      msgAdded: "Teacher is added"
+      msgAdded: "Teacher is added",
     },
     editTeacher: {
       title: "Edit teacher information",
@@ -103,17 +103,20 @@ export const en = {
     },
     editSubject: {
       title: "Edit subject",
-      msgUpdated: "Subject is updated"
+      msgUpdated: "Subject is updated",
     },
     assignStudentsToClass: {
       title: "Assign students",
       noData: "No students",
+      msgAssigned: "Students are assigned to class",
     },
     addClassSubject: {
       title: "Add subject to class",
+      msgAdded: "Added subject to class",
     },
     editClassSubject: {
       title: "Edit class subject",
+      msgUpdated: "Class subject is updated",
     },
     createClassJournals: {
       title: "Create journals",
@@ -186,7 +189,7 @@ export const en = {
       list: {
         deleteSubjectConfirm: "Do you really want to delete a subject ?",
         msgCreated: "Subject is created",
-        msgDeleted: "Subject is deleted"
+        msgDeleted: "Subject is deleted",
       },
     },
     callsSchedule: {
@@ -202,7 +205,7 @@ export const en = {
         edit: "Edit",
       },
       title: "Edit calls schedule",
-      msgUpdated: "Calls schedule is updated"
+      msgUpdated: "Calls schedule is updated",
     },
     journals: {
       breadcrumb: {
@@ -242,6 +245,7 @@ export const en = {
       table: {
         deleteClassSubjectConfirm:
           "Do you really want to delete a class subject ?",
+        msgDeleted: "Class subject is deleted",
       },
     },
     classSchedule: {
