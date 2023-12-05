@@ -144,7 +144,7 @@ function SchoolPage() {
           </div>
           {!activeStudyPeriod && !isStudyPeriodsLoading && (
             <Alert
-              message="You should create study period before using the system"
+              message={t("pages.school.createStudyPeriodAlert")}
               banner
               style={{ marginBottom: 20 }}
             />

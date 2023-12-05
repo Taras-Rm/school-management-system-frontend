@@ -153,6 +153,7 @@ export const en = {
       breadcrumb: {
         school: "School",
       },
+      createStudyPeriodAlert: "You should create school study period before using the system"
     },
     teachers: {
       breadcrumb: {

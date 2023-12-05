@@ -152,6 +152,8 @@ export const uk = {
       breadcrumb: {
         school: "Школа",
       },
+      createStudyPeriodAlert:
+        "Вам потрібно встановити навчальний період для школи перед тим як використовувати систему",
     },
     teachers: {
       breadcrumb: {
