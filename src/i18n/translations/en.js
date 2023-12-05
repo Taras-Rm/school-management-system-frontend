@@ -103,6 +103,7 @@ export const en = {
     },
     editSubject: {
       title: "Edit subject",
+      msgUpdated: "Subject is updated"
     },
     assignStudentsToClass: {
       title: "Assign students",
@@ -184,6 +185,8 @@ export const en = {
       addSubjectBtn: "Add subject",
       list: {
         deleteSubjectConfirm: "Do you really want to delete a subject ?",
+        msgCreated: "Subject is created",
+        msgDeleted: "Subject is deleted"
       },
     },
     callsSchedule: {
@@ -199,6 +202,7 @@ export const en = {
         edit: "Edit",
       },
       title: "Edit calls schedule",
+      msgUpdated: "Calls schedule is updated"
     },
     journals: {
       breadcrumb: {

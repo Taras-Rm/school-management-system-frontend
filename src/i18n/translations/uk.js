@@ -102,6 +102,7 @@ export const uk = {
     },
     editSubject: {
       title: "Редагувати інформацію про предмет",
+      msgUpdated: "Предмет оновлено"
     },
     assignStudentsToClass: {
       title: "Додати учнів",
@@ -185,6 +186,8 @@ export const uk = {
       addSubjectBtn: "Додати предмет",
       list: {
         deleteSubjectConfirm: "Ви справді бажаєте видалити предмет ?",
+        msgCreated: "Предмет створено",
+        msgDeleted: "Предмет видалено"
       },
     },
     callsSchedule: {
@@ -200,6 +203,7 @@ export const uk = {
         edit: "Редагувати",
       },
       title: "Редагувати розклад дзвінків",
+      msgUpdated: "Розклад дзвінків оновлено"
     },
     journals: {
       breadcrumb: {

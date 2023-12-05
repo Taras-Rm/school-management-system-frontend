@@ -49,7 +49,7 @@ function EditCallSchedulePage() {
   const updateCallsScheduleMutation = useMutation(updateSchoolCallsSchedule, {
     onSuccess: () => {
       queryClient.invalidateQueries(["callsSchedule"]);
-      message.success("Calls schedule is updated");
+      message.success(t("pages.editCallsSchedule.msgUpdated"));
       navigate(routes.callSchedulePage);
     },
     onError: (err) => {

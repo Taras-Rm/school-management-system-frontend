@@ -11,7 +11,7 @@ function CreateSubjectModal({ t, isOpen, setIsCreateSubjectModalOpen }) {
   const createSubjectMutation = useMutation(createSchoolSubject, {
     onSuccess: () => {
       queryClient.invalidateQueries(["subjects"]);
-      message.success("Subject is created");
+      message.success(t("pages.subjects.list.msgCreated"));
       setIsCreateSubjectModalOpen(false);
     },
     onError: (err) => {

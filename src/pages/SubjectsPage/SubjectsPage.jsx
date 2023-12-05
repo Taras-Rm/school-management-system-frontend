@@ -46,7 +46,7 @@ function SubjectsPage() {
   const deleteSubjectMutation = useMutation(deleteSchoolSubject, {
     onSuccess: () => {
       queryClient.invalidateQueries(["subjects"]);
-      message.success("Subject is deleted!");
+      message.success(t("pages.subjects.list.msgDeleted"));
     },
     onError: (err) => {
       message.error("Failed to delete subject: " + err.response.data?.message);

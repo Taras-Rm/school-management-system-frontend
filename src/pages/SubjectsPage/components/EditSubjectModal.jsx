@@ -27,7 +27,7 @@ function EditSubjectModal({ t, subjectId, setEditSubjectId }) {
   const updateSubjectMutation = useMutation(updateSchoolSubject, {
     onSuccess: () => {
       queryClient.invalidateQueries("subjects", subjectId);
-      message.success("Subject updated");
+      message.success(t("forms.editSubject.msgUpdated"));
       setEditSubjectId(null);
       form.resetFields();
     },
