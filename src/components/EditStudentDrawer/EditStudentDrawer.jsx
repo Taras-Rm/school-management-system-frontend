@@ -8,7 +8,6 @@ import {
   Row,
   Select,
   Space,
-  Spin,
   message,
 } from "antd";
 import React from "react";
@@ -18,6 +17,7 @@ import { getGenderOptions } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { getSchoolStudent, updateSchoolStudent } from "../../api/students";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../Loader/Loader";
 
 function EditStudentDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
@@ -89,7 +89,7 @@ function EditStudentDrawer({ t, isOpen, onClose, id }) {
       }
     >
       {isLoadingStudent ? (
-        <Spin />
+        <Loader size="medium" />
       ) : (
         <Form
           form={form}

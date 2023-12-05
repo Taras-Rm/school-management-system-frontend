@@ -8,7 +8,6 @@ import {
   Row,
   Select,
   Space,
-  Spin,
   message,
 } from "antd";
 import React from "react";
@@ -21,6 +20,7 @@ import {
 } from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { RETRY_COUNT } from "../../api/api";
+import Loader from "../Loader/Loader";
 
 function EditTeacherDrawer({ t, isOpen, onClose, id }) {
   const queryClient = useQueryClient();
@@ -93,7 +93,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
       }
     >
       {isLoadingTeacher ? (
-        <Spin />
+        <Loader size="medium" />
       ) : (
         <Form
           form={form}

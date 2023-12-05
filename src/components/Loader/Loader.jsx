@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import React from "react";
 
-function Loader() {
+function Loader({size = "large"}) {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ function Loader() {
         justifyContent: "center",
       }}
     >
-      <Spin size="large" spinning />
+      <Spin size={size} spinning />
     </div>
   );
 }
