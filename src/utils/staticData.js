@@ -106,10 +106,12 @@ export const journalGrades = [
   { value: "H", label: "H" },
 ];
 
-export const degreesLevelsOptions = [
-  { value: "basic", label: "Basic" },
-  { value: "specialist", label: "Specialist" },
-];
+export const getDegreesLevelsOptions = (t) => {
+  return [
+    { value: "basic", label: t("degreesLevels.basic") },
+    { value: "specialist", label: t("degreesLevels.specialist") },
+  ];
+};
 
 export const languagesOptions = [
   { value: LOCALES.EN, label: "Eng" },

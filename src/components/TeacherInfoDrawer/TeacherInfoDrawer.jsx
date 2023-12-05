@@ -1,6 +1,9 @@
 import { Col, Divider, Drawer, Row } from "antd";
 import React from "react";
-import { getGenderOptions } from "../../utils/staticData";
+import {
+  getDegreesLevelsOptions,
+  getGenderOptions,
+} from "../../utils/staticData";
 
 const DescriptionItem = ({ title, content }) => (
   <div style={{ display: "flex", alignItems: "center" }}>
@@ -68,7 +71,11 @@ function TeacherInfoDrawer({ t, isOpen, onClose, teacher = {} }) {
         <Col span={24}>
           <DescriptionItem
             title={t("formFields.degree")}
-            content={teacher.degree}
+            content={
+              getDegreesLevelsOptions(t).find(
+                (op) => op.value === teacher.degree
+              )?.label
+            }
           />
         </Col>
       </Row>

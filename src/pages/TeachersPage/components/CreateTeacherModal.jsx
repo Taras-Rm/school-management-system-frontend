@@ -3,7 +3,10 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createSchoolTeacher } from "../../../api/teachers";
-import { degreesLevelsOptions, getGenderOptions } from "../../../utils/staticData";
+import {
+  getDegreesLevelsOptions,
+  getGenderOptions,
+} from "../../../utils/staticData";
 
 function CreateTeacherModal({ t, isOpen, setIsCreateTeacherModalOpen }) {
   const queryClient = useQueryClient();
@@ -12,7 +15,7 @@ function CreateTeacherModal({ t, isOpen, setIsCreateTeacherModalOpen }) {
   const createTeacherMutation = useMutation(createSchoolTeacher, {
     onSuccess: () => {
       queryClient.invalidateQueries(["teachers"]);
-      message.success(t('forms.addTeacher.msgAdded'));
+      message.success(t("forms.addTeacher.msgAdded"));
       setIsCreateTeacherModalOpen(false);
     },
     onError: (err) => {
@@ -107,7 +110,7 @@ function CreateTeacherModal({ t, isOpen, setIsCreateTeacherModalOpen }) {
           label={t("formFields.degree")}
           rules={[{ required: true }]}
         >
-          <Select options={degreesLevelsOptions} />
+          <Select options={getDegreesLevelsOptions(t)} />
         </Form.Item>
       </Form>
     </Modal>

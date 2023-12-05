@@ -10,6 +10,10 @@ export const en = {
     male: "Male",
     female: "Female",
   },
+  degreesLevels: {
+    basic: "Younger teacher",
+    specialist: "Master teatcher",
+  },
   buttons: {
     cancel: "Cancel",
     update: "Update",

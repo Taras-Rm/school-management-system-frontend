@@ -10,6 +10,10 @@ export const uk = {
     male: "Чоловік",
     female: "Жінка",
   },
+  degreesLevels: {
+    basic: "Молодший вчитель",
+    specialist: "Старший вчитель",
+  },
   buttons: {
     cancel: "Скасувати",
     update: "Оновити",

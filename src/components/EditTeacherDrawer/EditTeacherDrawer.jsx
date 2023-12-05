@@ -15,7 +15,10 @@ import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSchoolTeacher, updateSchoolTeacher } from "../../api/teachers";
 import dayjs from "dayjs";
-import { degreesLevelsOptions, getGenderOptions } from "../../utils/staticData";
+import {
+  getDegreesLevelsOptions,
+  getGenderOptions,
+} from "../../utils/staticData";
 import { useForm } from "antd/es/form/Form";
 import { RETRY_COUNT } from "../../api/api";
 
@@ -39,7 +42,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
         form.setFieldsValue({ ...data, dob: dayjs(data.dob) });
       },
       enabled: !!id,
-      retry: RETRY_COUNT
+      retry: RETRY_COUNT,
     }
   );
 
@@ -170,7 +173,7 @@ function EditTeacherDrawer({ t, isOpen, onClose, id }) {
               <Form.Item name={"degree"} label={t("formFields.degree")}>
                 <Select
                   placeholder={t("formFields.degree")}
-                  options={degreesLevelsOptions}
+                  options={getDegreesLevelsOptions(t)}
                 />
               </Form.Item>
             </Col>
