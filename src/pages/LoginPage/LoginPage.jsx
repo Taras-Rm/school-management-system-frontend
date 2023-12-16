@@ -32,10 +32,12 @@ function LoginPage() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
         height: "100vh",
       }}
     >
+      <Typography.Title level={2}>Login</Typography.Title>
       <div style={{ width: 300 }}>
         <Form
           layout="vertical"

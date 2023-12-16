@@ -14,7 +14,7 @@ function JournalCard({ t, journalInfo, classId }) {
           })}
           style={{ fontSize: 18 }}
         >
-          {`${journalInfo.classSubject.subject.name}`}
+          {`${journalInfo?.classSubject?.subject.name}`}
         </Typography.Link>
       }
       actions={[]}
@@ -22,10 +22,10 @@ function JournalCard({ t, journalInfo, classId }) {
     >
       <div>
         <Typography.Text>{t("pages.classJournals.teacher")}: </Typography.Text>
-        {journalInfo.classSubject.teacher ? (
+        {journalInfo.classSubject?.teacher ? (
           <Typography.Text
             strong
-          >{`${journalInfo.classSubject.teacher.name} ${journalInfo.classSubject.teacher.surname}`}</Typography.Text>
+          >{`${journalInfo.classSubject?.teacher?.name} ${journalInfo.classSubject?.teacher?.surname}`}</Typography.Text>
         ) : (
           <Typography.Text>{t("common.notDefined")}</Typography.Text>
         )}

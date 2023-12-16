@@ -21,7 +21,7 @@ function JournalCard({ t, journalInfo }) {
             href={generatePath(routes.journalPage, { id: journalInfo.id })}
             style={{ fontSize: 18 }}
           >
-            {`${journalInfo.classSubject.subject.name}`}
+            {`${journalInfo?.classSubject?.subject?.name}`}
           </Typography.Link>
         </div>
       }
